@@ -4,7 +4,7 @@
 
 We aim to build an app named SmartEats that can calculate calories of your input photos and genrate relative nutrition content with advise and potential disease risks.
 
-Team Members
+## Team Members
 
 - Ninghui Hao
 - Yantong Cui
