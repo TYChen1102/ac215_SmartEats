@@ -6,8 +6,8 @@ We aim to build an app named SmartEats that can calculate calories of your input
 
 Team Members
 
-Ninghui Hao
-Yantong Cui
-Jiayi Sun
-Taiyang Chen
-Qianwen Li
+- Ninghui Hao
+- Yantong Cui
+- Jiayi Sun
+- Taiyang Chen
+- Qianwen Li
