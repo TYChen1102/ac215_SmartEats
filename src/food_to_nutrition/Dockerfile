@@ -5,7 +5,7 @@ FROM python:3.11-slim-buster
 # This allows us to use "pipenv shell" as a container entry point.
 ENV PYENV_SHELL=/bin/bash
 
-#ENV GOOGLE_APPLICATION_CREDENTIALS=secrets/ac215-smarteat-437821-7bf746ea309f.json
+ENV GOOGLE_APPLICATION_CREDENTIALS=secrets/ac215-smarteat-437821-7bf746ea309f.json
 
 # Ensure we have an up to date baseline, install dependencies
 RUN set -ex; \

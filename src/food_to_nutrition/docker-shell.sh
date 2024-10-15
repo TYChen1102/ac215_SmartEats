@@ -3,7 +3,7 @@
 # exit immediately if a command exits with a non-zero status
 set -e
 
-BUILD="False"
+BUILD="True"
 
 # Define some environment variables
 export IMAGE_NAME="ac215-smarteats-food-to-nutrition"
