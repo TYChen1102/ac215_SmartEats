@@ -1,13 +1,11 @@
 # AC215 - Milestone2 - SmartEats
 
 **Project:**
-
 In this project, we aim to develop SmartEats, an AI-powered application that analyzes food images, predicts disease risks based on dietary habits, and offers personalized nutrition advice. 
 an application named SmartEats, which will take the food image as input from users and generate nutrition components with advise and potential disease risks. It will first require users to upload food pictures, and then it will use image recognition to estimate nutritional components like protein and fats and also display the amounts of each
 component ideally. Based on the results, SmartEats will calculate calories, assess potential health risks, and provide tailored dietary suggestions, such as healthy recipes.
 
 **Team Members:**
-
 Jiayi Sun, Ninghui Hao, Qianwen Li, Taiyang Chen, Yantong Cui
 
 **Group Name:**
