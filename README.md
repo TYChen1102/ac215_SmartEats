@@ -1,23 +1,15 @@
-# ac215_SmartEats
+# AC215 - Milestone2 - SmartEats
 
-## This is the project for APCOMP215, 2024 Fall. 
+**Project**
+In this project, we aim to develop SmartEats, an AI-powered application that analyzes food images, predicts disease risks based on dietary habits, and offers personalized nutrition advice. 
+an application named SmartEats, which will take the food image as input from users and generate nutrition components with advise and potential disease risks. It will first require users to upload food pictures, and then it will use image recognition to estimate nutritional components like protein and fats and also display the amounts of each
+component ideally. Based on the results, SmartEats will calculate calories, assess potential health risks, and provide tailored dietary suggestions, such as healthy recipes.
 
-We aim to build an app named SmartEats that can calculate calories of your input photos and genrate relative nutrition content with advise and potential disease risks.
+**Team Members**
+Jiayi Sun, Ninghui Hao, Qianwen Li, Taiyang Chen, Yantong Cui
 
-## Team Members
-
-- Ninghui Hao
-- Yantong Cui
-- Jiayi Sun
-- Taiyang Chen
-- Qianwen Li
-
-## Milestone 2 Template
-
-```
-The files are empty placeholders only. You may adjust this template as appropriate for your project.
-Never commit large data files,trained models, personal API Keys/secrets to GitHub
-```
+**Group Name**
+The SmartEats Group
 
 #### Project Milestone 2 Organization
 
@@ -46,17 +38,6 @@ Never commit large data files,trained models, personal API Keys/secrets to GitHu
         ├── model_rag.py
         └── train_model.py
 ```
-
-# AC215 - Milestone2 - Cheesy App
-
-**Team Members**
-Pavlos Parmigianopapas, Pavlos Ricottapapas and Pavlos Gouda-papas
-
-**Group Name**
-The Grate Cheese Group
-
-**Project**
-In this project, we aim to develop an AI-powered cheese application. The app will feature visual recognition technology to identify various types of cheese and include a chatbot for answering all kinds of cheese-related questions. Users can simply take a photo of the cheese, and the app will identify it, providing detailed information. Additionally, the chatbot will allow users to ask cheese-related questions. It will be powered by a RAG model and fine-tuned models, making it a specialist in cheese expertise.
 
 ### Milestone2 ###
 
@@ -92,8 +73,10 @@ Additionally, we compiled 250 bibliographical sources on cheese, including books
 
 
 ## Running Dockerfile
-Instructions for running the Dockerfile can be added here.
-To run Dockerfile - `Instructions here`
+```
+cd src                 # move into the directory with docker-shell.sh
+sh docer-shell.sh      # the pipeline consisting of multiple containers will run sequentially 
+```
 
 **Models container**
 - This container has scripts for model training, rag pipeline and inference
