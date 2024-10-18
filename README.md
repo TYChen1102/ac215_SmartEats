@@ -111,9 +111,9 @@ We upload our datasets to the bucket, allowing the entire group to access them. 
 8. RAG_based_on_fine_tuned_model: Another container prepares data for the RAG model, including tasks such as chunking, embedding, and populating the vector database.
    src/RAG_on_fine_tuned_model/cli.py:  This script prepares the necessary data for setting up our vector database. It performs chunking, embedding, and loads the data into a vector database (ChromaDB).
    
-        **Input:** Processed Raw data as txt. file, and user query text.
+   **Input:** Processed Raw data as txt. file, and user query text.
    
-   	**Output:** Chunked data (.jsonl file), embedded data (.jsonl file), created ChromaDB instance, LLM response corresponding to the user query text, and LLM responses to our default evaluation questions (uploaded to GCP bucket as csv for different RAG configuration)
+   **Output:** Chunked data (.jsonl file), embedded data (.jsonl file), created ChromaDB instance, LLM response corresponding to the user query text, and LLM responses to our default evaluation questions (uploaded to GCP bucket as csv for different RAG configuration)
    
 
   - python cli.py --chunk --chunk_type char-split
@@ -190,10 +190,10 @@ We plan to incorporate a container for running DVC to keep track of the commits,
 - Notebooks contains documentations and code that is not part of container: EDA, Application mockup, LLM fine-tuning documentation, ...
 - Reports contains the project proposal submitted for Milestone 1.
 - Results Data Folder for RAG:
-  src/llm-rag/outputs: Output of chunking and data embedding
-  src/llm-rag/output_RAG_different_contig: The log of LLM response with different RAG configuration
-  src/llm-rag/input-datasets/books: The preprocessed text of our raw data.
-  src/llm-rag/chromadb/: Data generated and used by Docker named chromadb, which is the container we used for setting up our vector database.
+   - src/llm-rag/outputs: Output of chunking and data embedding
+   - src/llm-rag/output_RAG_different_contig: The log of LLM response with different RAG configuration
+   - src/llm-rag/input-datasets/books: The preprocessed text of our raw data.
+   - src/llm-rag/chromadb/: Data generated and used by Docker named chromadb, which is the container we used for setting up our vector database.
 
 **Next Steps**
 - Incorporate data versioning
