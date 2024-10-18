@@ -39,5 +39,5 @@ ADD --chown=app:app . /app
 ENTRYPOINT ["/bin/bash"]
 
 # Get into the pipenv shell
-CMD ["-c", "pipenv shell"]
+CMD ["-c", "pipenv run python nutrition_predict_disease.py"]
 
