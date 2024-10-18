@@ -15,9 +15,6 @@ bucket_name = "ac215smarteat"
 
 # Download test image
 def download():
-
-    print("download")
-
     storage_client = storage.Client(project=gcp_project)
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob('shared_results/test_food.png')
@@ -73,20 +70,19 @@ def make_prediction(img):
     predictions = model.predict(img)[0]
     pred_class = np.argmax(predictions)
     pred_class = num_to_food[pred_class]
-    return pred_class, predictions
+    return pred_class, np.max(predictions)
 
 # Save preditions and upload output to bucket shared_results folder
-def send_output(label, probabilities):
+def send_output(label, probability):
 
     output = {
         'food': label,
-        'weight': probabilities.tolist()
+        'prob': float(probability)
     }
 
     with open('step1_output.json', 'w') as outfile:
         json.dump(output, outfile)
-    
-    print("upload")
+
     storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob('shared_results/step1_output.json')
@@ -97,9 +93,5 @@ def send_output(label, probabilities):
 model = load_model('food_model_EfficientNet.h5')
 download()
 img = process_image('test_food.png')
-label, probabilities = make_prediction(img)
-print("Predicted food:")
-print(label)
-print("Predicted probability:")
-print(probabilities)
-send_output(label, probabilities)
+label, probability = make_prediction(img)
+send_output(label, probability)
