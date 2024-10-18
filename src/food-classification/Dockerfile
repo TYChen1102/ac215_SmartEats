@@ -41,4 +41,4 @@ RUN pipenv sync
 ENTRYPOINT ["/bin/bash"]
 
 # Get into the pipenv shell
-CMD ["-c", "pipenv shell"]
+CMD ["-c", "pipenv run python predict_food.py"]

@@ -18,16 +18,19 @@ api_key = 'HKDAbEhIHFiO9tKvNa4KmtHdiolSBIg5bf20cZvD'
 
 
 def extract_input():
-    print("Extract input")
-
     # Initialize the Google Cloud Storage client
     storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name)
+    # read step1_output.json
     blob = bucket.blob('shared_results/step1_output.json')
     step1_json = blob.download_as_text()
     step1_output = json.loads(step1_json)
-
-    print(step1_output)
+    
+    # read Weight.json
+    w_blob = bucket.blob('shared_results/Weight.json')
+    weight_json = w_blob.download_as_text()
+    weight = json.loads(weight_json)
+    step1_output.update(weight)
     return step1_output
 
 
@@ -128,8 +131,7 @@ def food_to_nutrition(food_item, weight, USDA_API_key):
         new_fat = weight / serving_size * output['Fat (numeric)'].iloc[0]
         output_final['Fat'] = (new_fat).astype(str) + " " + fat_unit
 
-    print(output_final)
-
+    print("Nutrition components: ", output_final)
     return output_final
 
 
@@ -149,18 +151,16 @@ def send_output(output_final):
         json.dump(output, outfile)
 
     # Upload output to bucket shared_results folder
-    print("upload")
     storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob('shared_results/step2_output.json')
     blob.upload_from_filename('step2_output.json')
-
     print('Step2 output uploaded to GCP bucket.')
 
 
 ## Run the above functions
 step1_output = extract_input()
 food_input = step1_output['food']
-weight_input = 200
+weight_input = step1_output['Weight']
 step2_output = food_to_nutrition(food_input, weight_input, api_key)
 send_output(step2_output)
