@@ -11,10 +11,10 @@ from vertexai.generative_models import GenerativeModel, GenerationConfig
 
 # Setup
 GCP_PROJECT = os.environ["GCP_PROJECT"]
-TRAIN_DATASET = "gs://nutritionqadataset/train.jsonl" # Replace with your dataset
-VALIDATION_DATASET = "gs://nutritionqadataset/test.jsonl" # Replace with your dataset
+TRAIN_DATASET = "gs://nutritionqadataset/train_split_new.jsonl" # Replace with your dataset
+VALIDATION_DATASET = "gs://nutritionqadataset/test_split_new.jsonl" # Replace with your dataset
 GCP_LOCATION = "us-central1"
-GENERATIVE_SOURCE_MODEL = "gemini-1.5-flash-002" # gemini-1.5-pro-002
+GENERATIVE_SOURCE_MODEL = "gemini-1.5-pro-002"# gemini-1.5-pro-002 # "gemini-1.5-flash-002" 
 # Configuration settings for the content generation
 generation_config = {
     "max_output_tokens": 3000,  # Maximum number of tokens for output
@@ -32,10 +32,10 @@ def train(wait_for_job=False):
         source_model=GENERATIVE_SOURCE_MODEL,
         train_dataset=TRAIN_DATASET,
         validation_dataset=VALIDATION_DATASET,
-        epochs=1, # change to 2-3
+        epochs=3, # change to 2-3
         adapter_size=4,
         learning_rate_multiplier=1.0,
-        tuned_model_display_name="nutrition-simpledata-test-v1",
+        tuned_model_display_name="nutrition-simpledata-retransform-15pro-epoch3-v3",
     )
     print("Training job started. Monitoring progress...\n\n")
     
@@ -63,7 +63,8 @@ def chat():
     #MODEL_ENDPOINT = "projects/129349313346/locations/us-central1/endpoints/5584851665544019968"
     #"projects/129349313346/locations/us-central1/endpoints/3319822527953371136" # Finetuned model
     #MODEL_ENDPOINT = "projects/1058117673285/locations/us-central1/endpoints/2147250551534911488" # self-try-tutorial
-    MODEL_ENDPOINT = "projects/1058117673285/locations/us-central1/endpoints/4248179777703247872" # nutrition-test-v1
+    #MODEL_ENDPOINT = "projects/1058117673285/locations/us-central1/endpoints/4248179777703247872" # nutrition-test-v1
+    MODEL_ENDPOINT ="projects/1058117673285/locations/us-central1/endpoints/6472676518647562240"  # gemini-1.5-pro, epoch3
     
     
     generative_model = GenerativeModel(MODEL_ENDPOINT)
