@@ -155,7 +155,10 @@ sh docer-shell.sh      # the pipeline consisting of multiple containers will run
 We plan to incorporate a container for running DVC to keep track of the commits, logs, and different versions of datasets in later step. 
 
 **Notebooks/Reports**
-This folder contains code that is not part of container - for e.g: Application mockup, EDA, any 🔍 🕵️‍♀️ 🕵️‍♂️ crucial insights, reports or visualizations.
+- Notebooks contains documentations and code that is not part of container: EDA, Application mockup, LLM fine-tuning documentation, ...
+- Reports contains the project proposal submitted for Milestone 1.
 
-----
-You may adjust this template as appropriate for your project.
+**Next Steps**
+- Incorporate data versioning
+- Combine some containers to reduce redundancy
+  
