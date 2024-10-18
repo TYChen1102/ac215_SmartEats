@@ -109,9 +109,8 @@ cd src                 # move into the directory with docker-shell.sh
 sh docer-shell.sh      # the pipeline consisting of multiple containers will run sequentially 
 ```
 
-**Models container**
-- This container has scripts for model training, rag pipeline and inference
-- Instructions for running the model container - `Instructions here`
+**Data Versioning Strategy:**
+We plan to incorporate a container for running DVC to keep track of the commits, logs, and different versions of datasets in later step. 
 
 **Notebooks/Reports**
 This folder contains code that is not part of container - for e.g: Application mockup, EDA, any 🔍 🕵️‍♀️ 🕵️‍♂️ crucial insights, reports or visualizations.
