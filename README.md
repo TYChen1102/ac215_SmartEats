@@ -14,8 +14,7 @@ The SmartEats Group
 **Project Milestone 2 Organization**
 
 ```
-├── Readme.md
-├── data # DO NOT UPLOAD DATA TO GITHUB, only .gitkeep to keep the directory or a really small sample
+├── data 
 ├── notebooks
 │   └── eda.ipynb
 ├── references
@@ -44,17 +43,49 @@ The SmartEats Group
 In this milestone, we have the components for data management, including versioning, as well as the computer vision and language models.
 
 **Data**
-We gathered a dataset of 100,000 cheese images representing approximately 1,500 different varieties. The dataset, approximately 100GB in size, was collected from the following sources: (1), (2), (3). We have stored it in a private Google Cloud Bucket.
-Additionally, we compiled 250 bibliographical sources on cheese, including books and reports, from sources such as (4) and (5).
+We upload our datasets to the bucket, allowing the entire group to access them. Within the notebook folder, there is an EDA file that helps introduce the dataset information in more details. 
 
-**Data Pipeline Containers**
-1. One container processes the 100GB dataset by resizing the images and storing them back to Google Cloud Storage (GCS).
+**Data Pipeline Containers (src)**
 
-	**Input:** Source and destination GCS locations, resizing parameters, and required secrets (provided via Docker).
+1. food-classification: The food-classification container recognizes the food in an image and stores the output back to Google Cloud Storage (GCS).
 
-	**Output:** Resized images stored in the specified GCS location.
+	**Input:** Image and required secrets (provided via Docker)
 
-2. Another container prepares data for the RAG model, including tasks such as chunking, embedding, and populating the vector database.
+	**Output:** Name of the detected food name and predicted probability of the food
+
+2. food_to_nutrition: The food_to_nutrition container links the food predicted from food_classification container & weight user inputs to the nutrient components and stores the output back to GCS.
+   
+   	**Input:** Food item predicted, the weight user inputs, and required secrets (provided via Docker)
+   
+   	**Output:** Nutrition components and calories of the food item identified
+   
+4. nutrition_predict_disease:
+   
+6. gemini-finetuner:
+   
+8. RAG_based_on_fine_tuned_model: Another container prepares data for the RAG model, including tasks such as chunking, embedding, and populating the vector database.
+
+
+## Data Pipeline Overview
+
+1. **`src/food-classification/predict_food.py`**
+   This script loads a fine-tuned EfficientNet model (food_model_EfficientNet.h5) and downloads a test food image from our bucket. Then it recognizes the food in the image and saves the food name as a JSON file to our bucket.
+
+2. **`src/food-classification/Pipfile`**
+   We used the following packages to help with food classification:
+   - pandas
+   - numpy
+   - scikit-learn
+   - matplotlib
+   - seaborn
+   - opencv-python
+   - tensorflow
+   - keras
+   - google-cloud-storage
+
+4. **`src/preprocessing/Dockerfile`**
+   Our Dockerfiles follow standard conventions.
+
 
 ## Data Pipeline Overview
 
