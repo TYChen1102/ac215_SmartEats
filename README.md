@@ -1,6 +1,6 @@
 # AC215 - Milestone2 - SmartEats
 
-**Project:**
+### Project:
 In this project, we aim to develop SmartEats, an AI-powered application that analyzes food images, predicts disease risks based on dietary habits, and offers personalized nutrition advice. 
 an application named SmartEats, which will take the food image as input from users and generate nutrition components with advise and potential disease risks. It will first require users to upload food pictures, and then it will use image recognition to estimate nutritional components like protein and fats and also display the amounts of each
 component ideally. Based on the results, SmartEats will calculate calories, assess potential health risks, and provide tailored dietary suggestions, such as healthy recipes.
@@ -11,7 +11,7 @@ Jiayi Sun, Ninghui Hao, Qianwen Li, Taiyang Chen, Yantong Cui
 **Group Name:**
 The SmartEats Group
 
-**Project Milestone 2 Organization**
+### Project Milestone 2 Organization
 
 ```
 ├── data 
@@ -38,14 +38,14 @@ The SmartEats Group
         └── train_model.py
 ```
 
-### Milestone2 ###
+## Milestone2 ###
 
 In this milestone, we have the components for data management, including versioning, as well as the computer vision and language models.
 
 **Data**
 We upload our datasets to the bucket, allowing the entire group to access them. Within the notebook folder, there is an EDA file that helps introduce the dataset information in more details. 
 
-**Data Pipeline Containers (src)**
+### Data Pipeline Containers (src):
 
 1. food-classification: The food-classification container recognizes the food in an image and stores the output back to Google Cloud Storage (GCS).
 
@@ -66,7 +66,7 @@ We upload our datasets to the bucket, allowing the entire group to access them. 
 8. RAG_based_on_fine_tuned_model: Another container prepares data for the RAG model, including tasks such as chunking, embedding, and populating the vector database.
 
 
-## Data Pipeline Overview
+### Data Pipeline Overview:
 
 1. **`src/food-classification/predict_food.py`**
    This script loads a fine-tuned EfficientNet model (food_model_EfficientNet.h5) and downloads a test food image from our bucket. Then it recognizes the food in the image and saves the food name as a JSON file to our bucket.
