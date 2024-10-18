@@ -265,8 +265,8 @@ def chat(method="char-split",query_text=None):    # change it to allows chat que
 	if query_text is None:
 		query_text = "What is protein food?"
 	query_embedding = generate_query_embedding(query_text)
-	print("Query:", query_text)
-	print("Embedding values:", query_embedding)
+	#print("Query:", query_text)
+	#print("Embedding values:", query_embedding)
 	# Get the collection
 	collection = client.get_collection(name=collection_name)
 
@@ -281,7 +281,7 @@ def chat(method="char-split",query_text=None):    # change it to allows chat que
 	{"\n".join(results["documents"][0])}
 	"""
 
-	print("INPUT_PROMPT: ",INPUT_PROMPT)
+	#print("INPUT_PROMPT: ",INPUT_PROMPT)
 	response = generative_model.generate_content(
 		[INPUT_PROMPT],  # Input prompt
 		generation_config=generation_config,  # Configuration settings
