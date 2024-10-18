@@ -254,7 +254,7 @@ def load(method="char-split"):
 
 
 
-def chat(method="char-split",query_text=None):    # change it to allows chat query
+def chat(method="char-split",query_text=None): # change it to allows chat query
 	print("chat()")
 
 	# Connect to chroma DB
@@ -289,7 +289,22 @@ def chat(method="char-split",query_text=None):    # change it to allows chat que
 	)
 	generated_text = response.text
 	print("LLM Response:", generated_text)
+
+	 # Upload output to GCP bucket 
+	storage_client = storage.Client()
+	bucket = storage_client.bucket(bucket_name)
+
+	output_file_name = 'final_step_LLM_output.txt'
+    # Open the text file in write mode and save the generated text
+	with open(output_file_name, 'w', encoding='utf-8') as file:
+		file.write(generated_text)
+	
+	blob = bucket.blob(f"shared_results/{output_file_name}")
+	blob.upload_from_filename(output_file_name)
+	print(' output uploaded to GCP bucket.')
+
 	return generated_text, results["documents"]
+
 
 def evaluate_and_save_to_csv(questions, output_file, method="char-split"):
 	
