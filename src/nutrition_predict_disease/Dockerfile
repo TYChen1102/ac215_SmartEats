@@ -5,13 +5,16 @@ FROM python:3.11-slim-buster
 # This allows us to use "pipenv shell" as a container entry point.
 ENV PYENV_SHELL=/bin/bash
 
+ENV GOOGLE_APPLICATION_CREDENTIALS=secrets/ac215-smarteat-437821-7bf746ea309f.json
+
 # Ensure we have an up to date baseline, install dependencies 
 RUN set -ex; \
     apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends build-essential git && \
     pip install --no-cache-dir --upgrade pip && \
-    pip install pipenv
+    pip install pipenv && \
+    mkdir -p /app
 
 # Create a user named app
 RUN useradd -ms /bin/bash app -d /home/app -u 1000 -p "$(openssl passwd -1 passw0rd)" && \

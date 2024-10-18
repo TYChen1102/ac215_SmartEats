@@ -7,6 +7,11 @@ name = "pypi"
 numpy = "*"
 pandas = "*"
 scikit-learn = "*"
+matplotlib = "*"
+tensorflow = "*"
+keras = "*"
+google-cloud-storage = "*"
+xgboost = "*"
 
 [dev-packages]
 
