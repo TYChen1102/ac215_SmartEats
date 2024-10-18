@@ -109,40 +109,32 @@ We upload our datasets to the bucket, allowing the entire group to access them. 
 6. gemini-finetuner:
    
 8. RAG_based_on_fine_tuned_model: Another container prepares data for the RAG model, including tasks such as chunking, embedding, and populating the vector database.
-   src/RAG_on_fine_tuned_model/cli.py:  This script prepares the necessary data for setting up our vector database. It performs chunking, embedding, and loads the data into a vector database (ChromaDB). 
+   src/RAG_on_fine_tuned_model/cli.py:  This script prepares the necessary data for setting up our vector database. It performs chunking, embedding, and loads the data into a vector database (ChromaDB).
+        **Input:** Processed Raw data as txt. file, and user query text.
+   	**Output:** Chunked data (.jsonl file), embedded data (.jsonl file), created ChromaDB instance, LLM response corresponding to the user query text, and LLM responses to our default evaluation questions (uploaded to GCP bucket as csv for different RAG configuration)
+   
 
 python cli.py --chunk --chunk_type char-split
 python cli.py --chunk --chunk_type recursive-split
 
-This will:Read each text file in the input-datasets/books directory
-Split the text into chunks using the specified method (character-based or recursive)
-Save the chunks as JSONL files in the outputs directory
+This will read each text file in the input-datasets/books directory; Split the text into chunks using the specified method (character-based or recursive);Save the chunks as JSONL files in the outputs directory
 
 python cli.py --embed --chunk_type char-split
 python cli.py --embed --chunk_type recursive-split
 
-This will: Reads the chunk files created in the previous section
-Uses Vertex AI's text embedding model to generate embeddings for each chunk
-Saves the chunks with their embeddings as new JSONL files
-We use Vertex AI text-embedding-004 model to generate the embeddings
+This will read the chunk files created in the previous section; Use Vertex AI's text embedding model to generate embeddings for each chunk; Save the chunks with their embeddings as new JSONL files.We use Vertex AI text-embedding-004 model to generate the embeddings
 
 python cli.py --load --chunk_type char-split
 python cli.py --load --chunk_type recursive-split
 
-This will:Connects to your ChromaDB instance
-Creates a new collection (or clears an existing one)
-Loads the embeddings and associated metadata into the collection
+This will connect to your ChromaDB instance, create a new collection (or clears an existing one), and load the embeddings and associated metadata into the collection.
 
-python cli.py --query --chunk_type char-split
-python cli.py --query --chunk_type recursive-split
+python cli.py --chat --query_text={your specific input}
 
-This will:Generate an embedding for a sample query
-Perform similarity searches in the vector database
-Apply various types of filters on the queries
+This will generate the LLM response for specific user input using our vector database. Users could additionally specify “--chunk_type” to request two different vector base we generated using different split methods. 
 
-python cli.py --chat --query_text={your specific input}: generate the LLM response for specific user input using our vector database. Users could additionally specify “--chunk_type” to request two different vector base we generated using different split methods. 
-
-python cli.py --process_questions --output-file: run our evaluation queries based on different RAG configuration and upload the results to the GCP buckets.
+python cli.py --process_questions --output-file={output file name}
+This will run our evaluation queries based on different RAG configuration and upload the results to the GCP buckets.
 
 
 
@@ -196,15 +188,11 @@ We plan to incorporate a container for running DVC to keep track of the commits,
 **Notebooks/Reports**
 - Notebooks contains documentations and code that is not part of container: EDA, Application mockup, LLM fine-tuning documentation, ...
 - Reports contains the project proposal submitted for Milestone 1.
-
-Data Folders:
-src/RAG_on_fine_tuned_model/outputs: Output of chunking and data embedding
-
-src/RAG_on_fine_tuned_model/output_RAG_different_contig: The log of LLM response with different RAG configuration
-
-src/RAG_on_fine_tuned_model/input-datasets/books: The preprocessed text of our raw data.
-
-src/docker-volumes/chromadb/: Data generated and used by Docker named chromadb, which is the container we used for setting up our vector database.
+- Results Data Folder for RAG:
+  src/llm-rag/outputs: Output of chunking and data embedding
+  src/llm-rag/output_RAG_different_contig: The log of LLM response with different RAG configuration
+  src/llm-rag/input-datasets/books: The preprocessed text of our raw data.
+  src/llm-rag/chromadb/: Data generated and used by Docker named chromadb, which is the container we used for setting up our vector database.
 
 **Next Steps**
 - Incorporate data versioning
