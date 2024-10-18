@@ -59,7 +59,7 @@ We upload our datasets to the bucket, allowing the entire group to access them. 
    
    	**Output:** Nutrition components and calories of the food item identified
    
-4. nutrition_predict_disease:The nutrition_predict_disease container use the nutritional components and calories of the food item from food_to_nutrition container to predict the risk of four chronic diseases. 
+4. nutrition_predict_disease: The nutrition_predict_disease container use the nutritional components and calories of the food item from food_to_nutrition container to predict the risk of four chronic diseases. 
 
    	**Input:** Nutritional information of the food item, and required secrets (provided via Docker)
    
