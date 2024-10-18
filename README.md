@@ -16,26 +16,63 @@ The SmartEats Group
 ```
 ├── data 
 ├── notebooks
-│   └── eda.ipynb
+│   ├── AC215_image_EfficientNet.ipynb     # fine-tuning of an EfficientNet model
+│   ├── AC215_image_VGG_new.ipynb
+│   ├── LLM-fintuning-Documentation.pdf    # Documentation of the LLM fine-tuning process
+│   ├── frontpage.html                     # HTML file for application front page
+│   ├── frontpage.jpg                      # screenshot of front page
+│   ├── image_EDA.ipynb                    # EDA for image datasets
+│   └── predict_disease_ML.ipynb           # fine-tuning of a XGBClassifier model
 ├── references
 ├── reports
 │   └── Statement of Work_Sample.pdf
 └── src
-    ├── datapipeline
+    ├── RAG_based_on_fine_tu
+    │   ├── docker-volumes/chromadb/
+    │   ├── input-datasets/books/
+    │   ├── outputs
     │   ├── Dockerfile
     │   ├── Pipfile
     │   ├── Pipfile.lock
-    │   ├── dataloader.py
+    │   ├── Readme
+    │   ├── cli.py
+    │   ├── docker-compose.yml
+    │   ├── docker-entrypoint.sh
+    │   └── docker-shell.sh
+    ├── food-classification
+    │   ├── secrets
+    │   ├── Dockerfile
+    │   ├── Pipfile
+    │   ├── Pipfile.lock
+    │   ├── food_model_EfficientNet.h5
+    │   └── predict_food.py
+    ├── food_to_nutrition
+    │   ├── secrets
+    │   ├── Dockerfile
+    │   ├── Pipfile
+    │   ├── Pipfile.lock
+    │   └── food_to_nutrition.py
+    ├── gemini-finetuner
+    │   ├── Dockerfile
+    │   ├── Pipfile
+    │   ├── Pipfile.lock
+    │   ├── cli.py
+    │   ├── docker-entrypoint.sh
     │   ├── docker-shell.sh
-    │   ├── preprocess_cv.py
-    │   ├── preprocess_rag.py
+    │   └── transform_new.py
+    ├── nutrition_predict_disease
+    │   ├── models
+    │   │   ├── Diabetes_model.pkl
+    │   │   ├── High Cholesterol_model.pkl
+    │   │   ├── Hypertension_model.pkl
+    │   │   └── Obesity_model.pkl
+    │   ├── secrets
+    │   ├── Dockerfile
+    │   ├── Pipfile
+    │   ├── Pipfile.lock
+    │   └── nutrition_predict_disease.py
     ├── docker-compose.yml
-    └── models
-        ├── Dockerfile
-        ├── docker-shell.sh
-        ├── infer_model.py
-        ├── model_rag.py
-        └── train_model.py
+    └── docker-shell.sh
 ```
 
 ## Milestone2 ###
