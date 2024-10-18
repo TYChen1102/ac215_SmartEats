@@ -51,4 +51,5 @@ RUN pipenv sync
 ADD --chown=app:app . /app
 
 # Entry point
-ENTRYPOINT ["/bin/bash","./docker-entrypoint.sh"]
+ENTRYPOINT ["/bin/bash"]
+CMD ["-c", "pipenv run python llm-main.py"]
