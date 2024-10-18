@@ -109,7 +109,7 @@ We upload our datasets to the bucket, allowing the entire group to access them. 
 6. gemini-finetuner:
    
 8. RAG_based_on_fine_tuned_model: Another container prepares data for the RAG model, including tasks such as chunking, embedding, and populating the vector database.
-   src/RAG_on_fine_tuned_model/cli.py:  This script prepares the necessary data for setting up our vector database. It performs chunking, embedding, and loads the data into a vector database (ChromaDB).
+   ##### src/RAG_on_fine_tuned_model/cli.py:  This script prepares the necessary data for setting up our vector database. It performs chunking, embedding, and loads the data into a vector database (ChromaDB).
    
    **Input:** Processed Raw data as txt. file, and user query text.
    
@@ -136,6 +136,11 @@ We upload our datasets to the bucket, allowing the entire group to access them. 
 
   - python cli.py --process_questions --output-file={output file name}
   This will run our evaluation queries based on different RAG configuration and upload the results to the GCP buckets.
+
+  #### src/RAG_on_fine_tuned_model/llm-main: 
+   **Input:** Previous step results.
+   **Output:** LLM response (uploaded to GCP bucket as .txt file)
+  Running "python llm-main.py" could take the results of our previous step from the GCP bucket, which are the food nutrition info and the predicted diease risk, and then ask our fine-tuned RAG model for nutrition advice. The LLM response will automatically be uploaded to our GCP bucket.
 
 
 
