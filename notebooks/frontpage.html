@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartEats: Your Personalized Calorie & Nutrition Advisor</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            background-image: url('https://www.transparenttextures.com/patterns/food.png');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            color: #333;
+        }
+
+        .header {
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+
+        .container {
+            background-color: white;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .instruction {
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .photo-area {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+            border: 2px dashed #888;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #upload-placeholder {
+            cursor: pointer;
+            color: #888;
+        }
+
+        #uploaded-image {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .example-area {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .example-image {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>SmartEats: Your Personalized Calorie & Nutrition Advisor</h1>
+    </div>
+
+    <div class="container">
+        <p class="instruction">Place the food within the frame to take a photo</p>
+
+        <div class="photo-area">
+            <input type="file" accept="image/*" id="file-input" hidden>
+            <img id="uploaded-image" src="#" alt="Your Image" class="hidden">
+            <div id="upload-placeholder" onclick="document.getElementById('file-input').click();">
+                <span>Tap to upload an image</span>
+            </div>
+        </div>
+
+        <div class="example-area">
+            <h2>Example Photo</h2>
+            <img src="https://storage.cloud.google.com/ac215smarteat/shared_results/test_food.png" 
+                 alt="Pizza Example" class="example-image">
+        </div>
+
+        <label for="weight-input">Enter Weight (g):</label>
+        <input type="number" id="weight-input" placeholder="e.g., 250" min="1" step="1">
+
+        <button onclick="submitData()">Submit</button>
+
+        <div id="response-message" class="hidden"></div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const uploadedImage = document.getElementById('uploaded-image');
+        const uploadPlaceholder = document.getElementById('upload-placeholder');
+        const responseMessage = document.getElementById('response-message');
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    uploadedImage.src = e.target.result;
+                    uploadedImage.classList.remove('hidden');
+                    uploadPlaceholder.classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function submitData() {
+            const weightInput = document.getElementById('weight-input').value;
+            if (!fileInput.files.length || !weightInput) {
+                alert('Please upload an image and enter the weight.');
+                return;
+            }
+
+            responseMessage.innerHTML = `Image and weight of ${weightInput}g submitted successfully!`;
+            responseMessage.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
