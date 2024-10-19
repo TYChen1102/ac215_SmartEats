@@ -152,15 +152,17 @@ We upload our datasets to the bucket, allowing the entire group to access them. 
 cd src                 # move into the directory with docker-shell.sh
 sh docer-shell.sh      # the pipeline consisting of multiple containers will run sequentially 
 ```
+The pipeline running illustration screenshots are stored in reports, and the example output is also attached there. 
 
-#### Data Versioning Strategy:
+
+### Data Versioning Strategy:
 We plan to incorporate a container for running DVC to keep track of the commits, logs, and different versions of datasets in later step. 
 
-#### Notebooks/Reports:
+### Notebooks/Reports:
 - Notebooks contains documentations and code that is not part of container: EDA, Application mockup, LLM fine-tuning documentation, ...
 - Reports contains the project proposal submitted for Milestone 1.
 
-#### Next Steps:
+### Next Steps:
 - Incorporate data versioning
 - Combine some containers to reduce redundancy
   
