@@ -34,7 +34,7 @@ The SmartEats Group
     │   ├── secrets
     │   ├── Dockerfile                     # To build the container for food classification
     │   ├── Pipfile                        # Define packages used in food classification
-    │   ├── Pipfile.lock                   # Corresponding to Pipfile
+    │   ├── Pipfile.lock                   
     │   ├── food_model_EfficientNet.h5     # Fine-tuned EfficientNet model
     │   └── predict_food.py                # Loads a fine-tuned EfficientNet model, downloads data, recognizes the food and saves to our bucket.
     ├── food_to_nutrition
@@ -46,18 +46,18 @@ The SmartEats Group
     ├── gemini-finetuner
     │   ├── Dockerfile                     # Dockerfile to build container to train/fine-tune base LLM model
     │   ├── Pipfile                        # Define necessary packages and requirements
-    │   ├── Pipfile.lock                   # Corresponding to Pipfile
+    │   ├── Pipfile.lock                   
     │   ├── cli.py                         # Scripts to define base LLM model, training hyper parameters, datasets and training codes
     │   ├── docker-entrypoint.sh           # run pipenv
     │   ├── docker-shell.sh                # Scripts to build the docker
     │   └── transform_new.py               # Scripts to reformat and split datasets
     ├── llm-rag
-    │   ├── docker-volumes/chromadb/
-    │   ├── input-datasets/books/
-    │   ├── output_RAG_different_config/
-    │   ├── outputs
-    │   ├── Dockerfile
-    │   ├── Pipfile
+    │   ├── docker-volumes/chromadb/       # Data generated and used by Docker named chromadb, which is the container we used for setting up our vector database.
+    │   ├── input-datasets/books/          # The preprocessed text of our raw data.
+    │   ├── output_RAG_different_config/   # The log of LLM response with different RAG configuration
+    │   ├── outputs                        # Output of chunking and data embedding
+    │   ├── Dockerfile                     # Build container for LLM RAG
+    │   ├── Pipfile                        # Define packages
     │   ├── Pipfile.lock
     │   ├── cli.py                         # prepare necessary data for setting up our vector database. It performs chunking, embedding, and loads the data into a vector database (ChromaDB)
     │   ├── docker-compose.yml
@@ -65,13 +65,14 @@ The SmartEats Group
     │   ├── docker-shell.sh
     │   └── llm-main.py
     ├── nutrition_predict_disease
-    │   ├── models                         # Trained XGB
+    │   ├── models                         # Trained XGBClassifier models
     │   ├── secrets
-    │   ├── Dockerfile
-    │   ├── Pipfile
-    │   ├── Pipfile.lock
-    │   └── nutrition_predict_disease.py
-    └── docker-shell.sh
+    │   ├── Dockerfile                     # To build container to predict disease risks based on nutrition content
+    │   ├── Pipfile                        # Define necessary packages and requirements
+    │   ├── Pipfile.lock                   
+    │   └── nutrition_predict_disease.py   # Load models and dataset to predict diseases risks
+    └── docker-shell.sh                    # Combine 4 containers in Data Pipeline (see below) and print final suggestions from fine-tuned LLm with RAG
+
 ```
 
 ## Milestone2 ###
@@ -152,19 +153,14 @@ cd src                 # move into the directory with docker-shell.sh
 sh docer-shell.sh      # the pipeline consisting of multiple containers will run sequentially 
 ```
 
-**Data Versioning Strategy:**
+#### Data Versioning Strategy:
 We plan to incorporate a container for running DVC to keep track of the commits, logs, and different versions of datasets in later step. 
 
-**Notebooks/Reports**
+#### Notebooks/Reports:
 - Notebooks contains documentations and code that is not part of container: EDA, Application mockup, LLM fine-tuning documentation, ...
 - Reports contains the project proposal submitted for Milestone 1.
-- Results Data Folder for RAG:
-   - src/llm-rag/outputs: Output of chunking and data embedding
-   - src/llm-rag/output_RAG_different_contig: The log of LLM response with different RAG configuration
-   - src/llm-rag/input-datasets/books: The preprocessed text of our raw data.
-   - src/llm-rag/chromadb/: Data generated and used by Docker named chromadb, which is the container we used for setting up our vector database.
 
-**Next Steps**
+#### Next Steps:
 - Incorporate data versioning
 - Combine some containers to reduce redundancy
   
