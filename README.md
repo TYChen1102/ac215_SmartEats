@@ -28,7 +28,10 @@ The SmartEats Group
 │   └── predict_disease_ML.ipynb           # fine-tuning of a XGBClassifier model
 ├── references
 ├── reports
-│   └── Statement of Work_Sample.pdf
+│   ├── APCOMP215 Project Proposal.pdf     
+│   ├── DataPipeline1.jpg                  # Pipeline running screenshot
+│   ├── DataPipeline2.jpg                  # Pipeline running screenshot
+│   └── Final_output.png                   # Final output example
 └── src
     ├── food-classification
     │   ├── secrets
@@ -62,8 +65,8 @@ The SmartEats Group
     │   ├── cli.py                         # prepare necessary data for setting up our vector database. It performs chunking, embedding, and loads the data into a vector database (ChromaDB)
     │   ├── docker-compose.yml
     │   ├── docker-entrypoint.sh
-    │   ├── docker-shell.sh
-    │   └── llm-main.py
+    │   ├── docker-shell.sh                
+    │   └── llm-main.py                    # invoke fine-tuned model from fine-tuned LLM model with RAG to generate diatery suggestions
     ├── nutrition_predict_disease
     │   ├── models                         # Trained XGBClassifier models
     │   ├── secrets
