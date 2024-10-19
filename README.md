@@ -16,19 +16,41 @@ The SmartEats Group
 ```
 ├── data 
 ├── notebooks
-│   ├── AC215_image_EfficientNet.ipynb     # fine-tuning of an EfficientNet model
-│   ├── AC215_image_VGG_new.ipynb
+│   ├── AC215 - EDA.pdf                    # EDA pdf file 
+│   ├── AC215_image_EfficientNet.ipynb     # train EfficientNet model
+│   ├── AC215_image_VGG_new.ipynb          # train VGG model
 │   ├── LLM-fintuning-Documentation.pdf    # Documentation of the LLM fine-tuning process
+│   ├── LLM_RAG_preprocessing.ipynb        # construct the RAG vector database
+│   ├── dataset3_EDA&preprocessing.ipynb   # EDA for nutrtion-disease dataset
 │   ├── frontpage.html                     # HTML file for application front page
 │   ├── frontpage.jpg                      # screenshot of front page
 │   ├── image_EDA.ipynb                    # EDA for image datasets
-│   ├── LLM_RAG_preprocessing.ipynb        # EDA of data prepocessing for RAG raw data
 │   └── predict_disease_ML.ipynb           # fine-tuning of a XGBClassifier model
-
 ├── references
 ├── reports
 │   └── Statement of Work_Sample.pdf
 └── src
+    ├── food-classification
+    │   ├── secrets
+    │   ├── Dockerfile                     # To build the container for food classification
+    │   ├── Pipfile                        # Define packages used in food classification
+    │   ├── Pipfile.lock                   # Corresponding to Pipfile
+    │   ├── food_model_EfficientNet.h5     # Fine-tuned EfficientNet model
+    │   └── predict_food.py                # Loads a fine-tuned EfficientNet model, downloads data, recognizes the food and saves to our bucket.
+    ├── food_to_nutrition
+    │   ├── secrets                        
+    │   ├── Dockerfile                     # build container to link nutrition components to food item
+    │   ├── Pipfile                        # Define packages
+    │   ├── Pipfile.lock
+    │   └── food_to_nutrition.py           # Script to output nutrition components based on food predicted and weight input
+    ├── gemini-finetuner
+    │   ├── Dockerfile                     # Dockerfile to build container to train/fine-tune base LLM model
+    │   ├── Pipfile                        # Define necessary packages and requirements
+    │   ├── Pipfile.lock                   # Corresponding to Pipfile
+    │   ├── cli.py                         # Scripts to define base LLM model, training hyper parameters, datasets and training codes
+    │   ├── docker-entrypoint.sh           # run pipenv
+    │   ├── docker-shell.sh                # Scripts to build the docker
+    │   └── transform_new.py               # Scripts to reformat and split datasets
     ├── llm-rag
     │   ├── docker-volumes/chromadb/
     │   ├── input-datasets/books/
@@ -37,44 +59,18 @@ The SmartEats Group
     │   ├── Dockerfile
     │   ├── Pipfile
     │   ├── Pipfile.lock
-    │   ├── Readme
     │   ├── cli.py
     │   ├── docker-compose.yml
     │   ├── docker-entrypoint.sh
-    │   └── docker-shell.sh
-    ├── food-classification
-    │   ├── secrets
-    │   ├── Dockerfile
-    │   ├── Pipfile
-    │   ├── Pipfile.lock
-    │   ├── food_model_EfficientNet.h5
-    │   └── predict_food.py
-    ├── food_to_nutrition
-    │   ├── secrets
-    │   ├── Dockerfile
-    │   ├── Pipfile
-    │   ├── Pipfile.lock
-    │   └── food_to_nutrition.py
-    ├── gemini-finetuner
-    │   ├── Dockerfile
-    │   ├── Pipfile
-    │   ├── Pipfile.lock
-    │   ├── cli.py
-    │   ├── docker-entrypoint.sh
     │   ├── docker-shell.sh
-    │   └── transform_new.py
+    │   └── llm-main.py
     ├── nutrition_predict_disease
-    │   ├── models
-    │   │   ├── Diabetes_model.pkl
-    │   │   ├── High Cholesterol_model.pkl
-    │   │   ├── Hypertension_model.pkl
-    │   │   └── Obesity_model.pkl
+    │   ├── models                        # Trained XGB
     │   ├── secrets
     │   ├── Dockerfile
     │   ├── Pipfile
     │   ├── Pipfile.lock
     │   └── nutrition_predict_disease.py
-    ├── docker-compose.yml
     └── docker-shell.sh
 ```
 
@@ -141,45 +137,6 @@ We upload our datasets to the bucket, allowing the entire group to access them. 
    **Input:** Previous step results.
    **Output:** LLM response (uploaded to GCP bucket as .txt file)
   Running "python llm-main.py" could take the results of our previous step from the GCP bucket, which are the food nutrition info and the predicted diease risk, and then ask our fine-tuned RAG model for nutrition advice. The LLM response will automatically be uploaded to our GCP bucket.
-
-
-
-
-### Data Pipeline Overview:
-
-1. **`src/food-classification/predict_food.py`**
-   This script loads a fine-tuned EfficientNet model (food_model_EfficientNet.h5) and downloads a test food image from our bucket. Then it recognizes the food in the image and saves the food name as a JSON file to our bucket.
-
-2. **`src/food-classification/Pipfile`**
-   We used the following packages to help with food classification:
-   - pandas
-   - numpy
-   - scikit-learn
-   - matplotlib
-   - seaborn
-   - opencv-python
-   - tensorflow
-   - keras
-   - google-cloud-storage
-
-4. **`src/preprocessing/Dockerfile`**
-   Our Dockerfiles follow standard conventions.
-
-
-## Data Pipeline Overview
-
-1. **`src/datapipeline/preprocess_cv.py`**
-   This script handles preprocessing on our 100GB dataset. It reduces the image sizes to 128x128 (a parameter that can be changed later) to enable faster iteration during processing. The preprocessed dataset is now reduced to 10GB and stored on GCS.
-
-2. **`src/datapipeline/preprocess_rag.py`**
-   This script prepares the necessary data for setting up our vector database. It performs chunking, embedding, and loads the data into a vector database (ChromaDB).
-
-3. **`src/datapipeline/Pipfile`**
-   We used the following packages to help with preprocessing:
-   - `special cheese package`
-
-4. **`src/preprocessing/Dockerfile(s)`**
-   Our Dockerfiles follow standard conventions, with the exception of some specific modifications described in the Dockerfile/described below.
 
 
 ## Running Dockerfile
