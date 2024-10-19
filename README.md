@@ -81,6 +81,7 @@ In this milestone, we have the components for data management, including version
 #### Data:
 We upload our datasets to the bucket, allowing the entire group to access them. Within the notebook folder, there is an EDA file that helps introduce the dataset information in more details. 
 
+
 ### Data Pipeline Containers (src/):
 1. **food-classification:** The food-classification container recognizes the food in an image and stores the output back to Google Cloud Storage (GCS).
     - **Input:** Image and required secrets (provided via Docker)
@@ -91,9 +92,10 @@ We upload our datasets to the bucket, allowing the entire group to access them. 
 3. **nutrition_predict_disease:** The nutrition_predict_disease container use the nutritional components and calories of the food item from food_to_nutrition container to predict the risk of four chronic diseases. 
     - **Input:** Nutritional information of the food item, and required secrets (provided via Docker)
     - **Output:** Predicted probabilities for the risk of developing diseases, including obesity, diabetes, hypertension, and high cholesterol
-4. llm-rag: This container is used to invoke fine-tuned model from fine-tuned LLM model with RAG to generate diatery suggestions
+4. **llm-rag:** This container is used to invoke fine-tuned model from fine-tuned LLM model with RAG to generate diatery suggestions
     - **Input:** Processed prompts containing previous outputs from container 2 and 3. The format of prompt is "Outputs from container 2 and 3, Could you give us some dietary advice based on these information?"
     - **Output:** The answer from fine-tuned LLM model with RAG to give response based on prompts.
+
 
 ### LLM Containers (src/):
 1. **gemini-finetuner:** This container is used to process datasets used for fine-tuning and perform fine-tuning process in GCP.
@@ -108,37 +110,40 @@ We upload our datasets to the bucket, allowing the entire group to access them. 
 2. **llm-rag:** Another container prepares data for the RAG model, including tasks such as chunking, embedding, and populating the vector database.
     - **Input:** Processed Raw data as txt. file, and user query text.
     - **Output:** Chunked data (.jsonl file), embedded data (.jsonl file), created ChromaDB instance, LLM response corresponding to the user query text, and LLM responses to our default evaluation questions (uploaded to GCP bucket as csv for different RAG configuration)
+  
   ```
+  # Read each text file in the input-datasets/books directory
+  # Split the text into chunks using the specified method (character-based or recursive)
+  # Save the chunks as JSONL files in the outputs directory
   python cli.py --chunk --chunk_type char-split
   python cli.py --chunk --chunk_type recursive-split
   ```
 
+  ```
+  # Read the chunk files created in the previous section;
+  # Use Vertex AI's text embedding model to generate embeddings for each chunk;
+  # Save the chunks with their embeddings as new JSONL files.We use Vertex AI text-embedding-004 model to generate the embeddings
+  python cli.py --embed --chunk_type char-split
+  python cli.py --embed --chunk_type recursive-split
+  ```
 
-  - python cli.py --chunk --chunk_type char-split
-  - python cli.py --chunk --chunk_type recursive-split
-  This will read each text file in the input-datasets/books directory; Split the text into chunks using the specified method (character-based or recursive);Save the chunks as JSONL files in the outputs directory
+  ```
+  # Connect to your ChromaDB instance
+  # Create a new collection (or clears an existing one)
+  # load the embeddings and associated metadata into the collection.
+  python cli.py --load --chunk_type char-split
+  python cli.py --load --chunk_type recursive-split
+  ```
 
-  - python cli.py --embed --chunk_type char-split
-  - python cli.py --embed --chunk_type recursive-split
+  ```
+  # Generate the LLM response for specific user input using our vector database. Users could additionally specify “--chunk_type” to request two different vector base we generated using different split methods. 
+  python cli.py --chat --query_text={your specific input}
+  ```
 
-  This will read the chunk files created in the previous section; Use Vertex AI's text embedding model to generate embeddings for each chunk; Save the chunks with their embeddings as new JSONL files.We use Vertex AI text-embedding-004 model to generate the embeddings
-
-  - python cli.py --load --chunk_type char-split
-  - python cli.py --load --chunk_type recursive-split
-
-  This will connect to your ChromaDB instance, create a new collection (or clears an existing one), and load the embeddings and associated metadata into the collection.
-
-  - python cli.py --chat --query_text={your specific input}
-
-  This will generate the LLM response for specific user input using our vector database. Users could additionally specify “--chunk_type” to request two different vector base we generated using different split methods. 
-
-  - python cli.py --process_questions --output-file={output file name}
-  This will run our evaluation queries based on different RAG configuration and upload the results to the GCP buckets.
-
-  #### src/RAG_on_fine_tuned_model/llm-main: 
-   **Input:** Previous step results.
-   **Output:** LLM response (uploaded to GCP bucket as .txt file)
-  Running "python llm-main.py" could take the results of our previous step from the GCP bucket, which are the food nutrition info and the predicted diease risk, and then ask our fine-tuned RAG model for nutrition advice. The LLM response will automatically be uploaded to our GCP bucket.
+  ```
+  # This will run our evaluation queries based on different RAG configuration and upload the results to the GCP buckets.
+  python cli.py --process_questions --output-file={output file name}
+  ```
 
 
 ## Running Dockerfile
