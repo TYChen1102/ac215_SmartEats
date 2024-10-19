@@ -59,13 +59,13 @@ The SmartEats Group
     │   ├── Dockerfile
     │   ├── Pipfile
     │   ├── Pipfile.lock
-    │   ├── cli.py
+    │   ├── cli.py                         # prepare necessary data for setting up our vector database. It performs chunking, embedding, and loads the data into a vector database (ChromaDB)
     │   ├── docker-compose.yml
     │   ├── docker-entrypoint.sh
     │   ├── docker-shell.sh
     │   └── llm-main.py
     ├── nutrition_predict_disease
-    │   ├── models                        # Trained XGB
+    │   ├── models                         # Trained XGB
     │   ├── secrets
     │   ├── Dockerfile
     │   ├── Pipfile
@@ -83,40 +83,36 @@ We upload our datasets to the bucket, allowing the entire group to access them. 
 
 ### Data Pipeline Containers (src/):
 1. **food-classification:** The food-classification container recognizes the food in an image and stores the output back to Google Cloud Storage (GCS).
-- **Input:** Image and required secrets (provided via Docker)
-- **Output:** Name of the detected food name and predicted probability of the food
+    - **Input:** Image and required secrets (provided via Docker)
+    - **Output:** Name of the detected food name and predicted probability of the food
 2. **food_to_nutrition:** The food_to_nutrition container links the food predicted from food_classification container & weight user inputs to the nutrient components and stores the output back to GCS.
-- **Input:** Food item predicted, the weight user inputs, and required secrets (provided via Docker)
-- **Output:** Nutrition components and calories of the food item identified
+    - **Input:** Food item predicted, the weight user inputs, and required secrets (provided via Docker)
+    - **Output:** Nutrition components and calories of the food item identified
 3. **nutrition_predict_disease:** The nutrition_predict_disease container use the nutritional components and calories of the food item from food_to_nutrition container to predict the risk of four chronic diseases. 
-- **Input:** Nutritional information of the food item, and required secrets (provided via Docker)
-- **Output:** Predicted probabilities for the risk of developing diseases, including obesity, diabetes, hypertension, and high cholesterol
+    - **Input:** Nutritional information of the food item, and required secrets (provided via Docker)
+    - **Output:** Predicted probabilities for the risk of developing diseases, including obesity, diabetes, hypertension, and high cholesterol
 4. llm-rag: This container is used to invoke fine-tuned model from fine-tuned LLM model with RAG to generate diatery suggestions
-- **Input:** Processed prompts containing previous outputs from container 2 and 3. The format of prompt is "Outputs from container 2 and 3, Could you give us some dietary advice based on these information?"
-- **Output:** The answer from fine-tuned LLM model with RAG to give response based on prompts.
+    - **Input:** Processed prompts containing previous outputs from container 2 and 3. The format of prompt is "Outputs from container 2 and 3, Could you give us some dietary advice based on these information?"
+    - **Output:** The answer from fine-tuned LLM model with RAG to give response based on prompts.
 
 ### LLM Containers (src/):
 1. **gemini-finetuner:** This container is used to process datasets used for fine-tuning and perform fine-tuning process in GCP.
-- **Input:** Processed Question Answering datasets as jsonl file, each entry has only question and answer parts.
-- **Output:** Fine-tuned LLM base model deployed as a endpoint for later RAG process.
+    - **Input:** Processed Question Answering datasets as jsonl file, each entry has only question and answer parts.
+    - **Output:** Fine-tuned LLM base model deployed as a endpoint for later RAG process.
   ```
   transform_new.py        # This process the format of nutrition question answering dataset and save this as jsonl files. Original dataset has instruction, input and output. After processing, question part includes instruction and inputs while answer part includes outputs.
   
-  python cli.py --train   #  Fine-tune based model based on hyper parameters and datasets from bucket (all defined in ```cli.py```).
-Remember to deploy fine-tuned model as endpoint for later RAG usage.
+  python cli.py --train   #  Fine-tune based model based on hyper parameters and datasets from bucket (all defined in src/gemini-finetuner/cli.py). Remember to deploy fine-tuned model as endpoint for later RAG usage.
   ```
 
 2. **llm-rag:** Another container prepares data for the RAG model, including tasks such as chunking, embedding, and populating the vector database.
-   src/RAG_on_fine_tuned_model/cli.py:  This script prepares the necessary data for setting up our vector database. It performs chunking, embedding, and loads the data into a vector database (ChromaDB).
+    - **Input:** Processed Raw data as txt. file, and user query text.
+    - **Output:** Chunked data (.jsonl file), embedded data (.jsonl file), created ChromaDB instance, LLM response corresponding to the user query text, and LLM responses to our default evaluation questions (uploaded to GCP bucket as csv for different RAG configuration)
+  ```
+  python cli.py --chunk --chunk_type char-split
+  python cli.py --chunk --chunk_type recursive-split
+  ```
 
-   
-8. RAG_based_on_fine_tuned_model: Another container prepares data for the RAG model, including tasks such as chunking, embedding, and populating the vector database.
-   ##### src/RAG_on_fine_tuned_model/cli.py:  This script prepares the necessary data for setting up our vector database. It performs chunking, embedding, and loads the data into a vector database (ChromaDB).
-   
-   **Input:** Processed Raw data as txt. file, and user query text.
-   
-   **Output:** Chunked data (.jsonl file), embedded data (.jsonl file), created ChromaDB instance, LLM response corresponding to the user query text, and LLM responses to our default evaluation questions (uploaded to GCP bucket as csv for different RAG configuration)
-   
 
   - python cli.py --chunk --chunk_type char-split
   - python cli.py --chunk --chunk_type recursive-split
