@@ -11,7 +11,7 @@ Jiayi Sun, Ninghui Hao, Qianwen Li, Taiyang Chen, Yantong Cui
 **Group Name:**
 The SmartEats Group
 
-### Project Milestone 2 Organization
+### Project Milestone 3 Organization
 
 ```
 ├── data 
@@ -85,7 +85,7 @@ The SmartEats Group
 
 ```
 
-## Milestone2 ###
+## Milestone3 ###
 
 In this milestone, we have the components for data management, including versioning, as well as the computer vision and language models.
 
