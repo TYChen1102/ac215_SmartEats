@@ -1,4 +1,4 @@
-# AC215 - Milestone2 - SmartEats
+# AC215 - Milestone3 - SmartEats
 
 ### Project:
 In this project, we aim to develop SmartEats, an AI-powered application that analyzes food images, predicts disease risks based on dietary habits, and offers personalized nutrition advice. 
