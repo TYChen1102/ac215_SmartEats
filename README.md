@@ -74,6 +74,13 @@ The SmartEats Group
     │   ├── Pipfile                        # Define necessary packages and requirements
     │   ├── Pipfile.lock                   
     │   └── nutrition_predict_disease.py   # Load models and dataset to predict diseases risks
+    ├── data-versioning
+    │   ├── Dockerfile                     # To build the container for data versioning
+    │   ├── Pipfile                        # Define packages used in data versioning
+    │   ├── Pipfile.lock                   
+    │   ├── docker-shell.sh                # Fine-tuned EfficientNet model
+    │   ├── docker-entrypoint.sh
+    │   └── smarteats_data.dvc
     └── docker-shell.sh                    # Combine 4 containers in Data Pipeline (see below) and print final suggestions from fine-tuned LLm with RAG
 
 ```
@@ -159,10 +166,10 @@ The pipeline running illustration screenshots are stored in reports, and the exa
 
 
 ### Data Versioning Strategy:
-We plan to incorporate a container for running DVC to keep track of the commits, logs, and different versions of datasets in later step. 
+We incorporated a container for running DVC to keep track of the commits, logs, and different versions of datasets. 
 
 ### Notebooks/Reports:
-- Notebooks contains documentations and code that is not part of container: EDA, Application mockup, LLM fine-tuning documentation, ...
+- Notebooks contains documentations and code that is not part of container: EDA, Application mockup, LLM fine-tuning documentation, data versions, ...
 - Reports contains the project proposal submitted for Milestone 1.
 
 ### Next Steps:
