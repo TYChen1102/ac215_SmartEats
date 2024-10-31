@@ -25,8 +25,8 @@ The SmartEats Group
 │   ├── LLM_RAG_preprocessing.ipynb        # construct the RAG vector database
 │   ├── data_versioning_cloud_storage.ipynb# view version of the dataset
 │   ├── dataset3_EDA&preprocessing.ipynb   # EDA for nutrtion-disease dataset
-│   ├── frontpage.html                     # HTML file for application front page
-│   ├── frontpage.jpg                      # screenshot of front page
+│   ├── frontpage_v2.html                  # HTML file for application front page
+│   ├── frontpage_v2.jpg                   # screenshot of front page
 │   ├── image_EDA.ipynb                    # EDA for image datasets
 │   └── predict_disease_ML.ipynb           # fine-tuning of a XGBClassifier model
 ├── references
@@ -180,5 +180,6 @@ The pipeline running illustration screenshots are stored in reports, and the exa
 
 ## What's new in Milestone 3:
 - Data Versioning: a container for running DVC to keep track of the commits, logs, and different versions of datasets.
-- Modify the prompt of fine-tuned LLM with RAG to offer more conservertive advice based on one meal input. 
+- Modify the prompt of fine-tuned LLM with RAG to offer more conservertive advice based on one meal input.
+- Update frontpage to v2
   
