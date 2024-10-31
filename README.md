@@ -78,7 +78,7 @@ The SmartEats Group
     │   ├── Dockerfile                     # To build the container for data versioning
     │   ├── Pipfile                        # Define packages used in data versioning
     │   ├── Pipfile.lock                   
-    │   ├── docker-shell.sh                # Fine-tuned EfficientNet model
+    │   ├── docker-shell.sh
     │   ├── docker-entrypoint.sh
     │   └── smarteats_data.dvc
     ├── secrets
