@@ -14,7 +14,9 @@ The SmartEats Group
 ### Project Milestone 3 Organization
 
 ```
-├── data 
+├── data
+├── midterm_presentation
+│   └── SmartEats_AC215_M3_slides.pdf      # midterm presentation slides
 ├── notebooks
 │   ├── AC215 - EDA.pdf                    # EDA pdf file 
 │   ├── AC215_image_EfficientNet.ipynb     # train EfficientNet model
@@ -32,6 +34,7 @@ The SmartEats Group
 │   ├── APCOMP215 Project Proposal.pdf     
 │   ├── DataPipeline1.jpg                  # Pipeline running screenshot
 │   ├── DataPipeline2.jpg                  # Pipeline running screenshot
+│   ├── Examples.pdf                       # Some example inputs&outputs
 │   └── Final_output.png                   # Final output example
 └── src
     ├── data-versioning
@@ -172,10 +175,10 @@ The pipeline running illustration screenshots are stored in reports, and the exa
 - Reports contains the project proposal submitted for Milestone 1.
 
 ### Next Steps:
-- Incorporate data versioning
 - Combine some containers to reduce redundancy
+- Incorporate multimodal models
 
-### What's new in Milestone 3:
+## What's new in Milestone 3:
 - Data Versioning: a container for running DVC to keep track of the commits, logs, and different versions of datasets.
 - Modify the prompt of fine-tuned LLM with RAG to offer more conservertive advice based on one meal input. 
   
