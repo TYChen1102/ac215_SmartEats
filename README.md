@@ -34,6 +34,13 @@ The SmartEats Group
 │   ├── DataPipeline2.jpg                  # Pipeline running screenshot
 │   └── Final_output.png                   # Final output example
 └── src
+    ├── data-versioning
+    │   ├── Dockerfile                     # To build the container for data versioning
+    │   ├── Pipfile                        # Define packages used in data versioning
+    │   ├── Pipfile.lock                   
+    │   ├── docker-shell.sh
+    │   ├── docker-entrypoint.sh
+    │   └── smarteats_data.dvc
     ├── food-classification
     │   ├── secrets
     │   ├── Dockerfile                     # To build the container for food classification
@@ -75,13 +82,6 @@ The SmartEats Group
     │   ├── Pipfile                        # Define necessary packages and requirements
     │   ├── Pipfile.lock                   
     │   └── nutrition_predict_disease.py   # Load models and dataset to predict diseases risks
-    ├── data-versioning
-    │   ├── Dockerfile                     # To build the container for data versioning
-    │   ├── Pipfile                        # Define packages used in data versioning
-    │   ├── Pipfile.lock                   
-    │   ├── docker-shell.sh
-    │   ├── docker-entrypoint.sh
-    │   └── smarteats_data.dvc
     ├── secrets
     └── docker-shell.sh                    # Combine 4 containers in Data Pipeline (see below) and print final suggestions from fine-tuned LLm with RAG
 
@@ -167,9 +167,6 @@ sh docer-shell.sh      # the pipeline consisting of multiple containers will run
 The pipeline running illustration screenshots are stored in reports, and the example output is also attached there. 
 
 
-### Data Versioning Strategy:
-We incorporated a container for running DVC to keep track of the commits, logs, and different versions of datasets. 
-
 ### Notebooks/Reports:
 - Notebooks contains documentations and code that is not part of container: EDA, Application mockup, LLM fine-tuning documentation, data versions, ...
 - Reports contains the project proposal submitted for Milestone 1.
@@ -177,4 +174,8 @@ We incorporated a container for running DVC to keep track of the commits, logs, 
 ### Next Steps:
 - Incorporate data versioning
 - Combine some containers to reduce redundancy
+
+### What's new in Milestone 3:
+- Data Versioning: a container for running DVC to keep track of the commits, logs, and different versions of datasets.
+- Modify the prompt of fine-tuned LLM with RAG to offer more conservertive advice based on one meal input. 
   
