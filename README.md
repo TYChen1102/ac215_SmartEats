@@ -81,6 +81,7 @@ The SmartEats Group
     │   ├── docker-shell.sh                # Fine-tuned EfficientNet model
     │   ├── docker-entrypoint.sh
     │   └── smarteats_data.dvc
+    ├── secrets
     └── docker-shell.sh                    # Combine 4 containers in Data Pipeline (see below) and print final suggestions from fine-tuned LLm with RAG
 
 ```
