@@ -21,6 +21,7 @@ The SmartEats Group
 │   ├── AC215_image_VGG_new.ipynb          # train VGG model
 │   ├── LLM-fintuning-Documentation.pdf    # Documentation of the LLM fine-tuning process
 │   ├── LLM_RAG_preprocessing.ipynb        # construct the RAG vector database
+│   ├── data_versioning_cloud_storage.ipynb# view version of the dataset
 │   ├── dataset3_EDA&preprocessing.ipynb   # EDA for nutrtion-disease dataset
 │   ├── frontpage.html                     # HTML file for application front page
 │   ├── frontpage.jpg                      # screenshot of front page
