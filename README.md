@@ -11,3 +11,6 @@ We aim to build an app named SmartEats that can calculate calories of your input
 - Jiayi Sun
 - Taiyang Chen
 - Qianwen Li
+
+## For code session
+Please check milestone branches.
