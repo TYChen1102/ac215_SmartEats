@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - Milestone4  # Triggers when code is pushed to the main branch
+      - Milestone4  # Triggers when code is pushed to the Milestone4 branch
 
 jobs:
   test:
@@ -14,31 +14,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Python environment (specifically Python 3.12)
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.12'
+      # Step 2: Pull the Docker image
+      - name: Pull Docker image
+        run: docker pull jsunsun/ms4_step1:latest
 
-      # Step 2.1: Set PYTHONPATH to include the root directory (or src if relevant)
-      - name: Set PYTHONPATH
-        run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV  # Adds current directory to PYTHONPATH
-
-
-      # Step 3: Install pytest and pytest-cov for coverage
-      - name: Install pytest and pytest-cov
+      # Step 3: Run tests in the Docker container
+      - name: Run tests in Docker container with coverage
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          docker run --rm \
+            -v ${{ github.workspace }}/src:/app/src \
+            -v ${{ github.workspace }}/tests:/app/tests \
+            -v ${{ github.workspace }}/coverage:/app/coverage \
+            jsunsun/ms4_step1:latest pytest --cov=/app/src --cov-report=html:/app/coverage
 
-      # Step 4: Run pytest with coverage and generate HTML report
-      - name: Run tests with coverage
-        run: |
-          pytest --cov=. --cov-report=html
-
-      # Step 5: Upload coverage report as an artifact
+      # Step 4: Upload coverage report as an artifact
       - name: Upload coverage report
         uses: actions/upload-artifact@v3
         with:
           name: coverage-report
-          path: htmlcov  # The folder where pytest-cov stores HTML reports
+          path: coverage  # Path to the coverage report folder
