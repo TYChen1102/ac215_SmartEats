@@ -169,6 +169,14 @@ sh docer-shell.sh      # the pipeline consisting of multiple containers will run
 ```
 The pipeline running illustration screenshots are stored in reports, and the example output is also attached there. 
 
+## Running Frontend
+```
+cd frondend
+sh docker-shell.sh
+http-server
+```
+Visit http://localhost:8080/frontpage.html
+
 
 ### Notebooks/Reports:
 - Notebooks contains documentations and code that is not part of container: EDA, Application mockup, LLM fine-tuning documentation, data versions, ...
