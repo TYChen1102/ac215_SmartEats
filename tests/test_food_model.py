@@ -5,7 +5,7 @@ import json
 import numpy as np
 from tensorflow.keras.models import load_model
 import cv2
-from predict_food import download, process_image, make_prediction, send_output
+from food_classification.predict_food import download, process_image, make_prediction, send_output
 
 # Mock global variables
 GCP_PROJECT = "test_project"
