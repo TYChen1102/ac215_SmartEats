@@ -25,7 +25,7 @@ def extract_input():
     blob = bucket.blob('shared_results/step1_output.json')
     step1_json = blob.download_as_text()
     step1_output = json.loads(step1_json)
-    
+
     # read Weight.json
     w_blob = bucket.blob('shared_results/Weight.json')
     weight_json = w_blob.download_as_text()

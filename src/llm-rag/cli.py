@@ -65,14 +65,14 @@ generative_model = GenerativeModel(
 book_mappings = {
 	"Dietary_Guidelines_for_Americans_2020-2025.txt": {"author":"Dietary Guidelines Writing Team", "year": 2020-2025},
 	"wiki_book.txt": {"author":"wiki writers", "year": 2023}
-	
+
 }
 
 rag_settings = {
-    	"Embedding Model": EMBEDDING_MODEL ,  
+    	"Embedding Model": EMBEDDING_MODEL ,
     	"generation_config": generation_config,
 		"retrieval_parameters": {
-        	"Number_of_top_documents_fetched": 10,  
+        	"Number_of_top_documents_fetched": 10,
     	},
 		"chunking method": "char-split"
     }
@@ -111,7 +111,7 @@ def load_text_embeddings(df, collection, batch_size=500):
 		book_mapping = book_mappings[metadata["book"]]
 		metadata["author"] = book_mapping["author"]
 		metadata["year"] = book_mapping["year"]
-   
+
 	# Process data in batches
 	total_inserted = 0
 	for i in range(0, df.shape[0], batch_size):
@@ -119,7 +119,7 @@ def load_text_embeddings(df, collection, batch_size=500):
 		batch = df.iloc[i:i+batch_size].copy().reset_index(drop=True)
 
 		ids = batch["id"].tolist()
-		documents = batch["chunk"].tolist() 
+		documents = batch["chunk"].tolist()
 		metadatas = [metadata for item in batch["book"].tolist()]
 		embeddings = batch["embedding"].tolist()
 
@@ -153,7 +153,7 @@ def chunk(method="char-split"):
 
 		with open(text_file) as f:
 			input_text = f.read()
-		
+
 		text_chunks = None
 		if method == "char-split":
 			chunk_size = 350
@@ -175,7 +175,7 @@ def chunk(method="char-split"):
 			text_chunks = text_splitter.create_documents([input_text])
 			text_chunks = [doc.page_content for doc in text_chunks]
 			print("Number of chunks:", len(text_chunks))
-		
+
 		if text_chunks is not None:
 			# Save the chunks
 			data_df = pd.DataFrame(text_chunks,columns=["chunk"])
@@ -207,7 +207,7 @@ def embed(method="char-split"):
 		embeddings = generate_text_embeddings(chunks,EMBEDDING_DIMENSION, batch_size=100)
 		data_df["embedding"] = embeddings
 
-		# Save 
+		# Save
 		print("Shape:", data_df.shape)
 		print(data_df.head())
 
@@ -261,7 +261,7 @@ def chat(method="char-split",query_text=None): # change it to allows chat query
 	client = chromadb.HttpClient(host=CHROMADB_HOST, port=CHROMADB_PORT)
 	# Get a collection object from an existing collection, by name. If it doesn't exist, create it.
 	collection_name = f"{method}-collection"
-    
+
 	if query_text is None:
 		query_text = "What is protein food?"
 	query_embedding = generate_query_embedding(query_text)
@@ -270,7 +270,7 @@ def chat(method="char-split",query_text=None): # change it to allows chat query
 	# Get the collection
 	collection = client.get_collection(name=collection_name)
 
-	# Query based on embedding value 
+	# Query based on embedding value
 	results = collection.query(
 		query_embeddings=[query_embedding],
 		n_results=10
@@ -290,7 +290,7 @@ def chat(method="char-split",query_text=None): # change it to allows chat query
 	generated_text = response.text
 	print("LLM Response:", generated_text)
 
-	 # Upload output to GCP bucket 
+	 # Upload output to GCP bucket
 	storage_client = storage.Client()
 	bucket = storage_client.bucket(bucket_name)
 
@@ -298,7 +298,7 @@ def chat(method="char-split",query_text=None): # change it to allows chat query
     # Open the text file in write mode and save the generated text
 	with open(output_file_name, 'w', encoding='utf-8') as file:
 		file.write(generated_text)
-	
+
 	blob = bucket.blob(f"shared_results/{output_file_name}")
 	blob.upload_from_filename(output_file_name)
 	print(' output uploaded to GCP bucket.')
@@ -307,7 +307,7 @@ def chat(method="char-split",query_text=None): # change it to allows chat query
 
 
 def evaluate_and_save_to_csv(questions, output_file, method="char-split"):
-	
+
     # Loop through the list of questions, generate an LLM response for each, and record both
 	results_list = []
 
@@ -321,11 +321,11 @@ def evaluate_and_save_to_csv(questions, output_file, method="char-split"):
         })
 		time.sleep(60) # do not overly request quota
 	results_df = pd.DataFrame(results_list)
-		
+
 
 
 	results_df.to_csv(output_file, index=False)
-     # Upload output to GCP bucket 
+     # Upload output to GCP bucket
 	storage_client = storage.Client()
 	bucket = storage_client.bucket(bucket_name)
 	blob = bucket.blob(f'LLM_evaluation/{output_file}')
@@ -335,7 +335,7 @@ def evaluate_and_save_to_csv(questions, output_file, method="char-split"):
 
 def main(args=None):
 	# The ten evaluation questions
-	questions = [ 
+	questions = [
         "What are the key nutritional considerations for school-aged children according to the Dietary Guidelines, and how do school meal programs contribute to their dietary needs?",
         "How do the Dietary Guidelines address the unique nutritional needs of infants and toddlers, and what are the key recommendations for this age group?",
         "Describe the recommended Healthy Dietary Patterns for adults aged 19-59, as outlined in the Dietary Guidelines, and the rationale behind these recommendations.",
@@ -348,7 +348,7 @@ def main(args=None):
         "How is body mass index (BMI) used as a risk factor for diseases in the context of nutritional assessments, and what are its limitations?"
     ]
 	print("CLI Arguments:", args)
-	
+
 	if args.process_questions:evaluate_and_save_to_csv(questions=questions, output_file=args.output_file, method=args.chunk_type)
 	if args.chunk:
 		chunk(method=args.chunk_type)
@@ -358,14 +358,14 @@ def main(args=None):
 
 	if args.load:
 		load(method=args.chunk_type)
-	
+
 	if args.chat:
 		chat(method=args.chunk_type,query_text=args.query_text)
 
 
 	if args.process_questions:
 		evaluate_and_save_to_csv(questions=questions, output_file=args.output_file, method=args.chunk_type)
-	
+
 
 
 if __name__ == "__main__":

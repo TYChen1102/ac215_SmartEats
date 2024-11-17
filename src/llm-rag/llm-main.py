@@ -17,7 +17,7 @@ def extract_input():
     step3_json = blob2.download_as_text()
     step3_output = json.loads(step3_json)
 
-    
+
     meal_info = (
     f"This is the nutrition content and calories of the user's meal: "
     f"{step2_output['Description']}.\n"
@@ -26,7 +26,7 @@ def extract_input():
     f"The risk of 4 potential relavant diseases are Obesity: {step3_output["Obesity"]}, Diabetes:{step3_output["Diabetes"]}, \n"
     f"High Cholesterol: {step3_output["High Cholesterol"]}, Hypertension: {step3_output["Hypertension"]}. Could you give us some dietary advice based on these information?"
     )
-   
+
     print("Formatted Meal Information for LLM Input:\n", meal_info)
     return meal_info
 
@@ -42,7 +42,7 @@ def interact_with_llm(prompt):
     """Send the prompt to the LLM using RAG via cli.py."""
     # Use subprocess to call the Python script with the necessary arguments
     try:
-        command = [ "python", "./cli.py", "--chat", "--chunk_type", "char-split", "--query_text", str(meal_info) ] 
+        command = [ "python", "./cli.py", "--chat", "--chunk_type", "char-split", "--query_text", str(meal_info) ]
         result = subprocess.run(
             command
         )
@@ -51,4 +51,3 @@ def interact_with_llm(prompt):
 
 # Step 4: Send the formatted meal information to the LLM
 interact_with_llm(meal_info)
-

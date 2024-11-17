@@ -14,7 +14,7 @@ GCP_PROJECT = os.environ["GCP_PROJECT"]
 TRAIN_DATASET = "gs://nutritionqadataset/train_split_new.jsonl" # Replace with your dataset
 VALIDATION_DATASET = "gs://nutritionqadataset/test_split_new.jsonl" # Replace with your dataset
 GCP_LOCATION = "us-central1"
-GENERATIVE_SOURCE_MODEL = "gemini-1.5-pro-002"# gemini-1.5-pro-002 # "gemini-1.5-flash-002" 
+GENERATIVE_SOURCE_MODEL = "gemini-1.5-pro-002"# gemini-1.5-pro-002 # "gemini-1.5-flash-002"
 # Configuration settings for the content generation
 generation_config = {
     "max_output_tokens": 3000,  # Maximum number of tokens for output
@@ -38,11 +38,11 @@ def train(wait_for_job=False):
         tuned_model_display_name="nutrition-simpledata-retransform-15pro-epoch3-v3",
     )
     print("Training job started. Monitoring progress...\n\n")
-    
+
     # Wait and refresh
     time.sleep(60)
     sft_tuning_job.refresh()
-    
+
     if wait_for_job:
         print("Check status of tuning job:")
         print(sft_tuning_job)
@@ -65,8 +65,8 @@ def chat():
     #MODEL_ENDPOINT = "projects/1058117673285/locations/us-central1/endpoints/2147250551534911488" # self-try-tutorial
     #MODEL_ENDPOINT = "projects/1058117673285/locations/us-central1/endpoints/4248179777703247872" # nutrition-test-v1
     MODEL_ENDPOINT ="projects/1058117673285/locations/us-central1/endpoints/6472676518647562240"  # gemini-1.5-pro, epoch3
-    
-    
+
+
     generative_model = GenerativeModel(MODEL_ENDPOINT)
 
     query = "Is the product suitable for consumption based on user allergies, preferences, and exceptions?"
@@ -78,14 +78,14 @@ def chat():
     )
     generated_text = response.text
     print("Fine-tuned LLM Response:", generated_text)
-     
+
 
 def main(args=None):
     print("CLI Arguments:", args)
 
     if args.train:
         train()
-    
+
     if args.chat:
         chat()
 

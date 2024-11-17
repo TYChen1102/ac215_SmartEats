@@ -1,7 +1,7 @@
 # AC215 - Milestone3 - SmartEats
 
 ### Project:
-In this project, we aim to develop SmartEats, an AI-powered application that analyzes food images, predicts disease risks based on dietary habits, and offers personalized nutrition advice. 
+In this project, we aim to develop SmartEats, an AI-powered application that analyzes food images, predicts disease risks based on dietary habits, and offers personalized nutrition advice.
 an application named SmartEats, which will take the food image as input from users and generate nutrition components with advise and potential disease risks. It will first require users to upload food pictures, and then it will use image recognition to estimate nutritional components like protein and fats and also display the amounts of each
 component ideally. Based on the results, SmartEats will calculate calories, assess potential health risks, and provide tailored dietary suggestions, such as healthy recipes.
 
@@ -18,7 +18,7 @@ The SmartEats Group
 ├── midterm_presentation
 │   └── SmartEats_AC215_M3_slides.pdf      # midterm presentation slides
 ├── notebooks
-│   ├── AC215 - EDA.pdf                    # EDA pdf file 
+│   ├── AC215 - EDA.pdf                    # EDA pdf file
 │   ├── AC215_image_EfficientNet.ipynb     # train EfficientNet model
 │   ├── AC215_image_VGG_new.ipynb          # train VGG model
 │   ├── LLM-fintuning-Documentation.pdf    # Documentation of the LLM fine-tuning process
@@ -31,7 +31,7 @@ The SmartEats Group
 │   └── predict_disease_ML.ipynb           # fine-tuning of a XGBClassifier model
 ├── references
 ├── reports
-│   ├── APCOMP215 Project Proposal.pdf     
+│   ├── APCOMP215 Project Proposal.pdf
 │   ├── DataPipeline1.jpg                  # Pipeline running screenshot
 │   ├── DataPipeline2.jpg                  # Pipeline running screenshot
 │   ├── Examples.pdf                       # Some example inputs&outputs
@@ -40,7 +40,7 @@ The SmartEats Group
     ├── data-versioning
     │   ├── Dockerfile                     # To build the container for data versioning
     │   ├── Pipfile                        # Define packages used in data versioning
-    │   ├── Pipfile.lock                   
+    │   ├── Pipfile.lock
     │   ├── docker-shell.sh
     │   ├── docker-entrypoint.sh
     │   └── smarteats_data.dvc
@@ -48,11 +48,11 @@ The SmartEats Group
     │   ├── secrets
     │   ├── Dockerfile                     # To build the container for food classification
     │   ├── Pipfile                        # Define packages used in food classification
-    │   ├── Pipfile.lock                   
+    │   ├── Pipfile.lock
     │   ├── food_model_EfficientNet.h5     # Fine-tuned EfficientNet model
     │   └── predict_food.py                # Loads a fine-tuned EfficientNet model, downloads data, recognizes the food and saves to our bucket.
     ├── food_to_nutrition
-    │   ├── secrets                        
+    │   ├── secrets
     │   ├── Dockerfile                     # build container to link nutrition components to food item
     │   ├── Pipfile                        # Define packages
     │   ├── Pipfile.lock
@@ -60,7 +60,7 @@ The SmartEats Group
     ├── gemini-finetuner
     │   ├── Dockerfile                     # Dockerfile to build container to train/fine-tune base LLM model
     │   ├── Pipfile                        # Define necessary packages and requirements
-    │   ├── Pipfile.lock                   
+    │   ├── Pipfile.lock
     │   ├── cli.py                         # Scripts to define base LLM model, training hyper parameters, datasets and training codes
     │   ├── docker-entrypoint.sh           # run pipenv
     │   ├── docker-shell.sh                # Scripts to build the docker
@@ -76,14 +76,14 @@ The SmartEats Group
     │   ├── cli.py                         # prepare necessary data for setting up our vector database. It performs chunking, embedding, and loads the data into a vector database (ChromaDB)
     │   ├── docker-compose.yml
     │   ├── docker-entrypoint.sh
-    │   ├── docker-shell.sh                
+    │   ├── docker-shell.sh
     │   └── llm-main.py                    # invoke fine-tuned model from fine-tuned LLM model with RAG to generate diatery suggestions
     ├── nutrition_predict_disease
     │   ├── models                         # Trained XGBClassifier models
     │   ├── secrets
     │   ├── Dockerfile                     # To build container to predict disease risks based on nutrition content
     │   ├── Pipfile                        # Define necessary packages and requirements
-    │   ├── Pipfile.lock                   
+    │   ├── Pipfile.lock
     │   └── nutrition_predict_disease.py   # Load models and dataset to predict diseases risks
     ├── secrets
     └── docker-shell.sh                    # Combine 4 containers in Data Pipeline (see below) and print final suggestions from fine-tuned LLm with RAG
@@ -95,7 +95,7 @@ The SmartEats Group
 In this milestone, we have the components for data management, including versioning, as well as the computer vision and language models.
 
 #### Data:
-We upload our datasets to the bucket, allowing the entire group to access them. Within the notebook folder, there is an EDA file that helps introduce the dataset information in more details. 
+We upload our datasets to the bucket, allowing the entire group to access them. Within the notebook folder, there is an EDA file that helps introduce the dataset information in more details.
 
 
 ### Data Pipeline Containers (src/):
@@ -105,7 +105,7 @@ We upload our datasets to the bucket, allowing the entire group to access them. 
 2. **food_to_nutrition:** The food_to_nutrition container links the food predicted from food_classification container & weight user inputs to the nutrient components and stores the output back to GCS.
     - **Input:** Food item predicted, the weight user inputs, and required secrets (provided via Docker)
     - **Output:** Nutrition components and calories of the food item identified
-3. **nutrition_predict_disease:** The nutrition_predict_disease container use the nutritional components and calories of the food item from food_to_nutrition container to predict the risk of four chronic diseases. 
+3. **nutrition_predict_disease:** The nutrition_predict_disease container use the nutritional components and calories of the food item from food_to_nutrition container to predict the risk of four chronic diseases.
     - **Input:** Nutritional information of the food item, and required secrets (provided via Docker)
     - **Output:** Predicted probabilities for the risk of developing diseases, including obesity, diabetes, hypertension, and high cholesterol
 4. **llm-rag:** This container is used to invoke fine-tuned model from fine-tuned LLM model with RAG to generate diatery suggestions
@@ -119,14 +119,14 @@ We upload our datasets to the bucket, allowing the entire group to access them. 
     - **Output:** Fine-tuned LLM base model deployed as a endpoint for later RAG process.
   ```
   transform_new.py        # This process the format of nutrition question answering dataset and save this as jsonl files. Original dataset has instruction, input and output. After processing, question part includes instruction and inputs while answer part includes outputs.
-  
+
   python cli.py --train   #  Fine-tune based model based on hyper parameters and datasets from bucket (all defined in src/gemini-finetuner/cli.py). Remember to deploy fine-tuned model as endpoint for later RAG usage.
   ```
 
 2. **llm-rag:** Another container prepares data for the RAG model, including tasks such as chunking, embedding, and populating the vector database.
     - **Input:** Processed Raw data as txt. file, and user query text.
     - **Output:** Chunked data (.jsonl file), embedded data (.jsonl file), created ChromaDB instance, LLM response corresponding to the user query text, and LLM responses to our default evaluation questions (uploaded to GCP bucket as csv for different RAG configuration)
-  
+
   ```
   # Read each text file in the input-datasets/books directory
   # Split the text into chunks using the specified method (character-based or recursive)
@@ -152,7 +152,7 @@ We upload our datasets to the bucket, allowing the entire group to access them. 
   ```
 
   ```
-  # Generate the LLM response for specific user input using our vector database. Users could additionally specify “--chunk_type” to request two different vector base we generated using different split methods. 
+  # Generate the LLM response for specific user input using our vector database. Users could additionally specify “--chunk_type” to request two different vector base we generated using different split methods.
   python cli.py --chat --query_text={your specific input}
   ```
 
@@ -165,9 +165,9 @@ We upload our datasets to the bucket, allowing the entire group to access them. 
 ## Running Dockerfile
 ```
 cd src                 # move into the directory with docker-shell.sh
-sh docer-shell.sh      # the pipeline consisting of multiple containers will run sequentially 
+sh docer-shell.sh      # the pipeline consisting of multiple containers will run sequentially
 ```
-The pipeline running illustration screenshots are stored in reports, and the example output is also attached there. 
+The pipeline running illustration screenshots are stored in reports, and the example output is also attached there.
 
 ## Running Frontend
 ```
@@ -190,4 +190,3 @@ Visit http://localhost:8080/frontpage.html
 - Data Versioning: a container for running DVC to keep track of the commits, logs, and different versions of datasets.
 - Modify the prompt of fine-tuned LLM with RAG to offer more conservertive advice based on one meal input.
 - Update frontpage to v2
-  
