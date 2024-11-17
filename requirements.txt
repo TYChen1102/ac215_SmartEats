@@ -1,0 +1,11 @@
+numpy
+pandas
+pytest
+pytest-cov
+scikit-learn
+matplotlib
+seaborn
+opencv-python
+tensorflow
+keras
+google-cloud-storage
