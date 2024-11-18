@@ -51,8 +51,9 @@ jobs:
 
       - name: Build Deployment Container 
         run: |
-          cd ${{ github.workspace }}src/food_classification/
+          cd ${{ github.workspace }}/src/food_classification/
           docker build -t ms4_step1_image --platform=linux/arm64/v8 -f Dockerfile .
+          docker run --rm --name ms4_step1_container -ti ms4_step1_image
       
       # # Step 2: Pull the Docker image
       # - name: Pull Docker image
