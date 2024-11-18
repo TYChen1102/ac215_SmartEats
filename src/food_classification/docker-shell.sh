@@ -15,7 +15,7 @@ docker build -t $IMAGE_NAME -f Dockerfile .
 echo "Using image: $IMAGE_NAME"
 
 # Run Container
-docker run --rm --name $IMAGE_NAME -ti \
+docker run --rm --name $IMAGE_NAME -i \
   -v "$BASE_DIR":/app \
   -v "$SECRETS_DIR":/secrets \
   -e GOOGLE_APPLICATION_CREDENTIALS=/secrets/ac215-smarteat-437821-15c2f229e610.json \
