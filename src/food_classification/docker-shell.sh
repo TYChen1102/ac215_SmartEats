@@ -21,4 +21,4 @@ docker run --rm --name $IMAGE_NAME -i \
   -e GOOGLE_APPLICATION_CREDENTIALS=/secrets/ac215-smarteat-437821-15c2f229e610.json \
   -e GCP_PROJECT=$GCP_PROJECT \
   -e GCS_MODELS_BUCKET_NAME=$GCS_MODELS_BUCKET_NAME \
-  $IMAGE_NAME
+  $IMAGE_NAME bash -c "mkdir -p /app && chmod -R 777 /app && exec bash"
