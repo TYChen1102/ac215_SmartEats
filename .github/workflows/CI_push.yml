@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Log basic workflow information
       - run: echo "Comment ${{ github.event.head_commit.message }}"
       - run: echo "Job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "Job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -19,54 +20,60 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # - id: 'auth'
-      #   uses: google-github-actions/auth@v1
-      #   with:
-      #     credentials_json: '${{ secrets.DEPLOYMENT }}'
+      # Authenticate with Google Cloud
+      - id: 'auth'
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.DEPLOYMENT }}'
 
+      # Configure Google Cloud SDK
       - name: Configure Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
 
+      # Install Docker Client
       - name: Configure Docker Client
         run: |
           curl -fsSL https://get.docker.com -o get-docker.sh
           sh get-docker.sh
 
+      # Create secrets directory and files
       - name: Create secrets directory
         run: |
-          mkdir ${{ github.workspace }}/secrets
-          chmod 0777 secrets
+          mkdir -p ${{ github.workspace }}/secrets
+          chmod 0777 ${{ github.workspace }}/secrets
 
-      - name: Create secrets file
+      - name: Create secrets files
         run: |
           echo '${{ secrets.DEPLOYMENT }}' > ${{ github.workspace }}/secrets/deployment.json
           echo '${{ secrets.DEPLOYMENT }}' > ${{ github.workspace }}/secrets/gcp-service.json
-          
+
+      # Log repository information
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
 
+      # List all files in the repository for debugging
       - name: List files in the repository
         run: |
-          ls ${{ github.workspace }}
+          ls -R ${{ github.workspace }}
 
+      # Ensure docker-shell.sh exists and has the right permissions
+      - name: Verify docker-shell.sh exists
+        run: |
+          if [ ! -f ${{ github.workspace }}/src/food_classification/docker-shell.sh ]; then
+            echo "Error: docker-shell.sh not found!" && exit 1
+          fi
+          chmod +x ${{ github.workspace }}/src/food_classification/docker-shell.sh
+
+      # Build and run the deployment container
       - name: Build Deployment Container 
         run: |
           cd ${{ github.workspace }}/src/food_classification/
-          # docker build -t ms4_step1_image --platform=linux/arm64/v8 -f Dockerfile .
-          # docker run --rm --name ms4_step1_container -ti ms4_step1_image
-
-          # docker buildx build --platform linux/arm64,linux/amd64 -t ms4_step1 --push .
           sh docker-shell.sh
       
-      # # Step 2: Pull the Docker image
+      # Uncomment these steps if you need to pull and run tests in the Docker container
       # - name: Pull Docker image
       #   run: docker pull jsunsun/ms4_step1:latest
-      # # - name: Build Docker image for AMD64
-      # #   run: |
-      # #     docker build --platform linux/amd64 -t jsunsun/ms4_step1_image:latest -f src/food_classification/Dockerfile .
 
-    
-      # # Step 3: Run tests in the Docker container
       # - name: Run tests in Docker container with coverage
       #   run: |
       #     docker run --rm \
