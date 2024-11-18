@@ -15,6 +15,7 @@ RUN set -ex; \
     apt-get install -y python3-opencv && \
     pip install --no-cache-dir --upgrade pip && \
     pip install pipenv
+    pip install pytest pytest-cov
 
 # Add a user app
 RUN useradd -ms /bin/bash app && \
