@@ -55,8 +55,8 @@ jobs:
           # docker build -t ms4_step1_image --platform=linux/arm64/v8 -f Dockerfile .
           # docker run --rm --name ms4_step1_container -ti ms4_step1_image
 
-          docker buildx build --platform linux/arm64,linux/amd64 -t ms4_step1 --push .
-          # sh docker-shell.sh
+          # docker buildx build --platform linux/arm64,linux/amd64 -t ms4_step1 --push .
+          sh docker-shell.sh
       
       # # Step 2: Pull the Docker image
       # - name: Pull Docker image
