@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - Milestone4  # Triggers when code is pushed to the Milestone4 branch
+      - Milestone4
 
 jobs:
   test:
