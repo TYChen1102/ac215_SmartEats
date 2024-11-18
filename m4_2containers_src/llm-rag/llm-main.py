@@ -40,6 +40,14 @@ meal_info=extract_input()
 
 def interact_with_llm(prompt):
     """Send the prompt to the LLM using RAG via cli.py."""
+        # Upgrade chromadb before running the script
+    try:
+        subprocess.run(["pip", "install", "--upgrade", "chromadb"], check=True)
+        print("Successfully upgraded chromadb.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error upgrading chromadb: {e.stderr}")
+        return
+        
     # Use subprocess to call the Python script with the necessary arguments
     try:
         command = [ "python", "./cli.py", "--chat", "--chunk_type", "char-split", "--query_text", str(meal_info) ] 
@@ -51,4 +59,5 @@ def interact_with_llm(prompt):
 
 # Step 4: Send the formatted meal information to the LLM
 interact_with_llm(meal_info)
+
 
