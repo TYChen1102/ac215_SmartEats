@@ -14,8 +14,6 @@ docker build -t $IMAGE_NAME -f Dockerfile .
 # Debugging: Verify IMAGE_NAME
 echo "Using image: $IMAGE_NAME"
 
-chmod -R 777 /app
-
 # Run Container
 docker run --rm --name $IMAGE_NAME -i \
   -v "$BASE_DIR":/app \
