@@ -76,6 +76,7 @@ jobs:
             -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
             -e GCP_PROJECT=ac215-smarteat-437821 \
             -e GCP_ZONE=us-central1-a \
+            step1_food_classification pytest --cov=/app/src --cov-report=html:/app/coverage
             
       - run: echo "Job's status is ${{ job.status }}."
       
