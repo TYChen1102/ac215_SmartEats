@@ -55,18 +55,19 @@ jobs:
         run: |
           ls -R ${{ github.workspace }}
 
-      # Ensure docker-shell.sh exists and has the right permissions
-      - name: Verify docker-shell.sh exists
-        run: |
-          if [ ! -f ${{ github.workspace }}/src/food_classification/docker-shell.sh ]; then
-            echo "Error: docker-shell.sh not found!" && exit 1
-          fi
-          chmod +x ${{ github.workspace }}/src/food_classification/docker-shell.sh
+      # # Ensure docker-shell.sh exists and has the right permissions
+      # - name: Verify docker-shell.sh exists
+      #   run: |
+      #     if [ ! -f ${{ github.workspace }}/src/food_classification/docker-shell.sh ]; then
+      #       echo "Error: docker-shell.sh not found!" && exit 1
+      #     fi
+      #     chmod +x ${{ github.workspace }}/src/food_classification/docker-shell.sh
 
       # Build and run the deployment container
       - name: Build Deployment Container 
         run: |
-          cd ${{ github.workspace }}/src/food_classification/
+          # cd ${{ github.workspace }}/src/food_classification/
+          cd ${{ github.workspace }}/src_2containers/
           sh docker-shell.sh
       
       # Uncomment these steps if you need to pull and run tests in the Docker container
