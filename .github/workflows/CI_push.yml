@@ -74,8 +74,7 @@ jobs:
             -v ${{ github.workspace }}/src:/app/src \
             -v ${{ github.workspace }}/coverage:/app/coverage \
             --volume $GITHUB_WORKSPACE:/workspace \
-            --mount type=bind,source=$DEPLOYMENT,target=/secrets/ac215-smarteat-437821-15c2f229e610.json \
-            --env DEPLOYMENT=/secrets/ac215-smarteat-437821-15c2f229e610.json \
+            --env GOOGLE_APPLICATION_CREDENTIALS=/secrets/ac215-smarteat-437821-15c2f229e610.json \
             -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
             -e GCP_PROJECT=ac215-smarteat-437821 \
             -e GCP_ZONE=us-central1-a \
