@@ -55,24 +55,34 @@ jobs:
         run: |
           ls -R ${{ github.workspace }}
 
-      # # Ensure docker-shell.sh exists and has the right permissions
-      # - name: Verify docker-shell.sh exists
-      #   run: |
-      #     if [ ! -f ${{ github.workspace }}/src/food_classification/docker-shell.sh ]; then
-      #       echo "Error: docker-shell.sh not found!" && exit 1
-      #     fi
-      #     chmod +x ${{ github.workspace }}/src/food_classification/docker-shell.sh
-
-      # Build and run the deployment container
+      # Build step1_food_classification container
       - name: Build Deployment Container 
-        run: |
-          # cd ${{ github.workspace }}/src/food_classification/
-          cd ${{ github.workspace }}/src_2containers/
-          sh docker-shell.sh
+        run: |-
+          cd ${{ github.workspace }}/src/food_classification/
+          docker build -t step1_food_classification -f Dockerfile .
+          
+      # Run step1_food_classification
+      - name: Run food classification (step1)
+        run: |-
+          docker run --rm --name step1_food_classification \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v $HOME/.ssh:/home/app/.ssh \
+            -v ${{ github.workspace }}/tests:/app/tests \
+            --volume $GITHUB_WORKSPACE:/workspace \
+            --mount type=bind,source=$GOOGLE_APPLICATION_CREDENTIALS,target=/secrets/ac215-smarteat-437821-15c2f229e610.json \
+            --env GOOGLE_APPLICATION_CREDENTIALS=/secrets/ac215-smarteat-437821-15c2f229e610.json \
+            -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
+            -e GCP_PROJECT=ac215-smarteat-437821 \
+            -e GCP_ZONE=us-central1-a \
+            
+      - run: echo "Job's status is ${{ job.status }}."
       
-      # Uncomment these steps if you need to pull and run tests in the Docker container
-      # - name: Pull Docker image
-      #   run: docker pull jsunsun/ms4_step1:latest
+      # # Build and run the deployment container
+      # - name: Build Deployment Container 
+      #   run: |
+      #     # cd ${{ github.workspace }}/src/food_classification/
+      #     # cd ${{ github.workspace }}/src_2containers/
+      #     sh docker-shell.sh
 
       # - name: Run tests in Docker container with coverage
       #   run: |
@@ -82,9 +92,9 @@ jobs:
       #       -v ${{ github.workspace }}/coverage:/app/coverage \
       #       jsunsun/ms4_step1:latest pytest --cov=/app/src --cov-report=html:/app/coverage
 
-      # Step 4: Upload coverage report as an artifact
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report
-          path: coverage  # Path to the coverage report folder
+      # # Step 4: Upload coverage report as an artifact
+      # - name: Upload coverage report
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: coverage-report
+      #     path: coverage  # Path to the coverage report folder
