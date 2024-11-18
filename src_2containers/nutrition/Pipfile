@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pandas = "*"
+numpy = "*"
+scikit-learn = "*"
+seaborn = "*"
+opencv-python = "*"
+keras = "*"
+google-cloud-storage = "*"
+requests = "*"
+argparse = "*"
+matplotlib = "*"
+tensorflow = "*"
+xgboost = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
