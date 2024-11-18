@@ -18,7 +18,7 @@ RUN set -ex; \
 
 # Add a user app
 RUN useradd -ms /bin/bash app && \
-    mkdir -p /app && \
+    mkdir -p /app && && chmod -R 777 /app \
     chown app:app /app
 
 # Switch to the app user
