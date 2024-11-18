@@ -10,26 +10,70 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - run: echo "Comment ${{ github.event.head_commit.message }}"
+      - run: echo "Job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "Job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "Branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+        
       # Step 1: Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v3
+
+      # - id: 'auth'
+      #   uses: google-github-actions/auth@v1
+      #   with:
+      #     credentials_json: '${{ secrets.DEPLOYMENT }}'
+
+      - name: Configure Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Configure Docker Client
+        run: |
+          curl -fsSL https://get.docker.com -o get-docker.sh
+          sh get-docker.sh
+
+      - name: Create secrets directory
+        run: |
+          mkdir ${{ github.workspace }}/secrets
+          chmod 0777 secrets
+
+      - name: Create secrets file
+        run: |
+          echo '${{ secrets.DEPLOYMENT }}' > ${{ github.workspace }}/secrets/deployment.json
+          echo '${{ secrets.DEPLOYMENT }}' > ${{ github.workspace }}/secrets/gcp-service.json
+          
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+
+      - name: Build Deployment Container 
+        run: |
+          cd ${{ github.workspace }}/src/food_classification/
+          # docker build -t ms4_step1_image --platform=linux/arm64/v8 -f Dockerfile .
+          # docker run --rm --name ms4_step1_container -ti ms4_step1_image
+
+          docker buildx build --platform linux/arm64,linux/amd64 -t ms4_step1 --push .
+          # sh docker-shell.sh
       
-      # Step 2: Pull the Docker image
-      - name: Pull Docker image
-        run: docker pull jsunsun/ms4_step1:latest
-      # - name: Build Docker image for AMD64
-      #   run: |
-      #     docker build --platform linux/amd64 -t jsunsun/ms4_step1_image:latest -f src/food_classification/Dockerfile .
+      # # Step 2: Pull the Docker image
+      # - name: Pull Docker image
+      #   run: docker pull jsunsun/ms4_step1:latest
+      # # - name: Build Docker image for AMD64
+      # #   run: |
+      # #     docker build --platform linux/amd64 -t jsunsun/ms4_step1_image:latest -f src/food_classification/Dockerfile .
 
     
-      # Step 3: Run tests in the Docker container
-      - name: Run tests in Docker container with coverage
-        run: |
-          docker run --rm \
-            -v ${{ github.workspace }}/src:/app/src \
-            -v ${{ github.workspace }}/tests:/app/tests \
-            -v ${{ github.workspace }}/coverage:/app/coverage \
-            jsunsun/ms4_step1:latest pytest --cov=/app/src --cov-report=html:/app/coverage
+      # # Step 3: Run tests in the Docker container
+      # - name: Run tests in Docker container with coverage
+      #   run: |
+      #     docker run --rm \
+      #       -v ${{ github.workspace }}/src:/app/src \
+      #       -v ${{ github.workspace }}/tests:/app/tests \
+      #       -v ${{ github.workspace }}/coverage:/app/coverage \
+      #       jsunsun/ms4_step1:latest pytest --cov=/app/src --cov-report=html:/app/coverage
 
       # Step 4: Upload coverage report as an artifact
       - name: Upload coverage report
