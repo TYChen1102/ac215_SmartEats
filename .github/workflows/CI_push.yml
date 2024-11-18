@@ -14,12 +14,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       
-      # # Step 2: Pull the Docker image
-      # - name: Pull Docker image
-      #   run: docker pull jsunsun/ms4_step1:latest
-      - name: Build Docker image for AMD64
-        run: |
-          docker build --platform linux/amd64 -t jsunsun/ms4_step1_image:latest -f src/food_classification/Dockerfile .
+      # Step 2: Pull the Docker image
+      - name: Pull Docker image
+        run: docker pull jsunsun/ms4_step1:latest
+      # - name: Build Docker image for AMD64
+      #   run: |
+      #     docker build --platform linux/amd64 -t jsunsun/ms4_step1_image:latest -f src/food_classification/Dockerfile .
 
     
       # Step 3: Run tests in the Docker container
