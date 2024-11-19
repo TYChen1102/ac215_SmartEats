@@ -63,7 +63,7 @@ jobs:
           # cd ${{ github.workspace }}/src_1container
           # sh docker-shell.sh
           
-      - name: List Docker images
+      # - name: List Docker images
         # run: docker images
           
       # Run step1_food_classification
