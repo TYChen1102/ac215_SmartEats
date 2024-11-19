@@ -169,11 +169,11 @@ sh docer-shell.sh      # the pipeline consisting of multiple containers will run
 ```
 The pipeline running illustration screenshots are stored in reports, and the example output is also attached there.
 
-## Running Frontend
+## Running Backend and Frontend
 ```
-cd frondend
-sh docker-shell.sh
-http-server
+cd src_1container
+sh docker-shell.sh   # Then,the backend is activated
+# frontend to come
 ```
 Visit http://localhost:8080/frontpage.html
 
