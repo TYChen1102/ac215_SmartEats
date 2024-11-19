@@ -36,6 +36,17 @@ jobs:
           curl -fsSL https://get.docker.com -o get-docker.sh
           sh get-docker.sh
 
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Install docker-compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
+      - name: Build and run
+        run: docker-compose up --build
+
       # Create secrets directory and files
       - name: Create secrets directory
         run: |
@@ -60,7 +71,7 @@ jobs:
         run: |-
           # cd ${{ github.workspace }}/src/food_classification/
           # docker build -t step1_food_classification -f Dockerfile .
-          cd ${{ github.workspace }}/backend_container/
+          cd ${{ github.workspace }}/src_1container/
           sh docker-shell.sh
           
       # - name: List Docker images
