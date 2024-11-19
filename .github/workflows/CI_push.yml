@@ -1,5 +1,5 @@
-name: CI
-
+name: Continuous Integration and Continuous Deployment
+run-name: ${{ github.actor }} submitted a CI CD Action
 on:
   push:
     branches:
@@ -60,7 +60,7 @@ jobs:
         run: |-
           # cd ${{ github.workspace }}/src/food_classification/
           # docker build -t step1_food_classification -f Dockerfile .
-          cd ${{ github.workspace }}/src_1container/
+          cd ${{ github.workspace }}/backend_container/
           sh docker-shell.sh
           
       # - name: List Docker images
