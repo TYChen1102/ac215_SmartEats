@@ -178,7 +178,7 @@ cd frontend          # move into the frontend directory with docker-shell.sh
 sh dokcer-shell.sh   # Then, the frontend is activated
 http-server          # activate the server
 ```
-Visit http://localhost:8080/frontpage.html
+Visit http://localhost:8080/model.html
 
 
 ### Notebooks/Reports:
