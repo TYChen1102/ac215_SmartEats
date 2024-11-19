@@ -25,6 +25,7 @@ langchain = "*"
 llama-index = "*"
 chromadb = "*"
 langchain-community = "*"
+python-multipart = "*"
 
 [dev-packages]
 
