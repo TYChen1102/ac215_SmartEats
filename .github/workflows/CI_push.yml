@@ -1,5 +1,5 @@
-name: CI
-
+name: Continuous Integration and Continuous Deployment
+run-name: ${{ github.actor }} submitted a CI CD Action
 on:
   push:
     branches:
@@ -58,28 +58,30 @@ jobs:
       # Build step1_food_classification container
       - name: Build Deployment Container 
         run: |-
-          cd ${{ github.workspace }}/src/food_classification/
-          docker build -t step1_food_classification -f Dockerfile .
+          # cd ${{ github.workspace }}/src/food_classification/
+          # docker build -t step1_food_classification -f Dockerfile .
+          cd ${{ github.workspace }}/backend_container/
+          sh docker-shell.sh
           
-      - name: List Docker images
-        run: docker images
+      # - name: List Docker images
+        # run: docker images
           
       # Run step1_food_classification
-      - name: Run food classification (step1)
-        run: |-
-          docker run --rm --name step1_food_classification \
-            -v /var/run/docker.sock:/var/run/docker.sock \
-            -v $HOME/.ssh:/home/app/.ssh \
-            -v ${{ github.workspace }}/tests:/app/tests \
-            -v ${{ github.workspace }}/src:/app/src \
-            -v ${{ github.workspace }}/coverage:/app/coverage \
-            --volume $GITHUB_WORKSPACE:/workspace \
-            --mount type=bind,source=${{ github.workspace }}/src/food_classification/secrets/ac215-smarteat-437821-15c2f229e610.json,target=/secrets/ac215-smarteat-437821-15c2f229e610.json \
-            --env GOOGLE_APPLICATION_CREDENTIALS=/secrets/ac215-smarteat-437821-15c2f229e610.json \
-            -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
-            -e GCP_PROJECT=ac215-smarteat-437821 \
-            -e GCP_ZONE=us-central1-a \
-            step1_food_classification pytest --cov=/app/src --cov-report=html:/app/coverage
+      # - name: Run food classification (step1)
+      #   run: |-
+      #     docker run --rm --name step1_food_classification \
+      #       -v /var/run/docker.sock:/var/run/docker.sock \
+      #       -v $HOME/.ssh:/home/app/.ssh \
+      #       -v ${{ github.workspace }}/tests:/app/tests \
+      #       -v ${{ github.workspace }}/src:/app/src \
+      #       -v ${{ github.workspace }}/coverage:/app/coverage \
+      #       --volume $GITHUB_WORKSPACE:/workspace \
+      #       --mount type=bind,source=${{ github.workspace }}/src/food_classification/secrets/ac215-smarteat-437821-15c2f229e610.json,target=/secrets/ac215-smarteat-437821-15c2f229e610.json \
+      #       --env GOOGLE_APPLICATION_CREDENTIALS=/secrets/ac215-smarteat-437821-15c2f229e610.json \
+      #       -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
+      #       -e GCP_PROJECT=ac215-smarteat-437821 \
+      #       -e GCP_ZONE=us-central1-a \
+      #       step1_food_classification pytest --cov=/app/src --cov-report=html:/app/coverage
             
       - run: echo "Job's status is ${{ job.status }}."
       
