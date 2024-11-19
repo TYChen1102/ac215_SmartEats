@@ -36,6 +36,14 @@ jobs:
           curl -fsSL https://get.docker.com -o get-docker.sh
           sh get-docker.sh
 
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Install docker-compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
       # Create secrets directory and files
       - name: Create secrets directory
         run: |
