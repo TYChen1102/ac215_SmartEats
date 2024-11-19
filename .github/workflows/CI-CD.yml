@@ -60,7 +60,7 @@ jobs:
         run: |-
           # cd ${{ github.workspace }}/src/food_classification/
           # docker build -t step1_food_classification -f Dockerfile .
-          cd ${{ github.workspace }}/backend_container/
+          cd ${{ github.workspace }}/src_1container/
           sh docker-shell.sh
           
       # - name: List Docker images
