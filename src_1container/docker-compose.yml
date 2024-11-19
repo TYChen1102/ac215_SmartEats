@@ -3,9 +3,11 @@ networks:
         name: llm-rag-network
         external: true
 services:
-    llm-rag-cli:
-        image: llm-rag-cli
-        container_name: llm-rag-cli
+    rag-system-api-service:
+        image: rag-system-api-service
+        container_name: rag-system-api-service
+        ports:
+            - 9000:9000
         volumes:
             - ../secrets:/secrets
             - ../src_1container:/app

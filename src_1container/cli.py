@@ -254,7 +254,6 @@ def load(method="char-split"):
 
 
 def chat(method="char-split", query_text=None):  # change it to allows chat query
-    print("chat()")
 
     # Connect to chroma DB
     client = chromadb.HttpClient(host=CHROMADB_HOST, port=CHROMADB_PORT)
