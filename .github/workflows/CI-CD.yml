@@ -44,8 +44,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y docker-compose
 
-      - name: Build and run
-        run: docker-compose up --build
+      # - name: Build and run
+      #   run: docker-compose up --build
 
       # Create secrets directory and files
       - name: Create secrets directory
