@@ -171,9 +171,12 @@ The pipeline running illustration screenshots are stored in reports, and the exa
 
 ## Running Backend and Frontend
 ```
-cd src_1container
-sh docker-shell.sh   # Then,the backend is activated
-# frontend to come
+cd src_1container    # move into the directory with docker-shell.sh
+sh docker-shell.sh   # Then, the backend is activated
+# now while runing the backend container, also run a frontend container
+cd frontend          # move into the frontend directory with docker-shell.sh
+sh dokcer-shell.sh   # Then, the frontend is activated
+http-server          # activate the server
 ```
 Visit http://localhost:8080/frontpage.html
 
