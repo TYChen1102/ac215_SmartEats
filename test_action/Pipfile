@@ -1,0 +1,32 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pandas = "*"
+numpy = "*"
+scikit-learn = "*"
+matplotlib = "*"
+seaborn = "*"
+tensorflow = "*"
+keras = "*"
+opencv-python = "*"
+opencv-python-headless = "*"
+google-cloud-storage = "*"
+requests = "*"
+argparse = "*"
+pytest = "*"
+xgboost = "*"
+user-agent = "*"
+google-generativeai = "*"
+google-cloud-aiplatform = "*"
+langchain = "*"
+llama-index = "*"
+chromadb = "*"
+langchain-community = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
