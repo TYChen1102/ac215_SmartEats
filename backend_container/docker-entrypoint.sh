@@ -3,6 +3,7 @@
 echo "Container is running!!!"
 
 args="$@"
+echo "hihihi"
 echo $args
 
 if [[ -z ${args} ]]; 
