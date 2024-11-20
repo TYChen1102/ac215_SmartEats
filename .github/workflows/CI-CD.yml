@@ -64,10 +64,12 @@ jobs:
         run: |
           mkdir -p ${{ github.workspace }}/secrets
           chmod 0777 ${{ github.workspace }}/secrets
+ 
 
       - name: Create secrets files
         run: |
           echo '${{ secrets.DEPLOYMENT }}' > ${{ github.workspace }}/secrets/llm-service-account.json
+          chmod 644 ${{ github.workspace }}/secrets/llm-service-account.json
           
       # Log repository information
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
