@@ -49,6 +49,7 @@ ADD --chown=app:app Pipfile Pipfile.lock /app/
 # Add the rest of the source code. This is done last so we don't invalidate all
 # layers when we change a line of code.
 ADD --chown=app:app . /app/
+RUN chmod -R 777 /app
 
 RUN pipenv sync
 
