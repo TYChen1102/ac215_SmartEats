@@ -5,7 +5,7 @@ import json
 import numpy as np
 from tensorflow.keras.models import load_model
 import cv2
-from food_classification.predict_food import download, process_image, make_prediction, send_output
+from predict_food import download, process_image, make_prediction, send_output
 
 # Mock global variables
 GCP_PROJECT = "test_project"
@@ -57,6 +57,50 @@ def test_make_prediction(mock_model):
         dummy_img = np.zeros((1, 224, 224, 3))
         label, probability = make_prediction(dummy_img)
 
+        assert isinstance(label, str)  # Label should be a string
+        assert isinstance(probability, float)  # Probability should be a float
+        assert probability > 0.0  # Probability should be non-zero
+
+def test_process_prediction(mock_model):
+    """Integration test of image preprocessing and classification"""
+    with patch("predict_food.model", mock_model):
+
+        # Black image (all zeros)
+        img_path = "dummy_image.png"
+        dummy_img = np.zeros((224, 224, 3), dtype=np.uint8)
+        cv2.imwrite(img_path, dummy_img)
+        processed_img = process_image(img_path)
+        label, probability = make_prediction(processed_img)
+        assert isinstance(label, str)  # Label should be a string
+        assert isinstance(probability, float)  # Probability should be a float
+        assert probability > 0.0  # Probability should be non-zero
+
+        # Random noise image
+        img_path = "dummy_image.png"
+        dummy_img = np.random.randint(0, 256, (224, 224, 3), dtype=np.uint8)
+        cv2.imwrite(img_path, dummy_img)
+        processed_img = process_image(img_path)
+        label, probability = make_prediction(processed_img)
+        assert isinstance(label, str)  # Label should be a string
+        assert isinstance(probability, float)  # Probability should be a float
+        assert probability > 0.0  # Probability should be non-zero
+
+        # Large image
+        img_path = "dummy_image.png"
+        dummy_img = np.random.randint(0, 256, (500, 500, 3), dtype=np.uint8)
+        cv2.imwrite(img_path, dummy_img)
+        processed_img = process_image(img_path)
+        label, probability = make_prediction(processed_img)
+        assert isinstance(label, str)  # Label should be a string
+        assert isinstance(probability, float)  # Probability should be a float
+        assert probability > 0.0  # Probability should be non-zero
+        
+        # Small image
+        img_path = "dummy_image.png"
+        dummy_img = np.random.randint(0, 256, (50, 50, 3), dtype=np.uint8)
+        cv2.imwrite(img_path, dummy_img)
+        processed_img = process_image(img_path)
+        label, probability = make_prediction(processed_img)
         assert isinstance(label, str)  # Label should be a string
         assert isinstance(probability, float)  # Probability should be a float
         assert probability > 0.0  # Probability should be non-zero
