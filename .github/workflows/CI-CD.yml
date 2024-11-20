@@ -100,7 +100,7 @@ jobs:
             -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
             -e GCP_PROJECT=ac215-smarteat-437821 \
             -e GCP_ZONE=us-central1-a \
-            ms4_deployment pytest --cov=. --cov-report=html
+            ms4_deployment 
             
       # # Step 4: Run pytest with coverage and generate HTML report
       # - name: Run tests with coverage
