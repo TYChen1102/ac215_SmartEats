@@ -79,16 +79,15 @@ jobs:
           ls -R ${{ github.workspace }}
 
       # Build step1_food_classification container
-      - name: Build Deployment Container 
-        run: |-
-          # cd ${{ github.workspace }}/src/food_classification/
-          # docker build -t step1_food_classification -f Dockerfile .
-          # cd ${{ github.workspace }}/src_1container/
-          cd ${{ github.workspace }}/backend_container/
-          sh docker-shell.sh
+      # - name: Build Deployment Container 
+      #   run: |-
+      #     # cd ${{ github.workspace }}/src_1container/
+      #     # cd ${{ github.workspace }}/backend_container/
+      #     # sh docker-shell.sh
 
       - name: Run Tests Inside Container
         run: |
+          cd ${{ github.workspace }}/backend_container/
           docker build -t ms4_deployment -f Dockerfile .
           docker run --name ms4_deployment --rm \
             -v /var/run/docker.sock:/var/run/docker.sock \
