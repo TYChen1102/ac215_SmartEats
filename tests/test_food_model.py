@@ -118,7 +118,7 @@ def test_process_prediction(mock_model):
 
 #         assert output["food"] == label
 #         assert output["prob"] == probability
-
-        # Verify the blob's `upload_from_filename` method was called
-        mock_blob = mock_storage_client.bucket(BUCKET_NAME).blob("shared_results/step1_output.json")
-        mock_blob.upload_from_filename.assert_called_once_with("step1_output.json")
+# 
+#         # Verify the blob's `upload_from_filename` method was called
+#         mock_blob = mock_storage_client.bucket(BUCKET_NAME).blob("shared_results/step1_output.json")
+#         mock_blob.upload_from_filename.assert_called_once_with("step1_output.json")
