@@ -83,17 +83,17 @@ jobs:
         run: |-
           # cd ${{ github.workspace }}/src/food_classification/
           # docker build -t step1_food_classification -f Dockerfile .
-          cd ${{ github.workspace }}/src_1container/
-          # cd ${{ github.workspace }}/backend_container/
+          # cd ${{ github.workspace }}/src_1container/
+          cd ${{ github.workspace }}/backend_container/
           sh docker-shell.sh
 
       - name: Run Tests Inside Container
         run: |
-          docker build -t step1_food_classification -f Dockerfile .
+          docker build -t ms4_deployment -f Dockerfile .
           docker run --name ms4_deployment --rm \
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v $HOME/.ssh:/home/app/.ssh \
-            -v ${{ github.workspace }}/src_1container:/app \
+            -v ${{ github.workspace }}/backend_container:/app \
             -v ${{ github.workspace }}/tests:/tests \
             --volume $GITHUB_WORKSPACE:/workspace \
             --mount type=bind,source=$GOOGLE_APPLICATION_CREDENTIALS,target=/secrets/llm-service-account.json \
