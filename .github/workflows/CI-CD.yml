@@ -83,31 +83,30 @@ jobs:
         run: |-
           # cd ${{ github.workspace }}/src/food_classification/
           # docker build -t step1_food_classification -f Dockerfile .
-          # cd ${{ github.workspace }}/src_1container/
-          cd ${{ github.workspace }}/backend_container/
+          cd ${{ github.workspace }}/src_1container/
+          # cd ${{ github.workspace }}/backend_container/
           sh docker-shell.sh
-          
-      # Run step1_food_classification
-      # - name: Run food classification (step1)
-      #   run: |-
-      #     docker run --rm --name step1_food_classification \
-      #       -v /var/run/docker.sock:/var/run/docker.sock \
-      #       -v $HOME/.ssh:/home/app/.ssh \
-      #       -v ${{ github.workspace }}/tests:/app/tests \
-      #       -v ${{ github.workspace }}/src:/app/src \
-      #       -v ${{ github.workspace }}/coverage:/app/coverage \
-      #       --volume $GITHUB_WORKSPACE:/workspace \
-      #       --mount type=bind,source=${{ github.workspace }}/src/food_classification/secrets/ac215-smarteat-437821-15c2f229e610.json,target=/secrets/ac215-smarteat-437821-15c2f229e610.json \
-      #       --env GOOGLE_APPLICATION_CREDENTIALS=/secrets/ac215-smarteat-437821-15c2f229e610.json \
-      #       -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
-      #       -e GCP_PROJECT=ac215-smarteat-437821 \
-      #       -e GCP_ZONE=us-central1-a \
-      #       step1_food_classification pytest --cov=/app/src --cov-report=html:/app/coverage
 
-      # Step 4: Run pytest with coverage and generate HTML report
-      - name: Run tests with coverage
+      - name: Run Tests Inside Container
         run: |
-          pipenv run pytest --cov=. --cov-report=html
+          docker build -t step1_food_classification -f Dockerfile .
+          docker run --name ms4_deployment --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v $HOME/.ssh:/home/app/.ssh \
+            -v ${{ github.workspace }}/src_1container:/app \
+            -v ${{ github.workspace }}/tests:/tests \
+            --volume $GITHUB_WORKSPACE:/workspace \
+            --mount type=bind,source=$GOOGLE_APPLICATION_CREDENTIALS,target=/secrets/llm-service-account.json \
+            --env GOOGLE_APPLICATION_CREDENTIALS=/secrets/llm-service-account.json \
+            -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
+            -e GCP_PROJECT=ac215-smarteat-437821 \
+            -e GCP_ZONE=us-central1-a \
+            ms4_deployment pytest --cov=. --cov-report=html
+            
+      # # Step 4: Run pytest with coverage and generate HTML report
+      # - name: Run tests with coverage
+      #   run: |
+      #     pytest --cov=. --cov-report=html
 
       # Step 5: Upload coverage report as an artifact
       - name: Upload coverage report
@@ -118,24 +117,3 @@ jobs:
 
       - run: echo "Job's status is ${{ job.status }}."
       
-      # # Build and run the deployment container
-      # - name: Build Deployment Container 
-      #   run: |
-      #     # cd ${{ github.workspace }}/src/food_classification/
-      #     # cd ${{ github.workspace }}/src_2containers/
-      #     sh docker-shell.sh
-
-      # - name: Run tests in Docker container with coverage
-      #   run: |
-      #     docker run --rm \
-      #       -v ${{ github.workspace }}/src:/app/src \
-      #       -v ${{ github.workspace }}/tests:/app/tests \
-      #       -v ${{ github.workspace }}/coverage:/app/coverage \
-      #       jsunsun/ms4_step1:latest pytest --cov=/app/src --cov-report=html:/app/coverage
-
-      # Step 4: Upload coverage report as an artifact
-      # - name: Upload coverage report
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: coverage-report
-      #     path: coverage  # Path to the coverage report folder
