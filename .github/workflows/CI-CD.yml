@@ -94,7 +94,19 @@ jobs:
       #       -e GCP_PROJECT=ac215-smarteat-437821 \
       #       -e GCP_ZONE=us-central1-a \
       #       step1_food_classification pytest --cov=/app/src --cov-report=html:/app/coverage
-            
+
+      # Step 4: Run pytest with coverage and generate HTML report
+      - name: Run tests with coverage
+        run: |
+          pytest --cov=. --cov-report=html
+
+      # Step 5: Upload coverage report as an artifact
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: htmlcov  # The folder where pytest-cov stores HTML reports
+
       - run: echo "Job's status is ${{ job.status }}."
       
       # # Build and run the deployment container
