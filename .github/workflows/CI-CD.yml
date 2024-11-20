@@ -101,7 +101,7 @@ jobs:
             -e GCP_PROJECT=ac215-smarteat-437821 \
             -e GCP_ZONE=us-central1-a \
             ms4_deployment \
-            -c "pytest --cov=. --cov-report=html"
+            -c "pytest --cov=. --cov-report=html --cov-config=.coveragerc -v"
             
       # # Step 4: Run pytest with coverage and generate HTML report
       # - name: Run tests with coverage
