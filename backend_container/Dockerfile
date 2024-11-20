@@ -56,4 +56,5 @@ RUN pipenv sync
 ENTRYPOINT ["/bin/bash"]
 
 # CMD ["-c", "pipenv run sh backend.sh"]
-ENTRYPOINT ["/bin/bash","./docker-entrypoint.sh"]
+CMD ["-c", "pipenv shell"]
+#ENTRYPOINT ["/bin/bash","./docker-entrypoint.sh"]
