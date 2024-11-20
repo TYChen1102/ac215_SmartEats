@@ -26,6 +26,7 @@ RUN set -ex; \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends $DEBIAN_PACKAGES && \
     apt-get install -y python3-opencv && \
+    apt-get update && apt-get install -y sqlite3 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     pip install --no-cache-dir --upgrade pip && \
