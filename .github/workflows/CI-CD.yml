@@ -19,17 +19,21 @@ jobs:
       # Step 1: Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v3
-
+      
       # Authenticate with Google Cloud
       - id: 'auth'
         uses: google-github-actions/auth@v1
         with:
           credentials_json: '${{ secrets.DEPLOYMENT }}'
-
+          
+      - name: Authenticate with GCP
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.Deployment }}
+          
       # Configure Google Cloud SDK
       - name: Configure Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
-
+    
       # Install Docker Client
       - name: Configure Docker Client
         run: |
@@ -122,8 +126,8 @@ jobs:
       #       jsunsun/ms4_step1:latest pytest --cov=/app/src --cov-report=html:/app/coverage
 
       # Step 4: Upload coverage report as an artifact
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report
-          path: coverage  # Path to the coverage report folder
+      # - name: Upload coverage report
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: coverage-report
+      #     path: coverage  # Path to the coverage report folder
