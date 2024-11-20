@@ -28,12 +28,12 @@ jobs:
           
       # - name: Authenticate with GCP
       #   env:
-      #     GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.Deployment }}
+      #     GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.DEPLOYMENT }}
           
       # Configure Google Cloud SDK
       - name: Configure Google Cloud SDK & Authenticate with GCP
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.Deployment }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.DEPLOYMENT }}
         uses: google-github-actions/setup-gcloud@v1 
     
       # Install Docker Client
@@ -102,7 +102,6 @@ jobs:
             -e GCP_ZONE=us-central1-a \
             ms4_deployment \
             -c "pytest --cov=. --cov-report=html"
-"
             
       # # Step 4: Run pytest with coverage and generate HTML report
       # - name: Run tests with coverage
