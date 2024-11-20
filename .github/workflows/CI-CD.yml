@@ -86,6 +86,12 @@ jobs:
       #     # cd ${{ github.workspace }}/src_1container/
       #     # cd ${{ github.workspace }}/backend_container/
       #     # sh docker-shell.sh
+
+      - name: Debug File Permissions
+        run: |
+          ls -l ${{ github.workspace }}/secrets/
+          cat ${{ github.workspace }}/secrets/llm-service-account.json
+
       
       - name: Run Tests Inside Container
         run: |
