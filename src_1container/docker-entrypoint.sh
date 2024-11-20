@@ -24,4 +24,5 @@ if [ "${DEV}" = 1 ]; then
   pipenv shell
 else
   uvicorn_server_production
+  pytest ./api/test_service.py
 fi
