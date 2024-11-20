@@ -53,7 +53,8 @@ ADD --chown=app:app . /app/
 RUN pipenv sync
 
 # Entry point
-ENTRYPOINT ["/bin/bash"]
+#ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash", "-c"]
 
 # CMD ["-c", "pipenv run sh backend.sh"]
 #CMD ["-c", "pipenv shell"]
