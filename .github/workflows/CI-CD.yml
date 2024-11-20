@@ -55,7 +55,7 @@ jobs:
 
       - name: Create secrets files
         run: |
-          echo '${{ secrets.DEPLOYMENT }}' > ${{ github.workspace }}/src/food_classification/secrets/ac215-smarteat-437821-15c2f229e610.json
+          echo '${{ secrets.DEPLOYMENT }}' > ${{ github.workspace }}/secrets/llm-service-account.json
           
       # Log repository information
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
@@ -74,9 +74,6 @@ jobs:
           # cd ${{ github.workspace }}/src_1container/
           cd ${{ github.workspace }}/backend_container/
           sh docker-shell.sh
-          
-      # - name: List Docker images
-        # run: docker images
           
       # Run step1_food_classification
       # - name: Run food classification (step1)
