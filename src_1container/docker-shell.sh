@@ -14,6 +14,7 @@ export IMAGE_NAME="rag-system-api-service"
 
 # Create the network if we don't have it yet
 docker network inspect rag-system-api-service-ne >/dev/null 2>&1 || docker network create rag-system-api-service-ne
+docker network inspect llm-rag-network >/dev/null 2>&1 || docker network create llm-rag-network
 
 # Build the image based on the Dockerfile
 docker build -t $IMAGE_NAME .
