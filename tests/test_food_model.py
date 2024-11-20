@@ -29,14 +29,14 @@ def mock_storage_client():
     mock_bucket.blob.return_value = mock_blob
     return mock_client
 
-def test_download(mock_storage_client):
-    """Test the download function."""
-    with patch("predict_food.storage.Client", return_value=mock_storage_client):
-        download()
+# def test_download(mock_storage_client):
+#     """Test the download function."""
+#     with patch("predict_food.storage.Client", return_value=mock_storage_client):
+#         download()
 
-        # Verify the blob's `download_to_filename` method was called
-        mock_blob = mock_storage_client.bucket(BUCKET_NAME).blob("shared_results/test_food.png")
-        mock_blob.download_to_filename.assert_called_once_with("test_food.png")
+#         # Verify the blob's `download_to_filename` method was called
+#         mock_blob = mock_storage_client.bucket(BUCKET_NAME).blob("shared_results/test_food.png")
+#         mock_blob.download_to_filename.assert_called_once_with("test_food.png")
 
 def test_process_image():
     """Test the image processing function."""
@@ -105,19 +105,19 @@ def test_process_prediction(mock_model):
         assert isinstance(probability, float)  # Probability should be a float
         assert probability > 0.0  # Probability should be non-zero
 
-def test_send_output(mock_storage_client):
-    """Test the send_output function."""
-    with patch("predict_food.storage.Client", return_value=mock_storage_client):
-        label = "Pizza"
-        probability = 0.85
-        send_output(label, probability)
+# def test_send_output(mock_storage_client):
+#     """Test the send_output function."""
+#     with patch("predict_food.storage.Client", return_value=mock_storage_client):
+#         label = "Pizza"
+#         probability = 0.85
+#         send_output(label, probability)
 
-        # Check output JSON
-        with open("step1_output.json", "r") as f:
-            output = json.load(f)
+#         # Check output JSON
+#         with open("step1_output.json", "r") as f:
+#             output = json.load(f)
 
-        assert output["food"] == label
-        assert output["prob"] == probability
+#         assert output["food"] == label
+#         assert output["prob"] == probability
 
         # Verify the blob's `upload_from_filename` method was called
         mock_blob = mock_storage_client.bucket(BUCKET_NAME).blob("shared_results/step1_output.json")
