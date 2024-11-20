@@ -95,7 +95,6 @@ jobs:
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v $HOME/.ssh:/home/app/.ssh \
             -v ${{ github.workspace }}/test_action:/app \
-            # -v ${{ github.workspace }}/tests:/tests \
             -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
             -e GCP_PROJECT=ac215-smarteat-437821 \
             -e GCP_ZONE=us-central1-a \
