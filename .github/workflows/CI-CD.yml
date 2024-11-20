@@ -90,10 +90,6 @@ jobs:
           cd ${{ github.workspace }}/test_action/
           docker build -t ms4_deployment -f Dockerfile .
           docker run --name ms4_deployment --rm \
-            --mount type=bind,source=$GOOGLE_APPLICATION_CREDENTIALS,target=/secrets/llm-service-account.json \
-            --env GOOGLE_APPLICATION_CREDENTIALS=/secrets/llm-service-account.json \
-            -v /var/run/docker.sock:/var/run/docker.sock \
-            -v $HOME/.ssh:/home/app/.ssh \
             -v ${{ github.workspace }}/test_action:/app \
             -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
             -e GCP_PROJECT=ac215-smarteat-437821 \
@@ -101,6 +97,12 @@ jobs:
             --volume $GITHUB_WORKSPACE:/workspace \
             ms4_deployment \
             ls -l /secrets/ && cat /secrets/llm-service-account.json
+            
+            # --mount type=bind,source=$GOOGLE_APPLICATION_CREDENTIALS,target=/secrets/llm-service-account.json \
+            # --env GOOGLE_APPLICATION_CREDENTIALS=/secrets/llm-service-account.json \
+            # -v /var/run/docker.sock:/var/run/docker.sock \
+            # -v $HOME/.ssh:/home/app/.ssh \
+
             # pytest tests.py
             
 
