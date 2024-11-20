@@ -92,6 +92,7 @@ jobs:
           cd ${{ github.workspace }}/test_action/
           docker build -t ms4_deployment -f Dockerfile .
           docker run --name ms4_deployment --rm \
+            --mount type=bind,source=$GOOGLE_APPLICATION_CREDENTIALS,target=/secrets/llm-service-account.json \
             -v ${{ github.workspace }}/test_action:/app \
             -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
             -e GCP_PROJECT=ac215-smarteat-437821 \
