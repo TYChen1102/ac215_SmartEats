@@ -26,12 +26,14 @@ jobs:
         with:
           credentials_json: '${{ secrets.DEPLOYMENT }}'
           
-      - name: Authenticate with GCP
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.Deployment }}
+      # - name: Authenticate with GCP
+      #   env:
+      #     GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.Deployment }}
           
       # Configure Google Cloud SDK
-      - name: Configure Google Cloud SDK
+      - name: Configure Google Cloud SDK & Authenticate with GCP
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.Deployment }}
         uses: google-github-actions/setup-gcloud@v1
     
       # Install Docker Client
