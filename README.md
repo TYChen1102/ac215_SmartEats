@@ -99,13 +99,13 @@ Detailed test case descriptions and test documentation is located in the directo
 - unittest: Provides tools like patch and MagicMock to mock external dependencies such as APIs and models
 
 #### Testing Strategy
-- Unit Tests
+- Unit Test
   - Validates individual functions such as process_image, food_to_nutrition, and transform_data.
   - Ensures correctness of outputs for given inputs.
   - External APIs (e.g., USDA API) and machine learning models are mocked to simulate their behavior during tests.
-- Integration Tests
+- Integration Test
   - Verifies that multiple components work together as expected, such as preprocessing an image and running it through the classification pipeline.
-- System Tests
+- System Test
   - Covers user flows and interactions, including building the container and running all steps in the app.
  
 
