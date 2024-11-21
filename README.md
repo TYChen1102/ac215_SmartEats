@@ -132,8 +132,3 @@ Detailed test case descriptions and test documentation is located in the directo
   - Verifies that multiple components work together as expected, such as preprocessing an image and running it through the classification pipeline.
 - System Tests
   - Covers user flows and interactions, including building the container and running all steps in the app.
-
-### Notebooks/Reports:
-- Notebooks contains documentations and code that is not part of container: EDA, Application mockup, LLM fine-tuning documentation, data versions, ...
-- Reports contains the project proposal submitted for Milestone 1.
-
