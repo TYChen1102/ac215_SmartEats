@@ -1,4 +1,4 @@
-# AC215 - Milestone4 - SmartEats
+<img width="1058" alt="image" src="https://github.com/user-attachments/assets/232f5ab7-6600-4185-addc-550c1594b4c3"># AC215 - Milestone4 - SmartEats
 
 ### Project:
 In this project, we aim to develop SmartEats, an AI-powered application that analyzes food images, predicts disease risks based on dietary habits, and offers personalized nutrition advice.
@@ -86,6 +86,7 @@ Visit http://localhost:8080/model.html
 ## Continuous Integration Setup:
 We have built two functioning CI pipelines that run on every push or merge.
 - Pre-commit checks: Automated build process and code quality checks using linting tools Flake8 running on GitHub Actions.
+  <img width="1121" alt="image" src="https://github.com/user-attachments/assets/3adaf2c5-2bfb-4372-b7a4-5c1702fc359e">
 - Continuous Integration and Continuous Deployment: Execution of unit, integration and systems tests with test results reported.
 
 ### Coverage report
