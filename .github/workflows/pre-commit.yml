@@ -39,11 +39,7 @@ jobs:
             echo "FROM=$(git rev-parse HEAD)" >> $GITHUB_ENV
           fi
           echo "TO=$(git rev-parse HEAD)" >> $GITHUB_ENV
-
-      - name: Debug changed files
-        run: |
-          git diff --name-only ${{ env.FROM }} ${{ env.TO }}
-
+          
       - name: Run pre-commit checks on changed files
         run: |
           pre-commit run --from-ref ${{ env.FROM }} --to-ref ${{ env.TO }}
