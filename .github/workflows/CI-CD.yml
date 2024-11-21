@@ -61,7 +61,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: ${{ github.workspace }}/htmlcov  # The folder where pytest-cov stores HTML reports
+          path: /test_action/htmlcov # The folder where pytest-cov stores HTML reports
 
       - run: echo "Job's status is ${{ job.status }}."
 
