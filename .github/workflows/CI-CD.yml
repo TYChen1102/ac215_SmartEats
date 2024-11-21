@@ -55,7 +55,13 @@ jobs:
             -e GCP_ZONE=us-central1-a \
             m4_deployment \
             sh run-test.sh
-            
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: htmlcov  # The folder where pytest-cov stores HTML reports
+
       - run: echo "Job's status is ${{ job.status }}."
 
 
