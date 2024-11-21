@@ -55,7 +55,8 @@ jobs:
             -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
             -e GCP_PROJECT=ac215-project \
             -e GCP_ZONE=us-central1-a \
-            m4_deployment sh run-test.sh
+            m4_deployment \
+            sh run-test.sh
             
       - run: echo "Job's status is ${{ job.status }}."
 
