@@ -113,8 +113,8 @@ Visit http://localhost:8080/model.html
 
 ## Continuous Integration Setup:
 We have built two functioning CI pipelines that run on every push or merge.
-- 1. Pre-commit checks: Automated build process and code quality checks using linting tools Flake8 running on GitHub Actions.
-- 2. Continuous Integration and Continuous Deployment: Execution of unit, integration and systems tests with test results reported.
+- Pre-commit checks: Automated build process and code quality checks using linting tools Flake8 running on GitHub Actions.
+- Continuous Integration and Continuous Deployment: Execution of unit, integration and systems tests with test results reported.
 
 ## Test Documentation:
 #### Unit Tests: For individual components and functions.
