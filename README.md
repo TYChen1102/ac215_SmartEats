@@ -117,10 +117,21 @@ We have built two functioning CI pipelines that run on every push or merge.
 - Continuous Integration and Continuous Deployment: Execution of unit, integration and systems tests with test results reported.
 
 ## Test Documentation:
-#### Unit Tests: For individual components and functions.
-#### Integration Tests: For integrating multiple components.
-#### System Tests: Covering user flows and interactions.
-#### Test Coverage Reports: Integrated into the CI pipeline to monitor code coverage to be at least 50%.
+#### Testing Tool Used
+- PyTest: Used as the primary testing framework.
+- unittest: Provides tools like patch and MagicMock to mock external dependencies such as APIs and models
+
+#### Testing Strategy
+- Unit Tests
+  - Validates individual functions such as process_image, food_to_nutrition, and transform_data.
+  - Ensures correctness of outputs for given inputs.
+  - External APIs (e.g., USDA API) and machine learning models are mocked to simulate their behavior during tests.
+- Integration Tests
+  - Verifies that multiple components work together as expected, such as preprocessing an image and running it through the classification pipeline.
+- System Tests
+  - Covers user flows and interactions, including building the container and running all steps in the app.
+
+Detailed test case descriptions and test documentation is located in the directory **reports/Test_Documentation.pdf**
 
 ### Notebooks/Reports:
 - Notebooks contains documentations and code that is not part of container: EDA, Application mockup, LLM fine-tuning documentation, data versions, ...
