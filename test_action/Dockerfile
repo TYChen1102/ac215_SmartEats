@@ -16,7 +16,7 @@ ENV PYENV_SHELL=/bin/bash
 # Tell Python to disable buffering so we don't lose any logs.
 ENV PYTHONUNBUFFERED=1
 
-ENV GOOGLE_APPLICATION_CREDENTIALS=./secrets/llm-service-account.json
+ENV GOOGLE_APPLICATION_CREDENTIALS=../secrets/llm-service-account.json
 
 # Ensure we have an up to date baseline, install dependencies and
 # create a user so we don't run the app as root
@@ -53,7 +53,7 @@ ADD --chown=app:app . /app/
 RUN pipenv sync
 
 # Entry point
-#ENTRYPOINT ["/bin/bash", "-c"]
+ENTRYPOINT ["/bin/bash"]
 
-#CMD ["-c", "pipenv shell"]
-ENTRYPOINT ["/bin/bash","./docker-entrypoint.sh"]
+CMD ["-c", "pipenv run sh run-test.sh"]
+#ENTRYPOINT ["/bin/bash","./docker-entrypoint.sh"]
