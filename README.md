@@ -117,6 +117,8 @@ We have built two functioning CI pipelines that run on every push or merge.
 - Continuous Integration and Continuous Deployment: Execution of unit, integration and systems tests with test results reported.
 
 ## Test Documentation:
+Detailed test case descriptions and test documentation is located in the directory **reports/Test_Documentation.pdf**
+
 #### Testing Tool Used
 - PyTest: Used as the primary testing framework.
 - unittest: Provides tools like patch and MagicMock to mock external dependencies such as APIs and models
@@ -130,8 +132,6 @@ We have built two functioning CI pipelines that run on every push or merge.
   - Verifies that multiple components work together as expected, such as preprocessing an image and running it through the classification pipeline.
 - System Tests
   - Covers user flows and interactions, including building the container and running all steps in the app.
-
-Detailed test case descriptions and test documentation is located in the directory **reports/Test_Documentation.pdf**
 
 ### Notebooks/Reports:
 - Notebooks contains documentations and code that is not part of container: EDA, Application mockup, LLM fine-tuning documentation, data versions, ...
