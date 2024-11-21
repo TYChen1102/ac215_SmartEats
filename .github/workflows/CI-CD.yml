@@ -49,6 +49,7 @@ jobs:
             -v $HOME/.ssh:/home/app/.ssh \
             -v ${{ github.workspace }}/test_action:/test_action \
             -v ${{ github.workspace }}/secrets:/secrets \
+            -v ${{ github.workspace }}/htmlcov:/test_action/htmlcov \
             --mount type=bind,source=${{ github.workspace }}/secrets/llm-service-account.json,target=/secrets/llm-service-account.json,readonly \
             -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
             -e GCP_PROJECT=ac215-project \
