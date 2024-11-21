@@ -39,6 +39,7 @@ jobs:
 
       - name: Build Deployment Container
         run: |-
+          mkdir -p ${{ github.workspace }}/htmlcov
           cd ${{ github.workspace }}/test_action/
           docker build -t m4_deployment -f Dockerfile .
 
@@ -61,7 +62,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: /test_action/htmlcov # The folder where pytest-cov stores HTML reports
+          path: ${{ github.workspace }}/htmlcov # The folder where pytest-cov stores HTML reports
 
       - run: echo "Job's status is ${{ job.status }}."
 
