@@ -102,6 +102,7 @@ http-server          # activate the server
 Visit http://localhost:8080/model.html
 
 ## Application Design
+
 ### Application architecture
 #### Solution Architecture
 #### Technical Architecture
@@ -110,6 +111,11 @@ Visit http://localhost:8080/model.html
 ### User interface
 <img width="1512" alt="image" src="https://github.com/user-attachments/assets/77e7f74c-f6d0-45eb-a85a-38e64657578f">
 
+## Test Documentation:
+#### Unit Tests: For individual components and functions.
+#### Integration Tests: For integrating multiple components.
+#### System Tests: Covering user flows and interactions.
+#### Test Coverage Reports: Integrated into the CI pipeline to monitor code coverage to be at least 50%.
 
 ### Notebooks/Reports:
 - Notebooks contains documentations and code that is not part of container: EDA, Application mockup, LLM fine-tuning documentation, data versions, ...
