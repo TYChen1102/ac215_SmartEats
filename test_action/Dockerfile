@@ -54,6 +54,6 @@ RUN pipenv sync
 
 # Entry point
 ENTRYPOINT ["/bin/bash"]
-
-CMD ["-c", "pipenv run sh run-test.sh"]
+CMD ["pipenv", "run", "sh", "run-test.sh"]
+#CMD ["-c", "pipenv run sh run-test.sh"]
 #ENTRYPOINT ["/bin/bash","./docker-entrypoint.sh"]
