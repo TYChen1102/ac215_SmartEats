@@ -30,7 +30,7 @@ then
     pipenv shell uvicorn_server
 else
     pipenv shell uvicorn_server
-#fi
+fi
 
   #/bin/bash $args
   #pipenv run $args
