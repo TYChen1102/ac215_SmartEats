@@ -30,44 +30,45 @@
 
         .container {
             width: 100%;
-            max-width: 1200px; /* Max width for larger screens */
+            max-width: 1200px;
             box-sizing: border-box;
             margin-top: 10px;
         }
 
         .image-container {
             display: flex;
-            height: 50vh; /* 50% of viewport height */
-            width: 100%; /* Full width */
-            align-items: center; /* Center vertically */
-            margin-top: 10px; /* Margin above the image container */
+            flex-direction: row;
+            height: 50vh;
+            width: 100%;
+            align-items: center;
+            margin-top: 10px;
         }
 
         .image-box {
-            flex: 1; /* Equal flex for both images */
-            margin: 10px; /* Margin between images */
-            border-radius: 8px; /* Rounded corners */
-            overflow: hidden; /* Hide overflow for image box */
-            position: relative; /* For child positioning */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-            background-color: #fafafa; /* Background color for alignment */
+            flex: 1;
+            margin: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fafafa;
         }
 
         .image-box img {
-            width: 100%; /* Full width for images */
-            height: 100%; /* Full height for images */
-            object-fit: cover; /* Cover to maintain aspect ratio */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .loading-spinner {
-            display: none; /* Hidden by default */
+            display: none;
             margin: 20px;
             width: 40px;
             height: 40px;
             border: 4px solid #f3f3f3;
             border-top: 4px solid #3498db;
             border-radius: 50%;
-            animation: spin 2s linear infinite; /* Spinner animation */
+            animation: spin 2s linear infinite;
         }
 
         @keyframes spin {
@@ -79,26 +80,25 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Center the contents */
+            justify-content: center;
             margin: 0.5px;
             border: 0.5px dashed #cccccc;
             border-radius: 0.5px;
             background-color: #fafafa;
             outline: none;
-            height: 100%; /* Height of image box */
-            cursor: pointer; /* Pointer on hover */
-            width: 100%; /* Ensure it takes full width */
+            height: 100%;
+            cursor: pointer;
+            width: 100%;
         }
 
         .dropzone:hover {
-            background-color: #f0f0f0; /* Change background on hover */
+            background-color: #f0f0f0;
         }
 
         .upload-button {
-            color: #666; /* Text color before upload */
-            font-size: 15px; /* Font size for guidance */
-            text-align: center; /* Center text */
-            margin-top: 0.01px; /* Space above */
+            color: #666;
+            font-size: 15px;
+            text-align: center;
         }
 
         .logo {
@@ -113,63 +113,82 @@
 
         .header-content {
             display: flex;
-            align-items: center; /* Align items in the header */
+            align-items: center;
         }
 
         .title {
             font-weight: 900;
-            font-size: 32px; /* Title font size */
-            color: white; /* White text color */
-            margin-left: 10px; /* Space between logo and title */
+            font-size: 32px;
+            color: white;
+            margin-left: 10px;
         }
 
         .subtitle {
-            font-size: 32px; /* Subtitle font size */
-            color: white; /* White text for subtitle */
+            font-size: 32px;
+            color: white;
         }
 
         .result-container {
             width: 100%;
             margin-top: 20px;
-            padding: 15px; /* Padding inside the result container */
+            padding: 15px;
             background: linear-gradient(180deg, rgba(225, 245, 254, 0.6), rgba(225, 245, 254, 0.8));
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
         }
 
         .chat-bubble {
-            background-color: #ffffff; /* White background for bubbles */
+            background-color: #ffffff;
             border-radius: 10px;
             padding: 15px;
             margin: 10px 0;
-            position: relative; /* For positioning arrow */
-            max-width: 100%; /* Respect container width */
-            word-wrap: break-word; /* Handle long words */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Bubble shadow */
+            position: relative;
+            max-width: 100%;
+            word-wrap: break-word;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .chat-bubble::after {
             content: '';
             position: absolute;
-            top: 10px; /* Adjust based on position */
-            left: 100%; /* Arrow on the right */
-            margin-left: 10px; /* Spacing */
+            top: 10px;
+            left: 100%;
+            margin-left: 10px;
             border-width: 10px;
             border-style: solid;
-            border-color: transparent transparent transparent #ffffff; /* Triangle on right */
+            border-color: transparent transparent transparent #ffffff;
         }
 
         .result-title {
             font-weight: bold;
-            font-size: 20px; /* Heading size for result */
-            color: #A41034; /* Color for titles */
+            font-size: 20px;
+            color: #A41034;
         }
 
         .result-text {
-            font-size: 16px; /* Standard text size for results */
-            color: #333; /* Dark text color */
-            margin: 5px 0; /* Margin for spacing */
-            line-height: 1.4; /* Line height for better readability */
+            font-size: 16px;
+            color: #333;
+            margin: 5px 0;
+            line-height: 1.4;
+        }
+        
+        .weight-input-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .weight-input {
+            width: 80px;
+            padding: 5px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #cccccc;
+        }
+
+        .info-text {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
         }
     </style>
 </head>
@@ -178,7 +197,7 @@
     <!-- Header -->
     <header class="mdc-top-app-bar">
         <div class="header-content">
-            <div class="logo" style="background-image: url('https://storage.cloud.google.com/ac215smarteat/smarteats_logo.PNG');"></div>
+            <div class="logo" style="background-image: url('https://storage.googleapis.com/smarteats-exampleimage/smarteats_logo.PNG');"></div>
             <div>
                 <span class="title">SmartEats:</span>
                 <span class="subtitle">Your personalized calorie & nutrition advisor</span>
@@ -192,23 +211,31 @@
         <div class="container">
             <div class="mdc-card mdc-card--outlined" style="min-height: 400px;">
                 <div class="image-container">
+                    
                     <!-- User Upload Image Container -->
                     <div class="image-box">
                         <div class="dropzone" onclick="upload_file()">
+                            <!-- Image Input -->
                             <input type="file" id="input_file" accept="image/*" capture="camera" name="input_file" style="display: none;">
-                            <div class="upload-button">Click to upload your image...</div> <!-- Placeholder -->
+                            <div class="upload-button">Click to upload your image...</div>
                         </div>
                         <img id="input_file_view" alt="Uploaded Image" style="width: 100%; height: 90%; object-fit: cover; display: none;" />
                     </div>
 
                     <!-- Example Image Container -->
                     <div class="image-box">
-                        <img src="https://storage.cloud.google.com/ac215smarteat/shared_results/test_food.png" alt="Stored Image"> <!-- Replace with your actual URL -->
-                        <div style="text-align: center; color: #666; font-size: 18px;">Example Data</div> <!-- Example label -->
+                        <img src="https://storage.googleapis.com/smarteats-exampleimage/test_food.png" alt="Stored Image">
+                        <div style="text-align: center; color: #666; font-size: 18px;">Example Data</div>
                     </div>
                 </div>
-                
-                <div class="loading-spinner" id="loadingSpinner"></div> <!-- Loading spinner -->
+
+                <div class="weight-input-container">
+                    <label for="weight_input" style="font-size: 16px; color: #333;">Enter Weight (grams):</label>
+                    <input type="number" id="weight_input" name="weight_input" min="1" step="any" class="weight-input">
+                    <div class="info-text">Please upload the weight before uploading the image, otherwise the default weight of 540 g will be used.</div>
+                </div>
+
+                <div class="loading-spinner" id="loadingSpinner"></div>
                 <div id="response_container" class="result-container" style="display: none;">
                     <div class="chat-bubble">
                         <span class="result-title">Meal Info:</span>
@@ -227,6 +254,9 @@
 
 <!-- Add Javascript -->
 <script>
+    // Initialize Material Components
+    window.mdc.autoInit();
+
     // API URL
     axios.defaults.baseURL = 'http://localhost:9000/';
 
@@ -241,23 +271,26 @@
     function upload_file() {
         meal_info_text.innerHTML = "";
         generated_text.innerHTML = "";
-        input_file_view.src = ""; // Clear the uploaded image
-        input_file_view.style.display = "none"; // Hide uploaded image
-        response_container.style.display = "none"; // Hide response container before upload
-        loadingSpinner.style.display = "none"; // Hide spinner before upload
+        input_file_view.src = "";
+        input_file_view.style.display = "none";
+        response_container.style.display = "none";
+        loadingSpinner.style.display = "none";
         input_file.click();
     }
 
     function input_file_onchange() {
         var file_to_upload = input_file.files[0];
-        input_file_view.src = URL.createObjectURL(file_to_upload); // Set the uploaded image src
-        input_file_view.style.display = "block"; // Show uploaded image
-        document.querySelector('.upload-button').style.display = "none"; // Hide the upload button after image is uploaded
+        input_file_view.src = URL.createObjectURL(file_to_upload);
+        input_file_view.style.display = "block";
+        document.querySelector('.upload-button').style.display = "none";
+
+        var weight = document.getElementById("weight_input").value || 540;
 
         var formData = new FormData();
         formData.append("file", file_to_upload);
-        
-        loadingSpinner.style.display = "block"; // Show spinner while loading
+        formData.append("weight", weight);
+
+        loadingSpinner.style.display = "block";
         axios.post('/predict', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -268,12 +301,12 @@
 
             meal_info_text.innerHTML = meal_info;
             generated_text.innerHTML = text;
-            response_container.style.display = "block"; // Show response container
-            loadingSpinner.style.display = "none"; // Hide spinner after loading
+            response_container.style.display = "block";
+            loadingSpinner.style.display = "none";
 
         }).catch(function (error) {
             console.error('Error processing file:', error);
-            loadingSpinner.style.display = "none"; // Hide spinner on error
+            loadingSpinner.style.display = "none";
         });
     }
 

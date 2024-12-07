@@ -23,5 +23,5 @@ The following commands are available:
 if [ "${DEV}" = 1 ]; then
   pipenv shell
 else
-  uvicorn_server_production
+  pipenv shell #uvicorn_server_production
 fi
