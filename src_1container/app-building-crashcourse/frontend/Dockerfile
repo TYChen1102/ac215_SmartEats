@@ -1,21 +1,34 @@
-FROM node:14.9.0-buster-slim
+# Build stage
+FROM node:18-alpine AS build
 
-# Update baseline and ensure we don't run the app as root.
-RUN set -ex; \
-    apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y --no-install-recommends openssl && \
-    npm install -g http-server && \
-    useradd -ms /bin/bash app -d /home/app -G sudo -u 2000 -p "$(openssl passwd -1 Passw0rd)" && \
-    mkdir -p /app && \
-    chown app:app /app
-
-EXPOSE 8080
-
-# Switch to the new user
-USER app
 WORKDIR /app
 
-ADD --chown=app:app . /app
+# Install dependencies
+COPY package.json package-lock.json ./
+RUN npm ci
 
-ENTRYPOINT ["/bin/bash"]
+# Copy source files
+COPY . .
+
+# Build the Next.js app
+RUN npm run build
+
+# Production stage
+FROM node:18-alpine AS production
+
+WORKDIR /app
+
+# Copy built assets from build stage
+COPY --from=build /app/package.json ./package.json
+COPY --from=build /app/package-lock.json ./package-lock.json
+COPY --from=build /app/.next ./.next
+COPY --from=build /app/public ./public
+
+# Install only production dependencies
+RUN npm ci --only=production
+
+# Expose the listening port
+EXPOSE 3000
+
+# Run the Next.js app
+CMD ["npm", "start"]
