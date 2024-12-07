@@ -27,9 +27,9 @@ if [[ -z ${args} ]];
 then
     #/bin/bash
     # pipenv shell
-    pipenv shell uvicorn_server_production
+    pipenv shell uvicorn_server
 else
-  pipenv shell uvicorn_server_production
+    pipenv shell uvicorn_server
 #fi
 
   #/bin/bash $args
