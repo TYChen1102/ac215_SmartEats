@@ -20,8 +20,26 @@ The following commands are available:
 \033[0m
 "
 
-if [ "${DEV}" = 1 ]; then
-  pipenv shell
+args="$@"
+echo $args
+
+if [[ -z ${args} ]]; 
+then
+    #/bin/bash
+    pipenv shell
 else
+<<<<<<< HEAD
   pipenv shell #uvicorn_server_production
 fi
+=======
+  #/bin/bash $args
+  pipenv run $args
+fi
+
+# if [ "${DEV}" = 1 ]; then
+#   pipenv shell
+# else
+#   uvicorn_server_production
+#   pytest ./api/test_service.py
+# fi
+>>>>>>> 7c7c5934d6201d4ef854967eeab346ae6f2d82d5
