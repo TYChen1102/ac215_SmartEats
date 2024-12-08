@@ -1,4 +1,4 @@
-cd app-building-crashcourse/frontend/
+cd src_1container/app-building-crashcourse/frontend/
 sh docker-shell.sh
 
 ## If this is your first time running the react container run 
@@ -11,7 +11,7 @@ If you can see the web page at http://localhost:3000, you have your environment 
 
 
 
-Remember  the three developed function are home, Meal image upload, and the Health-and-Wellness To-do.
+The developed function are home, Meal image upload, AI chat and the Health-and-Wellness To-do.
 
-In which Meal image upload is linked to the backend api/routers/image_to_nutrition.py,
+In which Meal image upload is linked to the backend api/routers/image_to_nutrition.py, the AI chat is based on RAG+fine_tuned
 the backend files service.py is changed as well.
