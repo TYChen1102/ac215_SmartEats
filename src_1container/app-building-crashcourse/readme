@@ -1,4 +1,4 @@
-cd app-building-crashcourse/frontend/
+cd src_1container/app-building-crashcourse/frontend/
 sh docker-shell.sh
 
 ## If this is your first time running the react container run 
