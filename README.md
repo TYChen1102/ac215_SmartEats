@@ -20,6 +20,8 @@ The SmartEats Group
 
 In this milestone, we deploy our application to a Kubernete cluster on GCP with manul scaling. We work on ansible playbooks to automate the provisioning and deployment of the infrastructure and application, including the kubernetes cluster. We set up a CI/CD pipeline using Github Actions, which runs unit test across every container, runs integration tests corss the explosed API on every pull request. We also implemented a ML workflow for 1 model. 
 
+### Architectures:
+
 
 ### Containers
 
@@ -41,46 +43,22 @@ In this milestone, we deploy our application to a Kubernete cluster on GCP with 
 1. **gemini-finetuner:** This container is used to process datasets used for fine-tuning and perform fine-tuning process in GCP.
     - **Input:** Processed Question Answering datasets as jsonl file, each entry has only question and answer parts.
     - **Output:** Fine-tuned LLM base model deployed as a endpoint for later RAG process.
-  ```
-  transform_new.py        # This process the format of nutrition question answering dataset and save this as jsonl files. Original dataset has instruction, input and output. After processing, question part includes instruction and inputs while answer part includes outputs.
-  
-  python cli.py --train   #  Fine-tune based model based on hyper parameters and datasets from bucket (all defined in src/gemini-finetuner/cli.py). Remember to deploy fine-tuned model as endpoint for later RAG usage.
-  ```
 
 2. **llm-rag:** Another container prepares data for the RAG model, including tasks such as chunking, embedding, and populating the vector database.
     - **Input:** Processed Raw data as txt. file, and user query text.
     - **Output:** Chunked data (.jsonl file), embedded data (.jsonl file), created ChromaDB instance, LLM response corresponding to the user query text, and LLM responses to our default evaluation questions (uploaded to GCP bucket as csv for different RAG configuration)
   
-  ```
-  # Read each text file in the input-datasets/books directory
-  # Split the text into chunks using the specified method (character-based or recursive)
-  # Save the chunks as JSONL files in the outputs directory
-  python cli.py --chunk --chunk_type char-split
-  python cli.py --chunk --chunk_type recursive-split
-  ```
 
-  ```
-  # Read the chunk files created in the previous section;
-  # Use Vertex AI's text embedding model to generate embeddings for each chunk;
-  # Save the chunks with their embeddings as new JSONL files.We use Vertex AI text-embedding-004 model to generate the embeddings
-  python cli.py --embed --chunk_type char-split
-  python cli.py --embed --chunk_type recursive-split
-  ```
+### Locally deployment:
+```
+```
 
-  ```
-  # Connect to your ChromaDB instance
-  # Create a new collection (or clears an existing one)
-  # load the embeddings and associated metadata into the collection.
-  python cli.py --load --chunk_type char-split
-  python cli.py --load --chunk_type recursive-split
-  ```
+### Deploy on GCP:
 
-  ```
-  # Generate the LLM response for specific user input using our vector database. Users could additionally specify “--chunk_type” to request two different vector base we generated using different split methods. 
-  python cli.py --chat --query_text={your specific input}
-  ```
 
-  ```
-  # This will run our evaluation queries based on different RAG configuration and upload the results to the GCP buckets.
-  python cli.py --process_questions --output-file={output file name}
-  ```
+### User Interfaces:
+
+
+### Coverage Report:
+
+
