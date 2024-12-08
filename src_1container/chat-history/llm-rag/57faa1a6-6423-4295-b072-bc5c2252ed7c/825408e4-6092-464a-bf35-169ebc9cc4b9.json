@@ -1,0 +1,18 @@
+{
+  "chat_id": "825408e4-6092-464a-bf35-169ebc9cc4b9",
+  "title": "qqqq...",
+  "dts": 1733638182,
+  "messages": [
+    {
+      "content": "qqqq",
+      "image": null,
+      "message_id": "ad65b0c5-6ebb-4082-9bef-c65c044d392f",
+      "role": "user"
+    },
+    {
+      "message_id": "eb30c52d-b18a-4b76-9c4f-c6e47e9f0061",
+      "role": "assistant",
+      "content": "The provided text chunks do not contain any information related to nutrition or diet.  Therefore, I cannot answer your question based on the given input. Please provide relevant text chunks for me to assist you.\n"
+    }
+  ]
+}
