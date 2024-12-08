@@ -172,10 +172,10 @@ export default function ChatInput({
                         onChange={handleModelChange}
                         disabled={disableModelSelect}
                     >
-                        <option value="llm">AI Assistant (LLM)</option>
-                        <option value="llm-cnn">AI Assistant (LLM + CNN)</option>
-                        <option value="llm-rag">AI Expert (RAG)</option>
-                        <option value="llm-agent">AI Expert (Agent)</option>
+                        <option value="llm-rag">AI Expert (Fine-tuned + RAG)</option>
+                        <option value="llm-rag">AI Expert (Fine-tuned + RAG)</option>
+                        <option value="llm-rag">AI Expert (Fine-tuned + RAG)</option>
+                        <option value="llm-ragt">AI Expert (Fine-tuned + RAG)</option>
                     </select>
                 </div>
             </div>

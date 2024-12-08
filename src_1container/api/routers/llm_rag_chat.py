@@ -18,14 +18,13 @@ chat_manager = ChatHistoryManager(model="llm-rag")
 
 @router.get("/chats")
 async def get_chats(x_session_id: str = Header(None, alias="X-Session-ID"), limit: Optional[int] = None):
-    """Get all chats, optionally limited to a specific number"""
+    """Get all chats, optionally limited to a specific number"""  
     print("x_session_id:", x_session_id)
     return chat_manager.get_recent_chats(x_session_id, limit)
 
 @router.get("/chats/{chat_id}")
 async def get_chat(chat_id: str, x_session_id: str = Header(None, alias="X-Session-ID")):
     """Get a specific chat by ID"""
-
     print("x_session_id:", x_session_id)
     chat = chat_manager.get_chat(chat_id, x_session_id)
     if not chat:

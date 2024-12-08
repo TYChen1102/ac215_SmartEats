@@ -3,7 +3,7 @@ from fastapi import File, Form
 from tempfile import TemporaryDirectory
 from starlette.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from api.routers import image_to_nutrition, llm_cnn_chat, llm_rag_chat
+from api.routers import image_to_nutrition, llm_rag_chat
 import numpy as np
 import pandas as pd
 from tensorflow.keras.models import load_model
@@ -49,7 +49,6 @@ app.add_middleware(
 
 # Additional routers here
 app.include_router(image_to_nutrition.router, prefix="/image_to_nutrition")
-app.include_router(llm_cnn_chat.router, prefix="/llm-cnn")
 app.include_router(llm_rag_chat.router, prefix="/llm-rag")
 
 

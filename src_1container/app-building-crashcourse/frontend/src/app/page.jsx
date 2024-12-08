@@ -37,7 +37,7 @@ export default function Home() {
                         </div>
                     </Link>
 
-                    <Link href="/audio" className="block">
+                    <Link href="/chat" className="block">
                         <div className="feature-card p-6 bg-white shadow-lg rounded-lg hover:shadow-xl transition-shadow">
                             <h3 className="feature-card-title text-xl font-semibold mb-2">AI chat box</h3>
                             <p className="feature-card-description text-gray-600">

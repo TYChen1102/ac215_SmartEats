@@ -14,10 +14,7 @@ export default function Header() {
     const pathname = usePathname();
 
     const navItems = [
-        { name: 'Home', path: '/', icon: <Home sx={{ fontSize: 20 }} /> },,
-        { name: 'Plots', path: '/plots', icon: <InsertChartIcon fontSize="small" /> },
-        { name: 'Grids', path: '/styletransfer', icon: <AppsIcon fontSize="small" /> },
-        { name: 'AI Assistant', path: '/chat', icon: <SmartToy fontSize="small" /> },
+        { name: 'Home', path: '/', icon: <Home sx={{ fontSize: 20 }} /> },
         { name: 'Health-and-Wellnes To-do', path: '/todo', icon: <ListAltIcon fontSize="small" /> }
     ];
 

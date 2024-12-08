@@ -1,21 +1,17 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Person, SmartToy, Forum, RemoveRedEye } from '@mui/icons-material';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { Person, SmartToy, Forum } from '@mui/icons-material';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-//import DataService from "../../services/MockDataService"; // Mock
 import DataService from "../../services/DataService";
-
 
 export default function ChatMessage({
     chat,
     isTyping,
     model
 }) {
-    // Component States
     const chatHistoryRef = useRef(null);
 
     const fetchChat = async (id) => {
@@ -30,15 +26,12 @@ export default function ChatMessage({
         }
     };
 
-    // Setup Component
-    // Auto-scroll to bottom of chat history when new messages are added
     useEffect(() => {
         if (chatHistoryRef.current) {
             chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
         }
     }, [chat, isTyping]);
 
-    // Helper function to format time
     const formatTime = (timestamp) => {
         return new Date(timestamp).toLocaleTimeString([], {
             hour: '2-digit',
@@ -46,12 +39,11 @@ export default function ChatMessage({
         });
     };
 
-    // UI View
     return (
         <div className="flex flex-col h-full overflow-hidden">
             {chat && (
                 <div className="flex items-center gap-3 p-4 border-b border-gray-200 bg-white">
-                    <Forum className="text-purple-600" />
+                    <Forum className="text-red-600" />
                     <h1 className="text-gray-800 font-medium">{chat.title}</h1>
                 </div>
             )}
@@ -62,18 +54,12 @@ export default function ChatMessage({
                         key={msg.message_id}
                         className={`chat-message ${msg.role === 'user' ? 'chat-message-user' : 'chat-message-assistant'}`}
                     >
-                        <div className={`p-2 rounded-full ${msg.role === 'assistant' ? 'bg-purple-100' :
-                            msg.role === 'cnn' ? 'bg-pink-100' : 'bg-gray-100'
-                            }`}>
-                            {msg.role === 'assistant' && <SmartToy className="text-purple-600" />}
-                            {msg.role === 'cnn' && <RemoveRedEye className="text-pink-600" />}
+                        <div className={`p-2 rounded-full ${msg.role === 'assistant' ? 'bg-red-100' : 'bg-gray-100'}`}>
+                            {msg.role === 'assistant' && <SmartToy className="text-red-600" />}
                             {msg.role === 'user' && <Person className="text-gray-600" />}
                         </div>
 
-                        <div className={`rounded-2xl p-4 shadow-sm ${msg.role === 'user'
-                            ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white'
-                            : 'bg-white text-gray-800'
-                            }`}>
+                        <div className={`rounded-2xl p-4 shadow-sm bg-white text-gray-800`}>
                             {msg.image && (
                                 <img src={msg.image} alt="Chat" className="max-w-md rounded-lg mb-2" />
                             )}
@@ -85,7 +71,7 @@ export default function ChatMessage({
                                 />
                             )}
 
-                            <div className={`prose ${msg.role === 'user' ? 'prose-invert' : ''} max-w-none`}>
+                            <div className={`prose max-w-none`}>
                                 <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                                     {msg.content}
                                 </ReactMarkdown>
