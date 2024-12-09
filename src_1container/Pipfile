@@ -26,6 +26,7 @@ llama-index = "*"
 chromadb = "*"
 langchain-community = "*"
 python-multipart = "*"
+uvicorn = "*"
 
 [dev-packages]
 

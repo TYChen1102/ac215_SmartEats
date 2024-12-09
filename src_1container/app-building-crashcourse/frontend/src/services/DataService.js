@@ -8,12 +8,28 @@ const api = axios.create({
     baseURL: BASE_API_URL
 });
 
+// Function to get or create a session ID
+function getSessionId() {
+    // Try to retrieve the session ID from localStorage
+    let sessionId = localStorage.getItem('userSessionId');
 
+    // If no session ID is found, create a new one
+    if (!sessionId) {
+        sessionId = uuid();
+        localStorage.setItem('userSessionId', sessionId); // Store it in localStorage
+    }
+
+    return sessionId;
+}
+
+// Usage
+const userSessionId = getSessionId();
+console.log("Session ID:", userSessionId);
 
 // Add request interceptor to include session ID in headers
 api.interceptors.request.use(
     (config) => {
-        const sessionId = localStorage.getItem('userSessionId');
+        const sessionId = getSessionId(); // Get the session ID using the function
         if (sessionId) {
             config.headers['X-Session-ID'] = sessionId;
         }
@@ -23,6 +39,19 @@ api.interceptors.request.use(
         return Promise.reject(error);
     }
 );
+// Add request interceptor to include session ID in headers
+//api.interceptors.request.use(
+//    (config) => {
+//        const sessionId = localStorage.getItem('userSessionId');
+//        if (sessionId) {
+//            config.headers['X-Session-ID'] = sessionId;
+//        }
+//        return config;
+//    },
+//    (error) => {
+//        return Promise.reject(error);
+//    }
+//);
 
 const DataService = {
     Init: function () {
