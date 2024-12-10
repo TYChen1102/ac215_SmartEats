@@ -42,27 +42,27 @@ jobs:
           mkdir -p ${{ github.workspace }}/htmlcov
           chmod 777 ${{ github.workspace }}/htmlcov
 
-      # Start ChromaDB Service
-      - name: Start ChromaDB Container
-        run: |-
-          docker run -d --rm \
-            --name chromadb \
-            -p 8000:8000 \
-            chromadb/chromadb:latest
+      # # Start ChromaDB Service
+      # - name: Start ChromaDB Container
+      #   run: |-
+      #     docker run -d --rm \
+      #       --name chromadb \
+      #       -p 8000:8000 \
+      #       chromadb/chromadb:latest
           
-      # Wait for ChromaDB to be ready
-      - name: Wait for ChromaDB to Start
-        run: |-
-          for i in {1..30}; do
-            if curl -s http://localhost:8000/health >/dev/null; then
-              echo "ChromaDB is ready!"
-              exit 0
-            fi
-            echo "Waiting for ChromaDB to be ready..."
-            sleep 5
-          done
-          echo "ChromaDB failed to start within the timeout period."
-          exit 1
+      # # Wait for ChromaDB to be ready
+      # - name: Wait for ChromaDB to Start
+      #   run: |-
+      #     for i in {1..30}; do
+      #       if curl -s http://localhost:8000/health >/dev/null; then
+      #         echo "ChromaDB is ready!"
+      #         exit 0
+      #       fi
+      #       echo "Waiting for ChromaDB to be ready..."
+      #       sleep 5
+      #     done
+      #     echo "ChromaDB failed to start within the timeout period."
+      #     exit 1
 
       - name: Build Deployment Container
         run: |-
@@ -72,7 +72,8 @@ jobs:
 
       - name: Run Deploy App
         run: |-
-          docker run --rm --name m4_deployment \
+          # docker run --rm --name m4_deployment \
+          docker-compose run --rm --service-ports m4_deployment \ 
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v $HOME/.ssh:/home/app/.ssh \
             -v ${{ github.workspace }}/test_action:/test_action \
