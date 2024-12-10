@@ -95,6 +95,8 @@ jobs:
             -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
             -e GCP_PROJECT=ac215-project \
             -e GCP_ZONE=us-central1-a \
+            -e CHROMADB_HOST=chromadb \  # Pass ChromaDB hostname
+            -e CHROMADB_PORT=8000 \     # Pass ChromaDB port
             m4_deployment \
             sh run-test.sh
 
