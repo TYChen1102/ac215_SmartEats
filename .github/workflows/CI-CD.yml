@@ -35,6 +35,13 @@ jobs:
         run: |-
           gcloud auth configure-docker # --quiet #authenticate to gcr
 
+      - name: Install Docker Compose
+        run: |-
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+      - name: Verify Docker Compose Version
+        run: docker-compose --version
+
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
 
@@ -74,11 +81,10 @@ jobs:
           cd ${{ github.workspace }}/test_action/
           docker build -t m4_deployment -f Dockerfile .
 
-
       - name: Run Deploy App
         run: |-
-          # docker-compose run --rm --service-ports m4_deployment \ 
-          docker run --rm --name m4_deployment \
+          # docker run --rm --name m4_deployment \
+          docker-compose run --rm --service-ports m4_deployment \
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v $HOME/.ssh:/home/app/.ssh \
             -v ${{ github.workspace }}/test_action:/test_action \
