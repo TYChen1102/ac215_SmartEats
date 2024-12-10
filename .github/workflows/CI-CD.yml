@@ -8,11 +8,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    services:
-      chromadb:
-          image: chromadb/chroma:latest
-          ports:
-              - 8000:8000
+    # services:
+    #   chromadb:
+    #       image: chromadb/chroma:latest
+    #       ports:
+    #           - 8000:8000
 
     steps:
       - run: echo "Comment ${{ github.event.head_commit.message }}"
