@@ -1,12 +1,13 @@
-Based on the provided information, your pizza meal contains 874.3 kcal, 117.6g carbohydrates, 25g protein, and 32.5g fat.  This meal appears to be high in carbohydrates and fat.
+Based on the provided information, your pizza meal contains 762 calories, 73.5 grams of carbohydrates, 40.6 grams of protein, and 35.3 grams of fat.  Your risk assessment shows elevated risks for Obesity (0.5917), Diabetes (0.0324), High Cholesterol (0.2825), and Hypertension (0.7012).
 
-This meal has been flagged with potential risks for several conditions:
+Given these results, I recommend the following dietary advice:
 
-* **Obesity:** 0.0603 risk
-* **Diabetes:** 0.0291 risk
-* **High Cholesterol:** 0.0146 risk
-* **Hypertension:** 0.1309 risk
+* **Carbohydrates:** While the exact amount of added sugar in your pizza isn't specified, the Dietary Guidelines for Americans (DGA) recommend that added sugars make up less than 10% of your total daily calories.  The Acceptable Macronutrient Distribution Range (AMDR) for carbohydrates is 45-65% of total calories.  Your current meal is likely high in refined carbohydrates, which should be limited in favor of whole grains and fiber-rich foods.  Aim for 14g of fiber per 1,000 kcal consumed.
 
-The high carbohydrate content, especially if it comes from refined grains and added sugars commonly found in pizza, could contribute to the elevated risks of obesity and diabetes. The fat content could contribute to obesity and high cholesterol.  It's important to consider the type of fat; saturated and trans fats are more concerning than unsaturated fats.  The provided data doesn't specify the types of fat or carbohydrates in the pizza.
+* **Fat:** The AMDR for total fat is 20-35% of total calories.  While your meal falls within this range, it's important to limit saturated fat intake. The provided data doesn't specify the amount of saturated fat in your pizza, but reducing saturated fat is generally recommended for overall health, especially considering your elevated risk for high cholesterol.
 
-For more personalized dietary advice, it would be helpful to know your age, sex, activity level, and overall dietary habits.  The provided references offer information on recommended macronutrient distributions and limits on added sugars and saturated fats, which could be useful in evaluating your overall diet.  Comparing the pizza's nutritional content to these recommendations would provide a more complete picture of its impact on your health.
+* **Overall Calorie Intake:**  762 calories for a single meal is substantial.  Depending on your individual needs and activity level, this could be a significant portion of your daily caloric requirements.  Consider portion control and balancing this meal with lower-calorie, nutrient-rich options throughout the day.
+
+* **Disease Risk:** Your elevated risk scores for obesity, diabetes, high cholesterol, and hypertension suggest a need for dietary changes.  Reducing overall calorie intake, limiting saturated and trans fats, increasing fiber intake, and choosing whole grains over refined carbohydrates are all steps that can help mitigate these risks.
+
+It's important to note that this advice is based solely on the information provided.  For personalized dietary recommendations, consult a registered dietitian or healthcare professional. They can help create a tailored plan based on your individual health status, needs, and goals.
