@@ -8,6 +8,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      chromadb:
+          image: chromadb/chroma:latest
+          ports:
+              - 8000:8000
 
     steps:
       - run: echo "Comment ${{ github.event.head_commit.message }}"
@@ -72,8 +77,8 @@ jobs:
 
       - name: Run Deploy App
         run: |-
-          # docker run --rm --name m4_deployment \
-          docker-compose run --rm --service-ports m4_deployment \ 
+          # docker-compose run --rm --service-ports m4_deployment \ 
+          docker run --rm --name m4_deployment \
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v $HOME/.ssh:/home/app/.ssh \
             -v ${{ github.workspace }}/test_action:/test_action \
