@@ -79,10 +79,20 @@ jobs:
           cd ${{ github.workspace }}/test_action/
           docker build -t m4_deployment -f Dockerfile .
 
-      - name: Run Deploy App
+      - name: Create and inspect docker network
         run: |-
           docker network create llm-rag-network || true  # Create network if it doesn't exist
           docker network connect llm-rag-network llm-rag-chromadb  # Connect ChromaDB to the network
+          docker network inspect llm-rag-network
+
+      - name: List Active Containers
+        run: docker ps
+
+      - name: List Docker Networks
+        run: docker network ls
+
+      - name: Deployment
+        run: |-
           docker run --rm --name m4_deployment \
             --network llm-rag-network \
             -v /var/run/docker.sock:/var/run/docker.sock \
