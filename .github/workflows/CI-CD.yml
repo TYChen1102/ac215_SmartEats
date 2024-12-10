@@ -81,7 +81,6 @@ jobs:
 
       - name: Run Deploy App
         run: |-
-          # docker-compose run --rm --service-ports m4_deployment \
           docker network create llm-rag-network || true  # Create network if it doesn't exist
           docker network connect llm-rag-network chromadb  # Connect ChromaDB to the network
           docker run --rm --name m4_deployment \
@@ -95,8 +94,8 @@ jobs:
             -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
             -e GCP_PROJECT=ac215-project \
             -e GCP_ZONE=us-central1-a \
-            -e CHROMADB_HOST=chromadb \  # Pass ChromaDB hostname
-            -e CHROMADB_PORT=8000 \     # Pass ChromaDB port
+            -e CHROMADB_HOST=chromadb \
+            -e CHROMADB_PORT=8000 \
             m4_deployment \
             sh run-test.sh
 
