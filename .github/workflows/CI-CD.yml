@@ -79,12 +79,30 @@ jobs:
           cd ${{ github.workspace }}/test_action/
           docker build -t m4_deployment -f Dockerfile .
 
+      # - name: Run Deploy App
+      #   run: |-
+      #     docker network create llm-rag-network || true  # Create network if it doesn't exist
+      #     docker network connect llm-rag-network chromadb  # Connect ChromaDB to the network
+      #     docker run --rm --name m4_deployment \
+      #       --network llm-rag-network \
+      #       -v /var/run/docker.sock:/var/run/docker.sock \
+      #       -v $HOME/.ssh:/home/app/.ssh \
+      #       -v ${{ github.workspace }}/test_action:/test_action \
+      #       -v ${{ github.workspace }}/secrets:/secrets \
+      #       -v ${{ github.workspace }}/htmlcov:/test_action/htmlcov \
+      #       --mount type=bind,source=${{ github.workspace }}/secrets/llm-service-account.json,target=/secrets/llm-service-account.json,readonly \
+      #       -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
+      #       -e GCP_PROJECT=ac215-project \
+      #       -e GCP_ZONE=us-central1-a \
+      #       -e CHROMADB_HOST=chromadb \
+      #       -e CHROMADB_PORT=8000 \
+      #       m4_deployment \
+      #       sh run-test.sh
+
       - name: Run Deploy App
         run: |-
-          docker network create llm-rag-network || true  # Create network if it doesn't exist
-          docker network connect llm-rag-network chromadb  # Connect ChromaDB to the network
-          docker run --rm --name m4_deployment \
-            --network llm-rag-network \
+          cd ${{ github.workspace }}/test_action/
+          docker-compose -f docker-compose.yml run --rm --service-ports m4_deployment \
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v $HOME/.ssh:/home/app/.ssh \
             -v ${{ github.workspace }}/test_action:/test_action \
@@ -94,8 +112,6 @@ jobs:
             -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
             -e GCP_PROJECT=ac215-project \
             -e GCP_ZONE=us-central1-a \
-            -e CHROMADB_HOST=chromadb \
-            -e CHROMADB_PORT=8000 \
             m4_deployment \
             sh run-test.sh
 
