@@ -21,7 +21,10 @@ The SmartEats Group
 In this milestone, we deploy our application to a Kubernete cluster on GCP with manul scaling. We work on ansible playbooks to automate the provisioning and deployment of the infrastructure and application, including the kubernetes cluster. We set up a CI/CD pipeline using Github Actions, which runs unit test across every container, runs integration tests corss the explosed API on every pull request. We also implemented a ML workflow for 1 model. 
 
 ### Architectures:
-
+#### Solution Architecture
+![Solution Architecture](images/solution.jpg)
+#### Technical Architecture
+![Technical Architecture](images/tech.png)
 
 ### Containers
 
