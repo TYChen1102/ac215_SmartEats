@@ -19,7 +19,7 @@ MODEL_ENDPOINT = "projects/1058117673285/locations/us-central1/endpoints/6472676
 # CHROMADB_HOST = "llm-rag-chromadb"
 # CHROMADB_PORT = 8000
 
-CHROMADB_HOST = os.getenv("CHROMADB_HOST",  "llm-rag-chromadb")  # Default to localhost if not set
+CHROMADB_HOST = os.getenv("CHROMADB_HOST", "llm-rag-chromadb")
 CHROMADB_PORT = os.getenv("CHROMADB_PORT", "8000")  
 
 # Configuration settings for the content generation
