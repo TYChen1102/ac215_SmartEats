@@ -65,13 +65,12 @@ method = "recursive-split"
 collection_name = f"{method}-collection"
 # Get the collection
 # collection = client.get_collection(name=collection_name)
+
 try:
     collection = client.get_collection(name="recursive-split-collection")
 except chromadb.errors.InvalidCollectionException:
     print("Collection does not exist. Creating it now.")
     collection = client.create_collection(name="recursive-split-collection")
-
-
 print(f"Collection {collection_name} is ready for use!")
 
 def generate_query_embedding(query):

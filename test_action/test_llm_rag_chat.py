@@ -82,7 +82,7 @@ def test_get_chat_image(chat_manager, tmp_path):
     """Test retrieving an image from a chat"""
     
     # Define the test image
-    image_filename = 'test_image.png'
+    image_filename = 'test_food.png'
     
     # Read the image file and encode it in base64
     with open(os.path.join(image_filename), 'rb') as image_file:
