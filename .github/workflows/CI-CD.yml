@@ -84,11 +84,11 @@ jobs:
           docker network create llm-rag-network || true  # Create network if it doesn't exist
           docker network connect llm-rag-network llm-rag-chromadb  # Connect ChromaDB to the network
       
-      - name: Debug Network Connection
-        run: |-
-          docker exec llm-rag-chromadb ping -c 3 m4_deployment || echo "Ping failed"
-          docker exec m4_deployment ping -c 3 llm-rag-chromadb || echo "Ping failed"
-          docker exec m4_deployment curl -s http://llm-rag-chromadb:8000/health || echo "Failed to connect to ChromaDB"
+      # - name: Debug Network Connection
+      #   run: |-
+      #     docker exec llm-rag-chromadb ping -c 3 m4_deployment || echo "Ping failed"
+      #     docker exec m4_deployment ping -c 3 llm-rag-chromadb || echo "Ping failed"
+      #     docker exec m4_deployment curl -s http://llm-rag-chromadb:8000/health || echo "Failed to connect to ChromaDB"
 
       - name: List Active Containers
         run: docker ps
