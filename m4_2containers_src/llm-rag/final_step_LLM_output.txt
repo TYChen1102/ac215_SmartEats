@@ -1,9 +1,0 @@
-Based on the provided information, your pizza meal contains 874.3 kcal, 117.6g carbohydrates, 25g protein, and 32.5g fat.  This meal appears to be high in carbohydrates and fat.
-
-This meal has a moderate risk for hypertension (0.1309) and a lower, but still noteworthy, risk for obesity (0.0603), diabetes (0.0291), and high cholesterol (0.0146).
-
-I recommend comparing the macronutrient percentages of this meal to the Acceptable Macronutrient Distribution Ranges (AMDR).  The provided data includes AMDR for total lipids (fat) (20-35% of kcal) and carbohydrates (45-65% of kcal).  Calculating these percentages for your meal will help determine if adjustments are needed.
-
-Additionally, the data suggests limiting added sugars to less than 10% of total kcal and saturated fatty acids to less than 10% of total kcal.  You should calculate these values for your pizza to assess its nutritional value.  Increasing fiber intake is also generally recommended, with a suggested intake of 14g per 1000 kcal.  Compare your fiber intake to this recommendation.
-
-By comparing your intake to these recommendations, you can make informed choices about future meals to improve your overall diet and reduce the risks of the mentioned diseases.
