@@ -40,8 +40,8 @@ In this milestone, we deploy our application to a Kubernete cluster on GCP with 
     - **Input:** Nutritional information of the food item, and required secrets (provided via Docker)
     - **Output:** Predicted probabilities for the risk of developing diseases, including obesity, diabetes, hypertension, and high cholesterol
 4. **llm-rag:** Prepares data for the RAG model, including tasks such as chunking, embedding, and populating the vector database; Invokes fine-tuned model from fine-tuned LLM model with RAG to generate diatery suggestions
-    - **Input (RAG setup):** Processed Raw data as txt. file, and user query text.
-    - **Output (RAG setup):** Chunked data (.jsonl file), embedded data (.jsonl file), created ChromaDB instance, LLM response corresponding to the user query text, and LLM responses to our default evaluation questions (uploaded to GCP bucket as csv for different RAG configuration)
+    - **Input (RAG Setup):** Processed Raw data as txt. file, and user query text.
+    - **Output (RAG Setup):** Chunked data (.jsonl file), embedded data (.jsonl file), created ChromaDB instance, LLM response corresponding to the user query text, and LLM responses to our default evaluation questions (uploaded to GCP bucket as csv for different RAG configuration)
     - **Input (RAG Usage):** Processed prompts containing previous outputs from container 2 and 3. The format of prompt is "Outputs from container 2 and 3, Could you give us some dietary advice based on these information?"
     - **Output (RAG Usage) :** The answer from fine-tuned LLM model with RAG to give response based on prompts.
 5.  **gemini-finetuner:** Processes datasets used for fine-tuning and perform fine-tuning process in GCP.
