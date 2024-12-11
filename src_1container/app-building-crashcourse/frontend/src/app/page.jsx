@@ -39,7 +39,7 @@ export default function Home() {
 
                     <Link href="/chat" className="block">
                         <div className="feature-card p-6 bg-white shadow-lg rounded-lg hover:shadow-xl transition-shadow">
-                            <h3 className="feature-card-title text-blue-600">AI Chatbot</h3>
+                            <h3 className="feature-card-title text-xl text-blue-600">AI Chatbot</h3>
                             <p className="feature-card-description text-gray-600">
                                 Dive into your nutritional journey with our 24/7 AI Chatbot.
                                 Get instant advice and personalized meal suggestions to support your health and wellness goals.
