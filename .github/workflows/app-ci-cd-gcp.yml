@@ -47,4 +47,7 @@ jobs:
             -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
             -e GCP_PROJECT=ac215-smarteat-437821 \
             -e GCP_ZONE=us-central1-a \
-            smarteats-app-deployment sh deploy-k8s-update.sh
+            smarteats-app-deployment
+      - name: Update App 
+        run: |-
+          docker exec -it smarteats-app-deployment sh -c "chmod +x /workspace/deployment/deploy-k8s-update.sh && /workspace/deployment/deploy-k8s-update.sh"
