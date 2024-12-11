@@ -8,11 +8,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    # services:
-    #   chromadb:
-    #       image: chromadb/chroma:latest
-    #       ports:
-    #           - 8000:8000
 
     steps:
       - run: echo "Comment ${{ github.event.head_commit.message }}"
@@ -34,11 +29,6 @@ jobs:
       - name: Configure Docker Client
         run: |-
           gcloud auth configure-docker # --quiet #authenticate to gcr
-
-      # - name: Install Docker Compose
-      #   run: |-
-      #     sudo apt-get update
-      #     sudo apt-get install -y docker-compose
 
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
@@ -83,12 +73,6 @@ jobs:
         run: |-
           docker network create llm-rag-network || true  # Create network if it doesn't exist
           docker network connect llm-rag-network llm-rag-chromadb  # Connect ChromaDB to the network
-      
-      # - name: Debug Network Connection
-      #   run: |-
-      #     docker exec llm-rag-chromadb ping -c 3 m4_deployment || echo "Ping failed"
-      #     docker exec m4_deployment ping -c 3 llm-rag-chromadb || echo "Ping failed"
-      #     docker exec m4_deployment curl -s http://llm-rag-chromadb:8000/health || echo "Failed to connect to ChromaDB"
 
       - name: List Active Containers
         run: docker ps
@@ -113,23 +97,6 @@ jobs:
             -e CHROMADB_PORT=8000 \
             m4_deployment \
             sh run-test.sh
-
-      # - name: Run Deploy App
-      #   run: |-
-      #     cd ${{ github.workspace }}/test_action/
-      #     docker-compose -f docker-compose.yml run --rm --service-ports m4_deployment \
-      #     docker-compose run --rm --service-ports m4_deployment \
-      #       -v /var/run/docker.sock:/var/run/docker.sock \
-      #       -v $HOME/.ssh:/home/app/.ssh \
-      #       -v ${{ github.workspace }}/test_action:/test_action \
-      #       -v ${{ github.workspace }}/secrets:/secrets \
-      #       -v ${{ github.workspace }}/htmlcov:/test_action/htmlcov \
-      #       --mount type=bind,source=${{ github.workspace }}/secrets/llm-service-account.json,target=/secrets/llm-service-account.json,readonly \
-      #       -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
-      #       -e GCP_PROJECT=ac215-project \
-      #       -e GCP_ZONE=us-central1-a \
-      #       m4_deployment \
-      #       sh run-test.sh
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
