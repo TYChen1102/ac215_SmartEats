@@ -1,0 +1,18 @@
+{
+  "chat_id": "f73c252e-3444-4653-b0b2-fffe2047a3ab",
+  "title": "how many proteins can adults take in a day...",
+  "dts": 1733703496,
+  "messages": [
+    {
+      "content": "how many proteins can adults take in a day",
+      "image": null,
+      "message_id": "91ab33f2-c0cc-414d-9b72-c03fdde56585",
+      "role": "user"
+    },
+    {
+      "message_id": "71534cb7-d973-47e9-8152-e3ed7415c7b3",
+      "role": "assistant",
+      "content": "The recommended daily protein intake for adults is 0.8 grams per kilogram of body weight, or 0.36 grams per pound.  However, needs vary.  Children, pregnant and lactating women, and athletes may require more protein.  The Acceptable Macronutrient Distribution Range (AMDR) for protein in adults is 10-35% of total daily calories.  One source mentions an upper limit of 30% of total calorie intake for protein.\n"
+    }
+  ]
+}

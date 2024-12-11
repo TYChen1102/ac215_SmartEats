@@ -1,0 +1,40 @@
+{
+  "chat_id": "169e3e6c-5ab7-4945-9b10-a14a59478432",
+  "title": "How much carbohydrates do you recommend adults to ...",
+  "dts": 1733741470,
+  "messages": [
+    {
+      "content": "How much carbohydrates do you recommend adults to take per day?",
+      "image": null,
+      "message_id": "809b875f-c517-458f-a465-b5218b586eff",
+      "role": "user"
+    },
+    {
+      "message_id": "c03d2c96-01e3-4858-945a-eb14ada75b26",
+      "role": "assistant",
+      "content": "Carbohydrate intake recommendations depend on individual factors such as activity level and weight goals.\n\nFor general intake, carbohydrates should comprise 45% to 65% of total daily calories.  More active individuals can aim for the higher end of this range (65%), while those less active or seeking weight loss should aim for the lower end (45%).  To calculate the gram amount, determine 45% to 65% of your daily calorie needs, then divide that number by four.\n\nOne example provided for a 2000 calorie diet suggests 310 grams of carbohydrates per day, compared to 70 grams of fat and 50 grams of protein.  This example seems to represent a higher carbohydrate intake, potentially suitable for a very active individual.  Individuals reducing calorie intake for weight loss should aim for approximately half their daily calories from carbohydrates.\n\nRegarding carbohydrate types, three-quarters of carbohydrate intake should come from complex carbohydrates, while the remaining quarter can be simple carbohydrates.  However, sugar intake should not exceed 10% of total energy intake.\n"
+    },
+    {
+      "content": "How much proteins do you recommend children to take per day?",
+      "image": null,
+      "message_id": "4f0598e6-1b0d-4db4-9369-5dd709df01f6",
+      "role": "user"
+    },
+    {
+      "message_id": "2b306435-a7ce-4d6a-bb54-a8453e940e56",
+      "role": "assistant",
+      "content": "For children less than one year old, protein should make up about 10% of their total energy intake. For children one year and older, protein should contribute no more than 12% of their total energy intake.  It's also recommended that 70% of the protein consumed by children come from animal sources.\n"
+    },
+    {
+      "content": "What is your advice on the nutrition intake for an adult per day, including proteins, carbohydrates, and fat?",
+      "image": null,
+      "message_id": "614d876a-0ae5-450a-aa45-49b9a8eeba88",
+      "role": "user"
+    },
+    {
+      "message_id": "afdcdd33-306e-41da-8d78-553edfa87cf2",
+      "role": "assistant",
+      "content": "The Acceptable Macronutrient Distribution Ranges (AMDR) for adults are as follows:\n\n* **Carbohydrates:** 45-65% of total daily calories\n* **Protein:** 10-35% of total daily calories\n* **Fat:** 20-35% of total daily calories\n\nIt's important to monitor your intake of these macronutrients to maintain appropriate energy levels and overall health.  Following these guidelines can contribute to a healthier lifestyle.\n"
+    }
+  ]
+}

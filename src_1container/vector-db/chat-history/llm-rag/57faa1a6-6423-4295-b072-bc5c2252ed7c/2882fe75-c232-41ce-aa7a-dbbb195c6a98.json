@@ -1,0 +1,18 @@
+{
+  "chat_id": "2882fe75-c232-41ce-aa7a-dbbb195c6a98",
+  "title": "How much calorie should one person take in everyda...",
+  "dts": 1733636851,
+  "messages": [
+    {
+      "content": "How much calorie should one person take in everyday?",
+      "model": "llm-rag",
+      "message_id": "e7d5be57-0de9-4d7b-82df-d644f18f3b3c",
+      "role": "user"
+    },
+    {
+      "message_id": "7ee7f4a8-60f5-4e20-a21c-ffab7acacd8f",
+      "role": "assistant",
+      "content": "The number of calories a person needs daily depends on several factors, including age, sex, height, weight, and physical activity level.  Whether a person needs to lose, maintain, or gain weight also influences calorie needs.  Other unspecified factors can also play a role.  The provided text mentions a \"healthy body mass index (BMI)\" and \"reference weight\" being related to calorie needs, but doesn't define these terms or provide specific calorie recommendations.  For more detailed information, the text suggests referring to the DRI Calculator for Healthcare Professionals available at nal.usda.gov/.\n"
+    }
+  ]
+}
