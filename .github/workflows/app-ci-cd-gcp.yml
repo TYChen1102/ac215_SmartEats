@@ -49,4 +49,4 @@ jobs:
             -e GCP_ZONE=us-central1-a \
             --entrypoint sh \
             smarteats-app-deployment \
-            -c "/workspace/src_1container/deployment/deploy-k8s-update.sh"
+            -c "chmod +x /workspace/src_1container/deployment/deploy-k8s-update.sh && /workspace/src_1container/deployment/deploy-k8s-update.sh"
