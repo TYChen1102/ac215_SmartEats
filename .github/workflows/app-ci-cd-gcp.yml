@@ -47,5 +47,5 @@ jobs:
             -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
             -e GCP_PROJECT=ac215-smarteat-437821 \
             -e GCP_ZONE=us-central1-a \
-            --entrypoint ${{ github.workspace }}/custom-entrypoint.sh \
+            --entrypoint /src_1container/deployment/custom-entrypoint.sh \
             smarteats-app-deployment
