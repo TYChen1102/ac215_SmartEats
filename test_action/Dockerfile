@@ -31,6 +31,7 @@ RUN set -ex; \
     pip install --no-cache-dir --upgrade pip && \
     pip install pipenv && \
     pip install pytest pytest-cov && \
+    pip install python-multipart && \
     useradd -ms /bin/bash app -d /home/app -u 1000 -p "$(openssl passwd -1 Passw0rd)" && \
     mkdir -p /app && \
     mkdir -p /persistent && \
