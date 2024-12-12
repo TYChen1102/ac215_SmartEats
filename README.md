@@ -137,7 +137,7 @@ The yaml files can be found under `.github/workflows/CI.yml`.
     ![CI/CD Deployment](images/ci_cd_deployment.png)
 
     - #### Test if CD succeeds
-    ![CI/CD Deployment_proof](images/cd_blud.png)
+    ![CI/CD Deployment_proof](images/cd_blue.png)
 
 ### User Interfaces:
 - **Home Page:**
