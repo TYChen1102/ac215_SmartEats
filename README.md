@@ -76,13 +76,14 @@ In this milestone, we deploy our application to a Kubernete cluster on GCP with 
    
 ### CI/CD Deployment:
 #### Continuous Integration (CI)
+
 #### Continuous Deployment (CD)
 1. Ensure Kubernetes Cluster is running at `http://<YOUR INGRESS IP>.sslip.io`. In our project, the app is deployed at http://34.45.44.240.sslip.io/
 2. Make some changes to the app, such as updating the color and font of the text in the frontend.
     ```
     <h3 className="feature-card-title text-xl font-semibold mb-2 text-blue-600">AI Chatbot</h3>
     ```
-3. Run the deploy app action by running following code. Add `/deploy-app` to the commit message to re-deploy the frontend and backend. Do this in `src_1container` folder outside the container.
+3. Run the deploy app action by running following code. Add `/deploy-app` to the commit message to re-deploy the frontend and backend. Do this in the `src_1container` folder outside the container.
     ```
     git add .
     git commit -m "update frontend and backend /deploy-app"
