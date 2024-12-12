@@ -9,53 +9,22 @@ const api = axios.create({
     baseURL: BASE_API_URL
 });
 
-//////////////////////// Version with AI Chatbot working but no useful reply (embedding)
-// // Generate a session ID when the app starts
-// let sessionId = uuidv4(); // Generate a new UUID for each instance
-// console.log("Generated Session ID:", sessionId);
-//
-// // Add request interceptor to include session ID in headers
-// api.interceptors.request.use((config) => {
-//     // const sessionId = localStorage.getItem('userSessionId');
-//     if (sessionId) {
-//         config.headers['X-Session-ID'] = sessionId;
-//     }
-//     return config;
-// }, (error) => {
-//     return Promise.reject(error);
-// });
+////////////////////// Version with AI Chatbot working but no useful reply (embedding)
+// Generate a session ID when the app starts
+let sessionId = uuidv4(); // Generate a new UUID for each instance
+console.log("Generated Session ID:", sessionId);
 
-/////////////////////// Version with session_id mismatch
-// Function to get or create a session ID
-function getSessionId() {
-    // Try to retrieve the session ID from localStorage
-    // let sessionId = localStorage.getItem('userSessionId');
-    let sessionId = uuidv4();
-    // If no session ID is found, create a new one
-    // if (!sessionId) {
-    //     sessionId = uuid();
-    //     localStorage.setItem('userSessionId', sessionId); // Store it in localStorage
-    // }
-
-    return sessionId;
-}
-// Usage
-const userSessionId = getSessionId();
-console.log("Session ID:", userSessionId);
-
-// Add request interceptor to include session ID in headers (v1)
-api.interceptors.request.use(
-    (config) => {
-        const sessionId = getSessionId(); // Get the session ID using the function
-        if (sessionId) {
-            config.headers['X-Session-ID'] = sessionId;
-        }
-        return config;
-    },
-    (error) => {
-        return Promise.reject(error);
+// Add request interceptor to include session ID in headers
+api.interceptors.request.use((config) => {
+    // const sessionId = localStorage.getItem('userSessionId');
+    if (sessionId) {
+        config.headers['X-Session-ID'] = sessionId;
     }
-);
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+});
+
 
 
 const DataService = {
