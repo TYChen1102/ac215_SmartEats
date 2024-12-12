@@ -25,6 +25,31 @@ api.interceptors.request.use((config) => {
     return Promise.reject(error);
 });
 
+/////////////////////// Version with session_id mismatch (v3)
+// Function to get or create a session ID
+function getSessionId() {
+    // Try to retrieve the session ID from localStorage
+    let sessionId = uuidv4();
+
+    return sessionId;
+}
+// Usage
+const userSessionId = getSessionId();
+console.log("Session ID:", userSessionId);
+
+// Add request interceptor to include session ID in headers (v1)
+api.interceptors.request.use(
+    (config) => {
+        const sessionId = userSessionId; // Get the session ID using the function
+        if (sessionId) {
+            config.headers['X-Session-ID'] = sessionId;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
 
 
 const DataService = {
