@@ -14,6 +14,51 @@ The SmartEats Group
 
 ### Project Organization
 ```
+├── .github/workflows
+│   ├── CI-CD.yml                          
+│   └── pre-commit.yml           
+├── data
+├── images
+│   ├── Coverage-report.png                 
+│   ├── api-list-SmartEats.png                  
+│   ├── solution.jpg                       
+│   └── tech.png                 
+├── midterm_presentation
+│   └── SmartEats_AC215_M3_slides.pdf      # midterm presentation slides
+├── notebooks
+│   ├── AC215 - EDA.pdf                    # EDA pdf file
+│   ├── AC215_image_EfficientNet.ipynb     # train EfficientNet model
+│   ├── AC215_image_VGG_new.ipynb          # train VGG model
+│   ├── LLM-fintuning-Documentation.pdf    # Documentation of the LLM fine-tuning process
+│   ├── LLM_RAG_preprocessing.ipynb        # construct the RAG vector database
+│   ├── data_versioning_cloud_storage.ipynb# view version of the dataset
+│   ├── dataset3_EDA&preprocessing.ipynb   # EDA for nutrtion-disease dataset
+│   ├── frontpage_v2.html                  # HTML file for application front page
+│   ├── frontpage_v2.jpg                   # screenshot of front page
+│   ├── image_EDA.ipynb                    # EDA for image datasets
+│   └── predict_disease_ML.ipynb           # fine-tuning of a XGBClassifier model
+├── references
+├── reports
+│   ├── APCOMP215 Project Proposal.pdf
+│   ├── DataPipeline1.jpg                  # Pipeline running screenshot
+│   ├── DataPipeline2.jpg                  # Pipeline running screenshot
+│   ├── Examples.pdf                       # Some example inputs&outputs
+│   └── Test_Documentation.pdf             # test documentaton
+│   └── Final_output.png                   # Final output example
+├── secrets
+├── src_1container
+│   ├── api                 
+│   ├── docker-volumes/chromadb                   
+│   └── frontend
+│   └── models
+└── test_action                            # container to test CI 
+    ├── Dockerfile                         # To build the container for 
+    ├── Pipfile                            # Define packages used in data versioning
+    ├── Pipfile.lock
+    ├── docker-entrypoint.sh 
+    ├   ...
+    ├── run-test.sh                        # shell script of running pytest within container
+    └── tests.py                           # test script
 ```
 
 ## Milestone5 
@@ -78,7 +123,7 @@ In this milestone, we deploy our application to a Kubernete cluster on GCP with 
 #### Continuous Integration (CI)
 
 #### Continuous Deployment (CD)
-1. Ensure Kubernetes Cluster is running at `http://<YOUR INGRESS IP>.sslip.io`. In our project, the app is deployed at http://34.45.44.240.sslip.io/
+1. Ensure Kubernetes Cluster is running at `http://<YOUR INGRESS IP>.sslip.io`.
 2. Make some changes to the app, such as updating the color and font of the text in the frontend.
     ```
     <h3 className="feature-card-title text-xl font-semibold mb-2 text-blue-600">AI Chatbot</h3>
@@ -92,15 +137,15 @@ In this milestone, we deploy our application to a Kubernete cluster on GCP with 
 ![CI/CD Deployment](images/ci_cd_deployment.png)
 
 ### User Interfaces:
-- Home Page;
+- **Home Page:**
 ![UI1](images/UI1.png)
-- Meal Image Uploading Page:
+- **Meal Image Uploading Page:**
 ![UI2](images/UI2.png)
-- Example:
+- **Example:**
 ![UI3](images/UI3.png)
-- AI Chatbot Page:
+- **AI Chatbot Page:**
 ![UI4](images/UI4.png)
-- Planner Page:
+- **Planner Page:**
 ![UI5](images/UI5.png)
 
 ### Coverage Report for Unit Tests & Integration test:
