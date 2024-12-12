@@ -134,7 +134,7 @@ The yaml files can be found under `.github/workflows/CI.yml`.
     git commit -m "update frontend and backend /deploy-app"
     git push
     ```
-    ![CI/CD Deployment](images/cd_1.png)
+    ![CI/CD Deployment](images/cd_1.jpg)
     ![CI/CD Deployment](images/ci_cd_deployment.png)
 
     - #### Test if CD succeeds
