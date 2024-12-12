@@ -48,14 +48,39 @@ In this milestone, we deploy our application to a Kubernete cluster on GCP with 
       
 
 ### Deploy on GCP:
-
+1. Build deployment container
+    ```
+    cd src_1container/deployment
+    sh docker-shell.sh
+    ```
+2. Deployment using Ansible Playbook 
+    ```
+    ansible-playbook deploy-docker-images.yml -i inventory.yml 
+    ansible-playbook deploy-create-instance.yml -i inventory.yml --extra-vars cluster_state=present
+    # get the IP address of the compute instance from GCP Console and update the appserver>hosts in inventory.yml file
+    ansible-playbook deploy-provision-instance.yml -i inventory.yml
+    ansible-playbook deploy-setup-containers.yml -i inventory.yml
+    ansible-playbook deploy-setup-webserver.yml -i inventory.yml
+    ```
+    The application is able to be up at http://<External IP>/
+   
+4. Deployment as Kubernetes cluster
+   ```
+   ansible-playbook deploy-docker-images.yml -i inventory.yml 
+   ansible-playbook deploy-k8s-cluster.yml -i inventory.yml --extra-vars cluster_state=present
+   ```
+   The application is able to be up at http://<YOUR INGRESS IP>.sslip.io
 
 ### User Interfaces:
+- Home Page;
 ![UI1](images/UI1.png)
-
+- Meal Image Uploading Page:
 ![UI2](images/UI2.png)
+- Example:
 ![UI3](images/UI3.png)
+- AI Chatbot Page:
 ![UI4](images/UI4.png)
+- Planner Page:
 ![UI5](images/UI5.png)
 
 ### Coverage Report for Unit Tests & Integration test:
