@@ -53,7 +53,9 @@ In this milestone, we deploy our application to a Kubernete cluster on GCP with 
     cd src_1container/deployment
     sh docker-shell.sh
     ```
-2. Deployment using Ansible Playbook 
+    ![deploy_container](images/deploy_container.png)
+   
+3. Deployment using Ansible Playbook 
     ```
     ansible-playbook deploy-docker-images.yml -i inventory.yml 
     ansible-playbook deploy-create-instance.yml -i inventory.yml --extra-vars cluster_state=present
@@ -70,6 +72,10 @@ In this milestone, we deploy our application to a Kubernete cluster on GCP with 
    ansible-playbook deploy-k8s-cluster.yml -i inventory.yml --extra-vars cluster_state=present
    ```
    The application is able to be up at http://<YOUR INGRESS IP>.sslip.io
+   ![UI1](images/UI1.png)
+   
+### CI/CD Deployment:
+![CI/CD Deployment](images/ci_cd_deployment.png)
 
 ### User Interfaces:
 - Home Page;
