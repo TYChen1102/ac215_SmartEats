@@ -69,7 +69,7 @@ In this milestone, we deploy our application to a Kubernete cluster on GCP with 
 #### Solution Architecture
 ![Solution Architecture](images/solution.jpg)
 #### Technical Architecture
-![Technical Architecture](images/tech.png)
+![Technical Architecture](images/tech.jpg)
 
 
 ### Models:
@@ -110,19 +110,24 @@ In this milestone, we deploy our application to a Kubernete cluster on GCP with 
     ansible-playbook deploy-setup-webserver.yml -i inventory.yml
     ```
     The application is able to be up at `http://<External IP>/`
+   ![ansible](images/ansible.png)
    
-3. Deployment as Kubernetes cluster
+4. Deployment as Kubernetes cluster
    ```
    ansible-playbook deploy-docker-images.yml -i inventory.yml 
    ansible-playbook deploy-k8s-cluster.yml -i inventory.yml --extra-vars cluster_state=present
    ```
    The application is able to be up at `http://<YOUR INGRESS IP>.sslip.io`
-   ![UI1](images/UI1.png)
+   ![k8s](images/k8s_1.png)
+   ![k8s_2](images/k8s_2.png)
    
-### CI/CD Deployment:
+### CI/CD
 #### Continuous Integration (CI)
 We implemented a CI pipeline set up in GitHub Actions that automatically triggers the testing and integration process whenever a commit is made. 
 The yaml files can be found under `.github/workflows/CI.yml`.
+
+ - #### Coverage Report for Unit Tests & Integration test:
+![Coverage Report](images/Coverage-report.png)
 
 #### Continuous Deployment (CD)
 1. Ensure Kubernetes Cluster is running at `http://<YOUR INGRESS IP>.sslip.io`.
@@ -136,7 +141,10 @@ The yaml files can be found under `.github/workflows/CI.yml`.
     git commit -m "update frontend and backend /deploy-app"
     git push
     ```
-![CI/CD Deployment](images/ci_cd_deployment.png)
+    ![CI/CD Deployment](images/ci_cd_deployment.png)
+
+    - ####
+    ![CI/CD Deployment_proof](images/cd_blud.png)
 
 ### User Interfaces:
 - **Home Page:**
@@ -150,6 +158,5 @@ The yaml files can be found under `.github/workflows/CI.yml`.
 - **Planner Page:**
 ![UI5](images/UI5.png)
 
-### Coverage Report for Unit Tests & Integration test:
-![Coverage Report](images/Coverage-report.png)
+
 
