@@ -121,6 +121,8 @@ In this milestone, we deploy our application to a Kubernete cluster on GCP with 
    
 ### CI/CD Deployment:
 #### Continuous Integration (CI)
+We implemented a CI pipeline set up in GitHub Actions that automatically triggers the testing and integration process whenever a commit is made. 
+The yaml files can be found under .github/workflows. 
 
 #### Continuous Deployment (CD)
 1. Ensure Kubernetes Cluster is running at `http://<YOUR INGRESS IP>.sslip.io`.
