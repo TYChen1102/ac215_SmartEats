@@ -15,16 +15,16 @@ The SmartEats Group
 ### Project Organization
 ```
 ├── .github/workflows
-│   ├── CI-CD.yml                          
-│   └── pre-commit.yml           
-├── data
-├── images
-│   ├── Coverage-report.png                 
-│   ├── api-list-SmartEats.png                  
-│   ├── solution.jpg                       
-│   └── tech.png                 
+│   ├── CI.yml                             # CI workflow
+│   └── app-ci-cd-gcp.yml                  # CD workflow
+├── images                                 # screenshots displayed below
 ├── midterm_presentation
 │   └── SmartEats_AC215_M3_slides.pdf      # midterm presentation slides
+├── ml-workflow-smarteat/src
+│   ├── data-collector                     # With $python cli.py --search --nums 10 --query "pizza"$ you are able to download ten pizza images from online Bing search and store these images in the GPC bucket.
+│   ├── data-processor                     # With $python cli.py --clean$ we remove duplicated images for later model prediction.
+│   ├── model-training                     # Use the pre-trained EfficientNet model to predict names of food items in previous processed images.
+│   └── workflow                           # Combine previous three steps and run pipelines on Vertex AI pipeline.
 ├── notebooks
 │   ├── AC215 - EDA.pdf                    # EDA pdf file
 │   ├── AC215_image_EfficientNet.ipynb     # train EfficientNet model
@@ -37,28 +37,21 @@ The SmartEats Group
 │   ├── frontpage_v2.jpg                   # screenshot of front page
 │   ├── image_EDA.ipynb                    # EDA for image datasets
 │   └── predict_disease_ML.ipynb           # fine-tuning of a XGBClassifier model
-├── references
 ├── reports
 │   ├── APCOMP215 Project Proposal.pdf
 │   ├── DataPipeline1.jpg                  # Pipeline running screenshot
 │   ├── DataPipeline2.jpg                  # Pipeline running screenshot
 │   ├── Examples.pdf                       # Some example inputs&outputs
+│   ├── Final_output.png                   # Final output example
 │   └── Test_Documentation.pdf             # test documentaton
-│   └── Final_output.png                   # Final output example
 ├── secrets
 ├── src_1container
-│   ├── api                 
-│   ├── docker-volumes/chromadb                   
-│   └── frontend
-│   └── models
-└── test_action                            # container to test CI 
-    ├── Dockerfile                         # To build the container for 
-    ├── Pipfile                            # Define packages used in data versioning
-    ├── Pipfile.lock
-    ├── docker-entrypoint.sh 
-    ├   ...
-    ├── run-test.sh                        # shell script of running pytest within container
-    └── tests.py                           # test script
+│   ├── api-service                        # Build container for api-service
+│   ├── app-building-crashcourse           # Build container for frontend     
+│   ├──  deployment                        # Build container for deployment
+│   └── vector-db                          # Build container for vector-db
+└── test_action                            # CI testing: unit test scripts, integration test scripts
+
 ```
 
 ## Milestone5 
