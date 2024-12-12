@@ -1,0 +1,105 @@
+name: Continuous Integration
+run-name: ${{ github.actor }} submitted a CI Action
+on:
+  push:
+    branches:
+      - main  # Triggers when code is pushed to the Milestone4 branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Comment ${{ github.event.head_commit.message }}"
+      - run: echo "Job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "Job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "Branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - id: 'auth'
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
+
+      - name: Configure Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Configure Docker Client
+        run: |-
+          gcloud auth configure-docker # --quiet #authenticate to gcr
+
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+
+      - name: Create directory in the repository
+        run: |
+          mkdir -p ${{ github.workspace }}/htmlcov
+          chmod 777 ${{ github.workspace }}/htmlcov
+
+      # Start ChromaDB Service
+      - name: Start ChromaDB Container
+        run: |-
+          docker run -d --rm \
+            --name llm-rag-chromadb \
+            -p 8000:8000 \
+            chromadb/chroma:latest
+          
+      # Wait for ChromaDB to be ready
+      - name: Wait for ChromaDB to Start
+        run: |-
+          for i in {1..30}; do
+            if curl -s http://localhost:8000/health >/dev/null; then
+              echo "ChromaDB is ready!"
+              exit 0
+            fi
+            echo "Waiting for ChromaDB to be ready..."
+            sleep 5
+          done
+          echo "ChromaDB failed to start within the timeout period."
+          exit 1
+
+      - name: Build Deployment Container
+        run: |-
+          cd ${{ github.workspace }}/test_action/
+          docker build -t m4_deployment -f Dockerfile .
+
+      - name: Create and inspect docker network
+        run: |-
+          docker network create llm-rag-network || true  # Create network if it doesn't exist
+          docker network connect llm-rag-network llm-rag-chromadb  # Connect ChromaDB to the network
+
+      - name: List Active Containers
+        run: docker ps
+
+      - name: List Docker Networks
+        run: docker network ls
+
+      - name: Run Deploy App
+        run: |-
+          docker run --rm --name m4_deployment \
+            --network llm-rag-network \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v $HOME/.ssh:/home/app/.ssh \
+            -v ${{ github.workspace }}/test_action:/test_action \
+            -v ${{ github.workspace }}/secrets:/secrets \
+            -v ${{ github.workspace }}/htmlcov:/test_action/htmlcov \
+            --mount type=bind,source=${{ github.workspace }}/secrets/llm-service-account.json,target=/secrets/llm-service-account.json,readonly \
+            -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
+            -e GCP_PROJECT=ac215-project \
+            -e GCP_ZONE=us-central1-a \
+            -e CHROMADB_HOST=llm-rag-chromadb \
+            -e CHROMADB_PORT=8000 \
+            m4_deployment \
+            sh run-test.sh
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: ${{ github.workspace }}/htmlcov  # The folder where pytest-cov stores HTML reports
