@@ -82,7 +82,7 @@ In this milestone, we deploy our application to a Kubernete cluster on GCP with 
     ```
     <h3 className="feature-card-title text-xl font-semibold mb-2 text-blue-600">AI Chatbot</h3>
     ```
-3. Run the deploy app action by running following code. Add `/deploy-app to the commit message to re-deploy the frontend and backend. Do this in `src_1container` folder outside the container.
+3. Run the deploy app action by running following code. Add `/deploy-app` to the commit message to re-deploy the frontend and backend. Do this in `src_1container` folder outside the container.
     ```
     git add .
     git commit -m "update frontend and backend /deploy-app"
