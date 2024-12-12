@@ -55,7 +55,7 @@ In this milestone, we deploy our application to a Kubernete cluster on GCP with 
     ```
     ![deploy_container](images/deploy_container.png)
    
-3. Deployment using Ansible Playbook 
+2. Deployment using Ansible Playbook 
     ```
     ansible-playbook deploy-docker-images.yml -i inventory.yml 
     ansible-playbook deploy-create-instance.yml -i inventory.yml --extra-vars cluster_state=present
@@ -64,20 +64,20 @@ In this milestone, we deploy our application to a Kubernete cluster on GCP with 
     ansible-playbook deploy-setup-containers.yml -i inventory.yml
     ansible-playbook deploy-setup-webserver.yml -i inventory.yml
     ```
-    The application is able to be up at http://<External IP>/
+    The application is able to be up at `http://<External IP>/`
    
-4. Deployment as Kubernetes cluster
+3. Deployment as Kubernetes cluster
    ```
    ansible-playbook deploy-docker-images.yml -i inventory.yml 
    ansible-playbook deploy-k8s-cluster.yml -i inventory.yml --extra-vars cluster_state=present
    ```
-   The application is able to be up at http://<YOUR INGRESS IP>.sslip.io
+   The application is able to be up at `http://<YOUR INGRESS IP>.sslip.io`
    ![UI1](images/UI1.png)
    
 ### CI/CD Deployment:
 #### Continuous Integration (CI)
 #### Continuous Deployment (CD)
-1. Ensure Kubernetes Cluster is running at http://<YOUR INGRESS IP>.sslip.io. In our project, the app is deployed at http://34.45.44.240.sslip.io/
+1. Ensure Kubernetes Cluster is running at `http://<YOUR INGRESS IP>.sslip.io`. In our project, the app is deployed at http://34.45.44.240.sslip.io/
 2. Make some changes to the app, such as updating the color and font of the text in the frontend.
     ```
     <h3 className="feature-card-title text-xl font-semibold mb-2 text-blue-600">AI Chatbot</h3>
