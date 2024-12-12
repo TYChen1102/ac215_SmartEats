@@ -1,0 +1,67 @@
+# PIPELINE DEFINITION
+# Name: ml-pipeline
+components:
+  comp-data-collector:
+    executorLabel: exec-data-collector
+  comp-data-processor:
+    executorLabel: exec-data-processor
+  comp-model-predicting:
+    executorLabel: exec-model-predicting
+deploymentSpec:
+  executors:
+    exec-data-collector:
+      container:
+        args:
+        - cli.py
+        - --search
+        - --nums 10
+        - --query pizza
+        - --bucket tutorial-ml-workflow
+        image: nih684/smarteat-data-collector
+        resources:
+          cpuLimit: 0.5
+          memoryLimit: 2.0
+    exec-data-processor:
+      container:
+        args:
+        - cli.py
+        - --clean
+        - --bucket tutorial-ml-workflow
+        image: nih684/smarteat-data-processor
+    exec-model-predicting:
+      container:
+        args:
+        - new_predict_food.py
+        image: nih684/smarteat-model-prediction
+pipelineInfo:
+  name: ml-pipeline
+root:
+  dag:
+    tasks:
+      data-collector:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-data-collector
+        taskInfo:
+          name: Data Collector
+      data-processor:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-data-processor
+        dependentTasks:
+        - data-collector
+        taskInfo:
+          name: Data Processor
+      model-predicting:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-model-predicting
+        dependentTasks:
+        - data-processor
+        taskInfo:
+          name: Model Predicting
+schemaVersion: 2.1.0
+sdkVersion: kfp-2.3.0

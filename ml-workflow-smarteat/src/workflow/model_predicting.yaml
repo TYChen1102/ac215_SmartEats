@@ -1,0 +1,26 @@
+# PIPELINE DEFINITION
+# Name: model-predicting-pipeline
+components:
+  comp-model-predicting:
+    executorLabel: exec-model-predicting
+deploymentSpec:
+  executors:
+    exec-model-predicting:
+      container:
+        args:
+        - new_predict_food.py
+        image: nih684/smarteat-model-prediction
+pipelineInfo:
+  name: model-predicting-pipeline
+root:
+  dag:
+    tasks:
+      model-predicting:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-model-predicting
+        taskInfo:
+          name: model-predicting
+schemaVersion: 2.1.0
+sdkVersion: kfp-2.3.0

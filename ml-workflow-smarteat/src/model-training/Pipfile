@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pandas = "*"
+numpy = "*"
+scikit-learn = "*"
+matplotlib = "*"
+seaborn = "*"
+opencv-python = "*"
+tensorflow = "*"
+keras = "*"
+google-cloud-storage = "*"
+google-cloud-aiplatform = "*"
+pillow = "*"
+opencv-python-headless = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
