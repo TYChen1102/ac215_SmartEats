@@ -26,36 +26,38 @@ In this milestone, we deploy our application to a Kubernete cluster on GCP with 
 #### Technical Architecture
 ![Technical Architecture](images/tech.png)
 
-### Containers
-
 
 ### Models:
 1. **food-classification:** Recognizes the food in an image and stores the output back to Google Cloud Storage (GCS).
     - **Input:** Image and required secrets (provided via Docker)
     - **Output:** Name of the detected food name and predicted probability of the food
-2. **food_to_nutrition:** Links the food predicted from food_classification container & weight user inputs to the nutrient components and stores the output back to GCS.
+2. **food_to_nutrition:** Links the food predicted from food_classification model & weight user inputs to the nutrient components and stores the output back to GCS.
     - **Input:** Food item predicted, the weight user inputs, and required secrets (provided via Docker)
     - **Output:** Nutrition components and calories of the food item identified
-3. **nutrition_predict_disease:** Uses the nutritional components and calories of the food item from food_to_nutrition container to predict the risk of four chronic diseases. 
+3. **nutrition_predict_disease:** Uses the nutritional components and calories of the food item from food_to_nutrition model to predict the risk of four chronic diseases. 
     - **Input:** Nutritional information of the food item, and required secrets (provided via Docker)
     - **Output:** Predicted probabilities for the risk of developing diseases, including obesity, diabetes, hypertension, and high cholesterol
 4. **llm-rag:** Prepares data for the RAG model, including tasks such as chunking, embedding, and populating the vector database; Invokes fine-tuned model from fine-tuned LLM model with RAG to generate diatery suggestions
     - **Input (RAG Setup):** Processed Raw data as txt. file, and user query text.
     - **Output (RAG Setup):** Chunked data (.jsonl file), embedded data (.jsonl file), created ChromaDB instance, LLM response corresponding to the user query text, and LLM responses to our default evaluation questions (uploaded to GCP bucket as csv for different RAG configuration)
-    - **Input (RAG Usage):** Processed prompts containing previous outputs from container 2 and 3. The format of prompt is "Outputs from container 2 and 3, Could you give us some dietary advice based on these information?"
+    - **Input (RAG Usage):** Processed prompts containing previous outputs from container 2 and 3. The format of prompt is "Outputs from model 2 and 3, Could you give us some dietary advice based on these information?"
     - **Output (RAG Usage) :** The answer from fine-tuned LLM model with RAG to give response based on prompts.
 5.  **gemini-finetuner:** Processes datasets used for fine-tuning and perform fine-tuning process in GCP.
     - **Input:** Processed Question Answering datasets as jsonl file, each entry has only question and answer parts.
     - **Output:** Fine-tuned LLM base model deployed as a endpoint for later RAG process.
-
-    
+      
 
 ### Deploy on GCP:
 
 
 ### User Interfaces:
+![UI1](images/UI1.png)
 
+![UI2](images/UI2.png)
+![UI3](images/UI3.png)
+![UI4](images/UI4.png)
+![UI5](images/UI5.png)
 
-### Coverage Report:
-
+### Coverage Report for Unit Tests & Integration test:
+![Coverage Report](images/Coverage-report.png)
 
