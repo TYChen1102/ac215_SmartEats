@@ -12,5 +12,4 @@ gcloud config set project $GCP_PROJECT
 gcloud auth configure-docker gcr.io -q
 
 # Run the deploy script
-#bash /src_1container/deployment/deploy-k8s-update.sh
-ls
+bash deploy-k8s-update.sh
