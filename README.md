@@ -48,7 +48,7 @@ The SmartEats Group
 ├── src_1container
 │   ├── api-service                        # Build container for api-service
 │   ├── app-building-crashcourse           # Build container for frontend     
-│   ├──  deployment                        # Build container for deployment
+│   ├── deployment                        # Build container for deployment
 │   └── vector-db                          # Build container for vector-db
 └── test_action                            # CI testing: unit test scripts, integration test scripts
 
